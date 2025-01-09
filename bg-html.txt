@@ -1,0 +1,501 @@
+<?xml version="1.0" encoding="utf-8"?><!--SPG:
+
+This HTML file has been associated with a SharePoint Master Page (.master file) carrying the same name.  While the files remain associated, you will not be allowed to edit the .master file, and any rename, move, or deletion operations will be reciprocated.
+
+To build the master page directly from this HTML file, simply edit the page as you normally would.  Use the Snippet Generator at https://intd.mu-varna.bg/_layouts/15/ComponentHome.aspx?Url=https%3A%2F%2Fintd%2Emu%2Dvarna%2Ebg%2F%5Fcatalogs%2Fmasterpage%2FMUVarnaBG%2Emaster to create and customize useful SharePoint entities, then copy and paste them as HTML snippets into your HTML code.   All updates to this file will automatically sync to the associated Master Page.
+
+-->
+<!-- _lcid="1033" _version="15.0.4420" _dal="1" -->
+<!-- _LocalBinding -->
+<!DOCTYPE html[]>
+<html xmlns:mso="urn:schemas-microsoft-com:office:office" xmlns:msdt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=10" />
+        <!--CS: Start Head Snippet-->
+        <!--SPM:<%@Register Tagprefix="SharePoint" Namespace="Microsoft.SharePoint.WebControls" Assembly="Microsoft.SharePoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c"%>-->
+        <!--SPM:<%@Register Tagprefix="WebPartPages" Namespace="Microsoft.SharePoint.WebPartPages" Assembly="Microsoft.SharePoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c"%>-->
+        <!--SPM:<%@Register Tagprefix="MUVarna_MainSlider" Namespace="MUVarna_Internet.MUVarna_MainSlider" Assembly="MUVarna_Internet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6b942b342860a2fc"%>-->
+        <!--SPM:<%@Register Tagprefix="MUVarna_MainMenu" Namespace="MUVarna_Internet.MUVarna_MainMenu" Assembly="MUVarna_Internet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6b942b342860a2fc"%>-->
+        <!--SID:00 -->
+        <meta name="GENERATOR" content="Microsoft SharePoint" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link rel="shortcut icon" href="/_layouts/15/MUVarna/img/favicon.ico" type="image/x-icon" />
+        <!--SPM:<SharePoint:RobotsMetaTag runat="server"/>-->
+        <!--MS:<SharePoint:PageTitle runat="server">-->
+            <!--SPM:<asp:ContentPlaceHolder id="PlaceHolderPageTitle" runat="server">-->
+            <!--SPM:<SharePoint:ProjectProperty Property="Title" runat="server"/>-->
+            <!--SPM:</asp:ContentPlaceHolder>-->
+        <!--ME:</SharePoint:PageTitle>-->
+        <!--SPM:<SharePoint:StartScript runat="server"/>-->
+        <!--MS:<SharePoint:CssLink runat="server" Version="15">-->
+        <!--ME:</SharePoint:CssLink>-->
+        <!--SPM:<SharePoint:CacheManifestLink runat="server"/>-->
+        <!--SPM:<SharePoint:PageRenderMode runat="server" RenderModeType="Standard"/>-->
+        <!--SPM:<SharePoint:ScriptLink language="javascript" name="core.js" OnDemand="true" runat="server" Localizable="false"/>-->
+        <!--SPM:<SharePoint:ScriptLink language="javascript" name="menu.js" OnDemand="true" runat="server" Localizable="false"/>-->
+        <!--SPM:<SharePoint:ScriptLink language="javascript" name="callout.js" OnDemand="true" runat="server" Localizable="false"/>-->
+        <!--SPM:<SharePoint:ScriptLink language="javascript" name="sharing.js" OnDemand="true" runat="server" Localizable="false"/>-->
+        <!--SPM:<SharePoint:ScriptLink language="javascript" name="suitelinks.js" OnDemand="true" runat="server" Localizable="false"/>-->
+        <!--SPM:<SharePoint:CustomJSUrl runat="server"/>-->
+        <!--MS:<SharePoint:SoapDiscoveryLink runat="server">-->
+        <!--ME:</SharePoint:SoapDiscoveryLink>-->
+        <!--MS:<SharePoint:AjaxDelta id="DeltaPlaceHolderAdditionalPageHead" Container="false" runat="server">-->
+            <!--MS:<asp:ContentPlaceHolder id="PlaceHolderAdditionalPageHead" runat="server">-->
+            <!--ME:</asp:ContentPlaceHolder>-->
+            <!--MS:<SharePoint:DelegateControl runat="server" ControlId="AdditionalPageHead" AllowMultipleControls="true">-->
+            <!--ME:</SharePoint:DelegateControl>-->
+            <!--MS:<asp:ContentPlaceHolder id="PlaceHolderBodyAreaClass" runat="server">-->
+            <!--ME:</asp:ContentPlaceHolder>-->
+        <!--ME:</SharePoint:AjaxDelta>-->
+        <!--SPM:<SharePoint:CssRegistration Name="Themable/corev15.css" runat="server"/>-->
+        <!--SPM:<SharePoint:AjaxDelta id="DeltaSPWebPartManager" runat="server">-->
+        <!--SPM:</SharePoint:AjaxDelta>-->
+        <!--CE: End Head Snippet-->
+        <!--[if gte mso 9]><xml>
+<mso:CustomDocumentProperties>
+
+<mso:ContentType msdt:dt="string">Design File</mso:ContentType>
+<mso:ContentTypeId msdt:dt="string">0x0101000F1C8B9E0EB4BE489F09807B2C53288F0054AD6EF48B9F7B45A142F8173F171BD10003D357F861E29844953D5CAA1D4D8A3A00D5542D0D1ED9E848A19A5C9FAB836186</mso:ContentTypeId>
+<mso:HtmlDesignAssociated msdt:dt="string">1</mso:HtmlDesignAssociated>
+<mso:HtmlDesignFromMaster msdt:dt="string">https://intd.mu-varna.bg/_catalogs/masterpage/MUVarnaBG.html, https://intd.mu-varna.bg/_catalogs/masterpage/MUVarnaBG.html</mso:HtmlDesignFromMaster>
+
+<mso:HtmlDesignStatusAndPreview msdt:dt="string">https://intd.mu-varna.bg/_catalogs/masterpage/MUVarnaBG.html, Conversion successful.</mso:HtmlDesignStatusAndPreview>
+<mso:DefaultCssFile msdt:dt="string"></mso:DefaultCssFile>
+<mso:PublishingPreviewImage msdt:dt="string"></mso:PublishingPreviewImage>
+<mso:HtmlDesignPreviewUrl msdt:dt="string"></mso:HtmlDesignPreviewUrl>
+<mso:MasterPageDescription msdt:dt="string"></mso:MasterPageDescription>
+<mso:UIVersion msdt:dt="string">;#15;#16;#</mso:UIVersion>
+<mso:PublishingHidden msdt:dt="string">0</mso:PublishingHidden>
+<mso:HtmlDesignConversionSucceeded msdt:dt="string">True</mso:HtmlDesignConversionSucceeded>
+</mso:CustomDocumentProperties>
+</xml><![endif]-->
+        
+
+        <link rel="stylesheet" href="/_layouts/15/MUVarna/css/bootstrap-modified.css" type="text/css" />
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+
+
+            <link href="_layouts/15/MUVarna/css/fontawesome-pro-5.15.0/all.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="/_layouts/15/MUVarna/css/mainnew.css" type="text/css" />
+        <link rel="stylesheet" href="/_layouts/15/MUVarna/css/parallax-content-slider.css?rev=ZaOXZEobVwykPO9g8hq%2F8A%3D%3D" type="text/css" />
+                <script src="/_layouts/15/MUVarna/js/jquery.min.js" type="text/javascript">//<![CDATA[
+        
+        
+        
+        
+        //]]>
+        </script>
+        <script type="text/javascript">//<![CDATA[window.jQuery || document.write('<script src="/_layouts/15/MUVarna/js/jquery-1.7.2.min.js">//<![CDATA[<\/script>')
+        
+        
+        
+        
+        //]]>
+        </script>
+        <script src="/_layouts/15/MUVarna/js/modernizr-2.6.2.min.js?rev=ZaOXZEobVwykPO9g8hq%2F8A%3D%3D" type="text/javascript">//<![CDATA[
+        
+        
+        
+        
+        //]]>
+        </script>
+        <!--DC:-->
+        <!--DC:-->
+    </head>
+    <body>
+        <!--SPM:<WebPartPages:SPWebPartManager runat="server"/>-->
+        <!--SPM:<asp:ScriptManager id="ScriptManager" runat="server" EnablePageMethods="false" EnablePartialRendering="true" EnableScriptGlobalization="false" EnableScriptLocalization="true"/>-->
+        <div id="ms-designer-ribbon">
+            <!--SPM:<%@Register Tagprefix="SharePoint" Namespace="Microsoft.SharePoint.WebControls" Assembly="Microsoft.SharePoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c"%>-->
+            <div id="TurnOnAccessibility" style="display:none" class="s4-notdlg noindex">
+                <a id="linkTurnOnAcc" href="#" class="ms-accessible ms-acc-button" onclick="SetIsAccessibilityFeatureEnabled(true);UpdateAccessibilityUI();document.getElementById('linkTurnOffAcc').focus();return false;">
+                    <!--MS:<SharePoint:EncodedLiteral runat="server" text="&#60;%$Resources:wss,master_turnonaccessibility%&#62;" EncodeMethod="HtmlEncode">-->
+                    <!--ME:</SharePoint:EncodedLiteral>-->
+                </a>
+            </div>
+            <div id="TurnOffAccessibility" style="display:none" class="s4-notdlg noindex">
+                <a id="linkTurnOffAcc" href="#" class="ms-accessible ms-acc-button" onclick="SetIsAccessibilityFeatureEnabled(false);UpdateAccessibilityUI();document.getElementById('linkTurnOnAcc').focus();return false;">
+                    <!--MS:<SharePoint:EncodedLiteral runat="server" text="&#60;%$Resources:wss,master_turnoffaccessibility%&#62;" EncodeMethod="HtmlEncode">-->
+                    <!--ME:</SharePoint:EncodedLiteral>-->
+                </a>
+            </div>
+            <!--SID:02 {Ribbon Snippet}-->
+            <!--PS: Start Preview--><div class="DefaultContentBlock" style="background:rgb(0, 114, 198); color:white; width:100%; padding:8px; height:64px; overflow:hidden;">In true previews of your site, the SharePoint ribbon will be here.</div><!--PE: End Preview-->
+        </div>
+        <!--MS:<SharePoint:SPSecurityTrimmedControl runat="server" AuthenticationRestrictions="AnonymousUsersOnly">-->
+            <!--SPM:<wssucw:Welcome runat="server" EnableViewState="false"/>-->
+        <!--ME:</SharePoint:SPSecurityTrimmedControl>-->
+        <div id="s4-workspace">
+            <header>
+                <div class="container">
+					<div class="navbar" id="top">
+						<div class="useful-links" onclick="toggleHiddenMenu()">
+							<i class="fa fa-external-link-square"></i>
+							<span class="pl-2">Полезни връзки</span>
+						</div>
+						<div class="nav-collapse">
+							<!--SPM:<MUVarna_MainMenu:MUVarna_MainMenu id="MenuFirst" TypeMenu="Top" TermGroup="MainMenuTop_BG" TermName="MainMenuTop_BG" runat="server"/>-->
+                            <ul class="nav" role="menu">
+                                <li>
+                                    <a style="padding:0 0 0 0; margin:0 0 0 0px;" href="https://live.tourdash.com/embed/5cc4f4e78d724745ba59fdbad5c31637?pano=CAoSLEFGMVFpcE9QTXBLOC1lWVh3ZTZGVVowRVNSRVVLODBHbFpUMnJCMjRyenBR&amp;head=-33.48309958974794&amp;pitch=12.418647447306993&amp;zoom=-1" target="_blank">
+                                        <img title="360" style="margin:0 0 0 10px; padding: 0 0 0 0;" alt="BG" src="/Style%20Library/MUVarna/sait360.png" />
+                                    </a>
+                                </li>
+                                <li>
+                                    <a style="padding:0 0 0 0; margin:0 0 0 0px;" href="http://mu-varna.bg/BG/AboutUs/Pages/qs.aspx" target="_blank">
+                                        <img style="margin:3px 0 0 5px; padding: 0 0 0 0;" alt="BG" src="/Style%20Library/MUVarna/QS%20lenta%20sait2.png" />
+                                    </a>
+                                </li>
+                            </ul>
+
+						</div>
+                        <div class="language">
+                            <span>BG</span>/
+                            <span>EN</span>
+                        </div>
+                        <div class="contrast-theme">
+                            <i class="fal fa-eye-slash"></i>
+                        </div>
+                    </div>
+                    <div class="container wrapper d-flex align-items-center">
+                        <!-- Begin: Logo &#38; Slogan -->
+                        <a href="/BG" title="Към начална страница">
+                            <img src="_layouts/15/MUVarna/img/muvarna-logo-blue.png" class="logo">
+                        </a>
+                        <a href="/BG" title="Към начална страница" class="slogan-bg">
+                            <div>Медицински университет - Варна</div> 
+                            <div class="strong">Проф. д-р Параскев Стоянов</div>
+                        </a>
+                        <!-- End: Logo &#38; Slogan -->
+                    
+	                    <div class="menu-searchbox-wrapper">
+							<div class="searchbox" role="search">
+							    <!--SPM:<SharePoint:DelegateControl runat="server" ControlId="SmallSearchInputBox"/>-->
+							    <!--PS: Start of READ-ONLY PREVIEW (do not modify)--><div class="ms-webpart-chrome "><div WebPartID="00000000-0000-0000-0000-000000000000" HasPers="true" id="WebPart" width="100%" class="ms-WPBody noindex " OnlyForMePart="true" allowDelete="false" style=""><div componentid="ctl00_SmallSearchInputBox1_csr" id="ctl00_SmallSearchInputBox1_csr"><div id="SearchBox" name="Control"><div class="input-append" id="ctl00_SmallSearchInputBox1_csr_sboxdiv"><input type="text" value="Search This Site..." maxlength="2048" accessKey="S" title="Search This Site..." id="ctl00_SmallSearchInputBox1_csr_sbox" autocomplete="off" autocorrect="off" class="span3" /><a title="Search" class="btn btn-primary" id="ctl00_SmallSearchInputBox1_csr_SearchLink" href="javascript: {}"><i class="icon-white icon-search"></i></a></div></div></div><div componentid="ctl00_SmallSearchInputBox1_csr" id="ctl00_SmallSearchInputBox1_csr"></div><div id="ctl00_SmallSearchInputBox1"></div><div class="ms-clear"></div></div></div><!--PE: End of READ-ONLY PREVIEW-->
+							</div>
+	
+		                    <!-- Begin: Main menu -->
+		                    <div class="menu">
+		                        <!--SPM:<MUVarna_MainMenu:MUVarna_MainMenu id="MenuSecond" TypeMenu="Bottom" TermGroup="MainMenuBottom_BG" TermName="MainMenuBottom_BG" runat="server"/>-->
+		                    </div>
+		                    <!-- End: Main menu -->
+	                    </div>
+	                </div>
+                    
+                </div>
+            </header>
+            <!-- End: Header -->
+            <!-- Begin: Top navigation -->
+            <div class="navbar navbar-inverse" id="top">
+                <div class="navbar-inner">
+                    <div class="container">
+                        <div class="nav-collapse collapse">
+                            <!--SPM:<MUVarna_MainMenu:MUVarna_MainMenu id="MenuFirst" TypeMenu="Top" TermGroup="MainMenuTop_BG" TermName="MainMenuTop_BG" runat="server"/>-->
+                            <ul class="nav" role="menu">
+                                <li class="pull-right">
+                                    <div class="addthis_toolbox addthis_default_style addthis_32x32_style" id="addthis">
+                                    </div>
+                                </li>
+                                <!-- <li class="dropdown pull-right">
+                                    <a href="#login" class="login" data-toggle="modal">Login</a>
+                                </li>     -->
+                                <li>
+                                    <a style="padding:0 0 0 0; margin:0 0 0 0px;" href="https://live.tourdash.com/embed/5cc4f4e78d724745ba59fdbad5c31637?pano=CAoSLEFGMVFpcE9QTXBLOC1lWVh3ZTZGVVowRVNSRVVLODBHbFpUMnJCMjRyenBR&amp;head=-33.48309958974794&amp;pitch=12.418647447306993&amp;zoom=-1" target="_blank">
+                                        <img title="360" style="margin:0 0 0 10px; padding: 0 0 0 0;" alt="BG" src="/Style%20Library/MUVarna/sait360.png" />
+                                    </a>
+                                </li>
+                                <li>
+                                    <a style="padding:0 0 0 0; margin:0 0 0 0px;" href="http://mu-varna.bg/BG/AboutUs/Pages/qs.aspx" target="_blank">
+                                        <img style="margin:3px 0 0 5px; padding: 0 0 0 0;" alt="BG" src="/Style%20Library/MUVarna/QS%20lenta%20sait2.png" />
+                                    </a>
+                                </li>
+                            </ul>
+                            <!--
+                             <ul class="nav" role="menu">
+                              
+								<li class="pull-right">
+                                   <div class="addthis_toolbox addthis_default_style addthis_32x32_style" id="addthis">
+                                    </div>
+                                </li
+                                <li>
+                                	<a href="https://live.tourdash.com/embed/5cc4f4e78d724745ba59fdbad5c31637" target="_blank" style="padding:0 0 0 0; margin:0 0 0 0px;"><img src="../_layouts/15/MUVarna/img/360gr.jpg" style="width:50px; margin:0 0 -6px 25px; height:40px; padding: 0 0 0 0;" alt="BG"  title="360"/></a>
+								</li>
+                                <li class="dropdown pull-right">
+                                    <a href="#login" class="login" data-toggle="modal">Вход
+                                    </a>
+                                </li>
+                             </ul>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+            </div>
+            <div id="s4-bodyContainer">
+                <div>
+                    <!--CS: Start PlaceHolderMain Snippet-->
+                    <!--SPM:<%@Register Tagprefix="SharePoint" Namespace="Microsoft.SharePoint.WebControls" Assembly="Microsoft.SharePoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c"%>-->
+                    <!--MS:<SharePoint:AjaxDelta id="DeltaPlaceHolderMain" IsMainContent="true" runat="server">-->
+                        <!--MS:<asp:ContentPlaceHolder ID="PlaceHolderMain" runat="server">-->
+                        <!--ME:</asp:ContentPlaceHolder>-->
+                    <!--ME:</SharePoint:AjaxDelta>-->
+                    <!--CE: End PlaceHolderMain Snippet-->
+                </div>
+            </div>
+            <footer>
+                
+                    <div class="map-holder">
+                        <div class="map">
+                            <a class="map-label" data-placement="bottom" title="" style="display:block !important;">
+                                <span style="font-size: 2rem;">
+                                    <span style="color: white;">
+                                        <i class="fas fa-map-marker-alt">
+                                        </i>
+                                    </span>
+                                </span>
+                            </a>
+                            <div class="map-popup">
+                                <div class="popover fade right in" id="contacts">
+                                    <div class="popover-content">
+                                        <p>MEDICAL UNIVERSITY
+                                            <br />
+PROF. DR. P. STOYANOV - VARNA                                            </p>
+                                        <p>Varna, 55 Marin Drinov str
+                                            <br />
+Tel.: +35952/677 050                                                <br />
+Fax: +35952/650 019                                                <br />
+e-mail:                                                 <a style="color:#007cc3" href="mailto:uni@mu-varna.bg">uni@mu-varna.bg
+                                            </a>
+                                        </p>
+                                        <p>
+                                            <a style="color:#007cc3" href="/EN/Pages/ContactsEN.aspx" title="Google Maps">view map
+                                            </a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ________________________________________________________________________________________________________________ -->
+                    <div class="container">
+                    <div class="links-container d-flex justify-content-between">
+                        <div class="d-flex flex-column justify-content-center">
+                            <a href="">
+                                <img src="_layouts/15/MUVarna/img/logo-bg.png" alt="" />
+                            </a>
+                        </div>
+                        <div class="d-flex flex-column">
+                            <a href="link/BG">Прием
+                            </a>
+                            <a href="link/BG">Студенти
+                            </a>
+                            <a href="link/BG">Научна дейност
+                            </a>
+                            <a href="link/BG">За нас
+                            </a>
+                            <a href="link/BG">Библиотека
+                            </a>
+                        </div>
+                        <div class="d-flex flex-column">
+                            <a href="link/BG">Новини
+                            </a>
+                            <a href="link/BG">Учебна дейност
+                            </a>
+                            <a href="link/BG">Международна дейност
+                            </a>
+                            <a href="link/BG">СДО
+                            </a>
+                            <a href="link/BG">ИЦЕДО
+                            </a>
+                        </div>
+                        <div class="d-flex flex-column">
+                            <a href="link/BG">ACRO
+                            </a>
+                            <a href="link/BG">Издателска дейност
+                            </a>
+                            <a href="link/BG">Alumni Club
+                            </a>
+                            <a href="link/BG">Контакти
+                            </a>
+                        </div>
+                        <div class="d-flex flex-column">
+                            <a href="/EN/AboutUs/Pages/Management.aspx">Management
+                            </a>
+                            <a href="/EN/AboutUs/Pages/Accreditation.aspx">Accreditation
+                            </a>
+                            <a href="/EN/AboutUs/Pages/%D0%9A%D0%BE%D0%BD%D0%BA%D1%83%D1%80%D1%81%D0%B8.aspx">Competions
+                            </a>
+                            <a href="/EN/SDO/Pages/Специализации.aspx">Specialisations
+                            </a>
+                            <a href="/EN/SDO/Pages/Кариерен-център.aspx">Career centre
+                            </a>
+                            <a href="/EN/Students/Pages/SocialQuestions.aspx">Social and welfare issues
+                            </a>
+                            <a href="/EN/AboutUs/Pages/MedicalUniversityVarna.aspx">Study medicine in Bulgaria
+                            </a>
+                        </div>
+                        <!-- <div class="d-flex flex-column">
+                            <a href="/BG/AboutUs/Pages/tyrgove.aspx">Търгове
+                            </a>
+                            <a href="/BG/CustomerProfile/Pages/ProceduresAll.aspx">Профил на купувача
+                            </a>
+                            <a href="/BG/Research/Pages/konkursi.aspx">Конкурси
+                            </a>
+                            <a href="/BG/AboutUs/Pages/godishen-finansov-otchet.aspx">Финансова информация
+                            </a>
+                        </div> -->
+                    </div>
+                    <div class="socials-wrapper d-flex justify-content-center">
+                        <a href="https://www.facebook.com/pages/Medical-University-of-Varna/164326093736811" target="blank" title="Facebook">
+                            <i class="fab fa-facebook">
+                            </i>
+                            <span>Facebook
+                            </span>
+                        </a>
+                        <a href="https://twitter.com/MUVarna_BG" target="blank" title="Tweet">
+                            <i class="fab fa-twitter">
+                            </i>
+                            <span>Twitter
+                            </span>
+                        </a>
+                        <a href="https://www.mu-varna.bg/BG" target="blank" title="Tweet">
+                            <i class="fab fa-linkedin">
+                            </i>
+                            <span>Linkedin
+                            </span>
+                        </a>
+                        <a href="http://www.youtube.com/user/Medicinskiuniversite" target="blank" title="YouTube">
+                            <i class="fab fa-youtube">
+                            </i>
+                            <span>YouTube
+                            </span>
+                        </a>
+                    </div>
+                    <p class="copyrights">© 1961-2024 Medical University - Varna. 
+                        
+                        <a href="#">All rights reserved
+                        </a>
+                        <a href="/EN/Pages/SiteMap.aspx">Sitemap
+                        </a>
+                    </p>
+                </div>
+                <button class="up-chevron-button" onClick="document.getElementById('top').scrollIntoView({ behavior: 'smooth'});">
+                    <i class="fas fa-chevron-up">
+                    </i>
+                </button>
+            </footer>
+            
+            <script src="/_layouts/15/MUVarna/js/bootstrap.min.js?rev=ZaOXZEobVwykPO9g8hq%2F8A%3D%3D" type="text/javascript">//<![CDATA[
+            
+            
+            
+            
+            
+            //]]>
+            </script>
+            <script src="/_layouts/15/MUVarna/js/jquery.tinycarousel.min.js?rev=ZaOXZEobVwykPO9g8hq%2F8A%3D%3D" type="text/javascript">//<![CDATA[
+            
+            
+            
+            
+            
+            //]]>
+            </script>
+            <script src="/_layouts/15/MUVarna/js/jquery.shadow.js?rev=ZaOXZEobVwykPO9g8hq%2F8A%3D%3D" type="text/javascript">//<![CDATA[
+            
+            
+            
+            
+            
+            //]]>
+            </script>
+            <script src="/_layouts/15/MUVarna/js/main.js?rev=zwpf9CD1m7am6imImmQglQ%3D%3D" type="text/javascript">//<![CDATA[
+            
+            
+            
+            
+            
+            //]]>
+            </script>
+            <!-- End Widget: Footer -->
+            <!-- Begin: Current page scripts -->
+            <script type="text/javascript">//<![CDATA[
+			  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+			  ga('create', 'UA-59519721-1', 'auto');
+			  ga('send', 'pageview');
+			
+            
+            
+            
+            
+            //]]>
+            </script>
+			<script>
+                function toggleHiddenMenu() {
+                    // $( "#usefulLinksMenu" ).addClass( "myClass yourClass" );
+                    $( "#usefulLinksMenu" ).toggle("slow");
+                    
+                    // $( "button").on("click", function () {
+                    //     $("p").toggle("slow");
+                    // });
+                }
+            </script>
+            <script type="text/javascript">//<![CDATA[
+            
+            
+		//On page load 
+		$(function(){
+			
+			        		
+			//fix subtitle design
+			$('.box-subtitle').each(function(){
+				$(this).offsetParent('.row-latest').find('.box-text').css('padding-bottom','39px');
+			});
+			
+			//equalHeight
+			setTimeout(function() {
+				$('.row-latest').each(function(){
+					equalHeight($(this).find('.span3'));
+					equalHeight($(this).find('.span4'));
+					equalHeight($(this).find('.span6'));
+				});
+				$('.row-fluid').each(function(){
+					equalHeight($(this).find('.box'));
+				});
+			}, 1000);
+			
+			
+
+			$('#ctl00_SmallSearchInputBox1_csr_SearchLink').removeClass('ms-srch-sb-searchLink');
+			$('#ctl00_SmallSearchInputBox1_csr_SearchLink').addClass('btn btn-primary');
+			$('#ctl00_SmallSearchInputBox1_csr_SearchLink').html('<i class="icon-white icon-search"></i>');
+			
+		});
+		
+            
+            
+            
+            
+            
+            
+            //]]>
+            </script>
+            <!-- End: Current page scripts -->
+            <!-- End: Footer -->
+            <!-- End: Current page scripts -->
+            <!-- End: Footer -->
+        </div>
+        <script src="/_layouts/15/MUVarna/js/jquery-migrate-1.2.1.js">//<![CDATA[
+        
+        
+        
+        
+        //]]>
+        </script>
+        <!-- begin koleda -->
+        <!-- end koleda -->
+    </body>
+</html>

@@ -1,0 +1,532 @@
+<link rel="stylesheet" href="/BG/admission/SiteAssets/admissions.css" />
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+<script src="/BG/admission/SiteAssets/httpRequestAdmission.js" type="module"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA_c2okRZHx0Hr6Zk0NFGTc5foG-sNj89I&sensor=false"></script>
+<!-- Maps script -->
+<script type="text/javascript">
+    var markersArray = [];
+    var map;
+    var glLclInfo;
+
+    window.onload = function () {
+        initialize();
+    }
+
+    function initialize() //function initializes Google map
+    {
+        var oload = "btn0"
+
+        var Jcs_getLocalName = "МEDICAL UNIVERSITY - VARNA"
+        var Jcs_getLocalLng = "43.2119"
+        var Jcs_getLocalLat = "27.9215"
+        var Jcs_getLocalInfo = " Prof. Dr. Paraskev Stoyanov​ Bulgaria Varna 9002 55 Marin Drinov str."
+        var Jcs_getLocalGooglePlusID = "114685766454318521037" //for reviews
+        //&nbsp;
+        glLclInfo = Jcs_getLocalInfo
+
+        Jcs_getLocalInfo = Jcs_getLocalInfo.replace(/\s/g, "&nbsp;"); //zamestva vsi4ki whitespaces sys koda im.... (za directions link-a)
+
+
+
+        var mapCenter = new google.maps.LatLng(Jcs_getLocalLng, Jcs_getLocalLat);
+
+        var googleMapOptions =
+    {
+        center: mapCenter,
+        zoom: 17,
+        panControl: true,
+        zoomControl: true,
+        zoomControlOptions: {
+            style: google.maps.ZoomControlStyle.SMALL
+        },
+        scaleControl: true,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+        map = new google.maps.Map(document.getElementById("google_map"), googleMapOptions);
+
+        var marker = new google.maps.Marker({
+            position: mapCenter,
+            map: map,
+            dragable: true,
+            title: Jcs_getLocalName
+        });
+        //infowindow rdy
+        var infowindow = new google.maps.InfoWindow({ content: "<b>"+Jcs_getLocalName + "</b><br />" + Jcs_getLocalInfo + "<br />" + "<br /><a href=" + "https://plus.google.com/" + Jcs_getLocalGooglePlusID + "/about" + ">" + "Reviews" + "</a>" + "&nbsp;&nbsp;&nbsp;&nbsp;" + "<a href=" + "http://maps.google.com/maps?saddr=" + "" + "&daddr=" + Jcs_getLocalInfo + ">" + "Directions" + "</a>" + "&nbsp;&nbsp;&nbsp;&nbsp;" + "<a href=" + "http://maps.google.com/maps?q=" + Jcs_getLocalInfo + ">Search Nearby" + "</a>" });
+        infowindow.open(map, marker);
+        google.maps.event.addListener(marker, "click", function (e) {
+            infowindow.open(map, marker);
+        });
+
+        markersArray.push(marker);
+
+
+    }
+    //Id, lng, lat, name, info, adress
+    function updateMarkerPosition(Id, newLng, newLat, name, cmpInfo, gPlusID) {
+
+        var Jcs_getLocalName = name
+        var Jcs_getLocalLng = newLng
+        var Jcs_getLocalLat = newLat
+        //var Jcs_getLocalCAC = cac
+        //var Jcs_getLocalSA = sa
+        //var Jcs_getLocalPhoneFax = phonefax
+        //var Jcs_getLocalEmailContact = emailcontacts //rdy
+        var Jcs_getLocalInfo = cmpInfo
+        var Jcs_getLocalGooglePlusID = gPlusID
+        glLclInfo = Jcs_getLocalInfo
+        Jcs_getLocalInfo = Jcs_getLocalInfo.replace(/\s/g, "&nbsp;");
+
+        HideMarkers();
+
+        var n_myLatlng = new google.maps.LatLng(Jcs_getLocalLng, Jcs_getLocalLat);
+        var marker = new google.maps.Marker({
+            position: n_myLatlng,
+            map: map,
+            dragable: true,
+            title: Jcs_getLocalName
+        });
+        //infowindow /rdy
+        var infowindow = new google.maps.InfoWindow({ content: "<b>"+ Jcs_getLocalName + "</b><br />" + Jcs_getLocalInfo + "<br />" + "<br /><a href=" + "https://plus.google.com/" + Jcs_getLocalGooglePlusID + "/about" + ">" + "Reviews" + "</a>" + "&nbsp;&nbsp;&nbsp;&nbsp;<a href=" + "http://maps.google.com/maps?saddr=" + "" + "&daddr=" + Jcs_getLocalInfo + ">" + "Directions" + "</a>" + "&nbsp;&nbsp;&nbsp;&nbsp;" + "<a href=" + "http://maps.google.com/maps?q=" + Jcs_getLocalInfo + ">Search Nearby" + "</a>" });
+        infowindow.open(map, marker);
+        google.maps.event.addListener(marker, "click", function (e) {
+            infowindow.open(map, marker);
+        });
+        // add marker in array
+        markersArray.push(marker);
+        //slide animation... 
+        window.setTimeout(function () {
+            map.panTo(n_myLatlng)
+        }, 500);
+    }
+
+    function linkButton(id) {
+        var queryInfo = glLclInfo;
+        var hreff = "http://maps.google.com/maps?q=" + queryInfo
+        var nhref = document.getElementById(id);
+        nhref.setAttribute('href', hreff);
+    }
+
+    function HideMarkers() {
+        if (markersArray) {
+            for (i in markersArray) {
+                markersArray[i].setMap(null);
+            }
+        }
+    }
+    function showMarkersInArray() {
+        if (markersArray) {
+            for (i in markersArray) {
+                markersArray[i].setMap(map);
+            }
+        }
+    }
+    function deleteMarkers() {
+        if (markersArray) {
+            for (i in markersArray) {
+                markersArray[i].setMap(null);
+            }
+            markersArray.length = 0;
+        }
+    }
+</script>
+
+    <div class="admissions-wrapper lang-version en-language" >
+        <div class="slider">
+            <div class="container slider-title">Admission</div>
+        </div>
+        <div class="adm-navigation">
+            <div class="container" id="admNavigationOutput">
+                <script id="admNavigation" type="text/x-handlebars-template">
+                    <div class="row row-cols-1 row-cols-md-3" >
+                        {{#each admNavigation}}
+                        <a class="col link-wrapper" href="{{link.Url}}">
+                            <div class="link-text">{{Title}}</div>
+                            <div class="more-button">
+                                <div class="more-button-text">Learn more</div>
+                                <i class="far fa-arrow-right"></i>
+                            </div>
+                        </a>
+                        {{/each}}
+                    </div>
+                </script>
+                <!-- <div class="row row-cols-1 row-cols-md-4 no-bottom-border"> -->
+            </div>
+        </div>
+        <div class="adm-what-can-study mb-5">
+            <div class="container">
+                <div class="section-header">
+                    <h1>What can I study</h1>
+                </div>
+                <div class="d-flex">
+                    <div class="big-accent-buttons-wrapper mr-3">
+                        <div class="bab-section bluebg">
+                            <div class="d-flex align-items-center">
+                                <!-- graduation-cap -->
+                                <i class="bab-icon fal fa-graduation-cap"></i>
+                                <h2>Undergraduate</h2>
+                            </div>
+                            <a href="/EN/Admission/Pages/whatcanistudy.aspx" class="d-flex align-items-center">
+                                <span class="mr-2">Learn more</span>
+                                <i class="fal fa-arrow-right p-3"></i>
+                            </a>
+                        </div>
+                        <div class="d-flex justify-content-end">
+                            <a href="/EN/Admission/Pages/programs-engl.aspx" class="bab-small-button mr-2">
+                                Programmes in English
+                            </a>
+                            <a href="/BG/specialnosti" class="bab-small-button">
+                                Programmes in Bulgarian
+                            </a>
+                        </div>
+                    </div>
+                    <div class="big-accent-buttons-wrapper">
+                        <div class="bab-section redbg">
+                            <div class="d-flex align-items-center">
+                                <!-- graduation-cap -->
+                                <i class="bab-icon fal fa-graduation-cap"></i>
+                                <h2>Graduate</h2>
+                            </div>
+                            <a href="/EN/Admission/Pages/whatcanistudy.aspx" class="d-flex align-items-center">
+                                <span class="mr-2">Learn more</span>
+                                <i class="fal fa-arrow-right p-3"></i>
+                            </a>
+                        </div>
+                        <div class="d-flex justify-content-end">
+                            <a href="https://www.mu-varna.bg/EN/Admission/Pages/Master-programmes-in-English-mu-varna.aspx" class="bab-small-button mr-2">
+                                Programmes in English
+                            </a>
+                            <a href="https://www.mu-varna.bg/BG/specialnosti" class="bab-small-button">
+                                Programmes in Bulgarian
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="adm-how-to-apply blue-contrast-section">
+            <div class="container">
+                <div class="section-header">
+                    <h1>HOW TO APPLY</h1>
+                </div>
+                <div class="d-flex">
+                    <div class="d-flex flex-grow-1 mr-5">
+                        <div class="big-accent-buttons-wrapper mr-3">
+                            <div class="bab-section bluebg">
+                                <a href="/EN/Admission/Pages/eu-eea-citizen-how-to-apply.aspx" class="d-flex align-items-center f24">
+                                    <div>EU and EEA CITIZENS</div>
+                                </a>
+                                <div class="d-flex align-items-center">
+                                    <i class="fal fa-arrow-right p-4 ml-3"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="big-accent-buttons-wrapper">
+                            <div class="bab-section orangebg">
+                                <a href="/EN/Admission/Pages/non-eu-how-to-apply.aspx" class="d-flex align-items-center f24">
+                                    <div>INTERNATIONAL  (NON-EU) STUDENTS​</div>
+                                </a>
+                                <a href class="d-flex align-items-center">
+                                    <i class="fal fa-arrow-right p-4 ml-3"></i>
+                                </a>
+                            </div>
+                            <div class="d-flex justify-content-end align-items-center">
+                                <span class="text-white mr-3">Have a look at our 2024 Brochure</span>
+                                <a href="https://press.mu-varna.bg/showpdf/books/adm2025en/" class="bab-small-button mr-2">
+                                    <i class="far fa-book-open"></i>
+                                </a>
+                                <a href="https://press.mu-varna.bg/showpdf/pdf/MUVarna_Adm_StudyWithUs_24_25.pdf" class="bab-small-button">
+                                    <i class="far fa-file-download"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="/EN/Admission/Pages/faqs.aspx" class="faq-button">
+                        <div class="faq-text title-text">FAQs</div>
+                        <i class="fal fa-arrow-right p-3"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="adm-events mb-5">
+            <div class="container">
+                <div class="section-header">
+                    <h1>Our news & events</h1>
+                </div>
+                <div class="tiles-box-wrapper" id="admEventsOutput">
+                    <script id="admEvents" type="text/x-handlebars-template">
+                        {{#each admEvents}}
+                        <div class="tile-box {{#if bigTile}}big-box{{/if}}">
+                            <div class="tile-image">
+                                <img src="{{picture.Url}}" alt="">
+                            </div>
+                            <div class="tile-content">
+                                <div class="tile-texts-wrapper">
+                                    <div class="tile-title">{{Title}}</div>
+                                    <div class="tile-text">{{description}}</div>
+                                </div>
+                                <div class="tile-buttons-wrapper">
+                                    <div class="tile-button">
+                                        <a href="{{Url}}">
+                                            <i class="fal fa-arrow-right"></i>
+                                            <span>{{button}}</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {{/each}}
+                    </script>
+                </div>
+                
+            </div>
+        </div>
+        <div class="adm-choose">
+            <div class="adm-choose-content d-flex flex-column align-items-center">
+                <div>
+                    <h1 class="mb-3 text-center">Why choose Medical University - Varna?</h1>
+                    <p class="regular-text f24 color-main-deep-blue text-center mb-3" >
+                        Academic traditions, technological innovations and an active student life, all in one.
+                    </p>
+                    <div class="container choose-icons-wrapper mb-5">
+                        <div class="choose-icon-column">
+                            <img src="https://lp.mu-varna.bg/en/images/icon1.svg" alt="">
+                            <div class="feature-title">Accredited M.D. diploma that lets your work anywhere in the EU</div>
+                        </div>
+                        <div class="choose-icon-column">
+                            <img src="https://lp.mu-varna.bg/en/images/icon2.svg" alt="">
+                            <div class="feature-title">New and modern medical equipment</div>
+                        </div>
+                        <div class="choose-icon-column">
+                            <img src="https://lp.mu-varna.bg/en/images/icon3.svg" alt="">
+                            <div class="feature-title">Medical education at the Black Sea coast</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="d-flex flexcontainer flex-wrap"  id="admChoiceOutput">
+                        <script id="admChoice" type="text/x-handlebars-template">
+                            {{#each admChoice}}
+                                <a href="{{this.link.Url}}" class="flex-item d-flex justify-content-center align-items-end" style="background-image: url({{this.picture.Url}})">
+                                    <div class="bg-white p-2 px-4">{{this.Title}}</div>
+                                </a>
+                            {{/each}}
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="main-gallery videos mb-5">
+            <div class="container">
+                <div class="section-header">
+                    <h1>Students life @ Testemonials</h1>
+                    <div class="d-flex">
+                        <a href="https://www.youtube.com/channel/UCgUtmnCUHwrnQ0EsoU-9XbA">
+                            <i class="fal fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="gallery-viewport" >
+                    <div class="overview d-flex mb-5" id="mainVideoGalleryOutput">
+                        <script id="mainVideoGallery" type="text/x-handlebars-template">
+                            {{#each mainVideoGallery}}
+                                <div class="gallery-thumb">
+                                    <a href="{{VideoUrl.Url}}">
+                                        <img class="" data-video-url="{{VideoUrl.Url}}" />
+                                        <div class="gallery-text f24 title-text">{{Title}}</div>
+                                    </a>
+                                </div>
+                            {{/each}}
+                        </script>
+                    </div>
+    
+                    <div class="gallery-contorls">
+                        <div class="gallery-paginator">
+                        </div>
+                        <div></div>
+                        <div class="gallery-buttons-wrapper d-flex">
+                            <button class="gallery-button prev" type="button"> <i class="fal fa-chevron-left"></i></button>
+                            <button class="gallery-button next mr-2" type="button"> <i class="fal fa-chevron-right"></i></button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="adm-testemonials">
+            <div class="container">
+                <div style="overflow:hidden"></div>
+                <div class="testemonials-slider d-flex" id="admTestemonialsOutput">
+                    <script id="admTestemonials" type="text/x-handlebars-template">
+                        {{#each admTestemonials}}
+                            <div class="testemonials-column">
+                                <div class="testemonials-header d-flex">
+                                    <img src="{{image.Url}}" alt="">
+                                    <div>
+                                        <h2 class="f24 mt-3 title-text">{{Title}}, {{country}}</h2>
+                                        <div>{{speciality}}</div>
+                                    </div>
+                                </div>
+                                <div class="testemonials-description regular-text">
+                                    {{description}}
+                                </div>
+                            </div>
+                        {{/each}}
+                    </script>
+                    <div class="testemonials-column">
+                        <div class="testemonials-header d-flex">
+                            <img src="https://dummyimage.com/100x100/" alt="">
+                            <div>
+                                <h2 class="f24 mt-3">Danesh, UK</h2>
+                                <div>Medical student</div>
+                            </div>
+                        </div>
+                        <div class="testemonials-description">
+                            "I have spent the past year at the Medical University of Varna and my experience here has gone beyond what I imagined beforehand. The school is a multicultural cent where students and faculty are integrated and respectful to each other. Studying here for the past year has shown me other ways to look at medicine, by learning medicine in much more clinical/diagnostic way. The English course here is what you would look for in a school. Lecturers/faculty members are patient and friendly, and always want students to excel. Those who work hard are very well rewarded. The university is a twenty-minute walk to the beach that has everything: clubs, restaurants, drinks, sports and museums. This is a university where you can work hard and enjoy your spare time. I highly recommend this school to anyone that is looking for an opportunity in medicine with facilities/resources as well as enjoyment. The Admissions office is the most helpful group of people you could come across. Regarding admission questions, do not hesitate to email or call, there will always be someone to help. I hope that anyone looking to do medicine can look here first. "
+                        </div>
+                    </div>
+                    <div class="testemonials-column">
+                        <div class="testemonials-header d-flex">
+                            <img src="https://dummyimage.com/100x100/" alt="">
+                            <div>
+                                <h2 class="f24 mt-3">Danesh, UK</h2>
+                                <div>Medical student</div>
+                            </div>
+                        </div>
+                        <div class="testemonials-description">
+                            "I have spent the past year at the Medical University of Varna and my experience here has gone beyond what I imagined beforehand. The school is a multicultural cent where students and faculty are integrated and respectful to each other. Studying here for the past year has shown me other ways to look at medicine, by learning medicine in much more clinical/diagnostic way. The English course here is what you would look for in a school. Lecturers/faculty members are patient and friendly, and always want students to excel. Those who work hard are very well rewarded. The university is a twenty-minute walk to the beach that has everything: clubs, restaurants, drinks, sports and museums. This is a university where you can work hard and enjoy your spare time. I highly recommend this school to anyone that is looking for an opportunity in medicine with facilities/resources as well as enjoyment. The Admissions office is the most helpful group of people you could come across. Regarding admission questions, do not hesitate to email or call, there will always be someone to help. I hope that anyone looking to do medicine can look here first. "
+                        </div>
+                    </div>
+                    <div class="testemonials-column">
+                        <div class="testemonials-header d-flex">
+                            <img src="https://dummyimage.com/100x100/" alt="">
+                            <div>
+                                <h2 class="f24 mt-3">Danesh, UK</h2>
+                                <div>Medical student</div>
+                            </div>
+                        </div>
+                        <div class="testemonials-description">
+                            "I have spent the past year at the Medical University of Varna and my experience here has gone beyond what I imagined beforehand. The school is a multicultural cent where students and faculty are integrated and respectful to each other. Studying here for the past year has shown me other ways to look at medicine, by learning medicine in much more clinical/diagnostic way. The English course here is what you would look for in a school. Lecturers/faculty members are patient and friendly, and always want students to excel. Those who work hard are very well rewarded. The university is a twenty-minute walk to the beach that has everything: clubs, restaurants, drinks, sports and museums. This is a university where you can work hard and enjoy your spare time. I highly recommend this school to anyone that is looking for an opportunity in medicine with facilities/resources as well as enjoyment. The Admissions office is the most helpful group of people you could come across. Regarding admission questions, do not hesitate to email or call, there will always be someone to help. I hope that anyone looking to do medicine can look here first. "
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="main-gallery photos mb-4">
+            <div class="container">
+                <div class="section-header">
+                    <h1>Gallery</h1>
+                </div>
+                <div class="gallery-viewport" >
+                    <div class="overview d-flex mb-5" id="mainPhotoGalleryOutput">
+                        <script id="mainPhotoGallery" type="text/x-handlebars-template">
+                            {{#each mainPhotoGallery}}
+                                <div class="gallery-thumb">
+                                    <a href="/EN/Admission/Pages/AlbumImages.aspx?AlbumID={{UniqueId}}">
+                                        <img class="mb-3" data-photo-url="{{UniqueId}}"  />
+                                        <div class="gallery-text f14 regular-text">{{FileLeafRef}}</div>
+                                    </a>
+                                </div>
+                            {{/each}}
+                        </script>
+                    </div>
+    
+                    <div class="gallery-contorls">
+                        <div class="gallery-paginator"></div>
+    
+                        <div class="gallery-buttons-wrapper d-flex">
+                            <button class="gallery-button prev" type="button"> <i class="fal fa-chevron-left"></i></button>
+                            <button class="gallery-button next mr-2" type="button"> <i class="fal fa-chevron-right"></i></button>
+                            <div class="tile-buttons-wrapper">
+                                <div class="tile-button">
+                                    <a href="/EN/Admission/Pages/Gallery.aspx" target="_blank" class="d-flex align-items-center">
+                                        <i class="fal fa-arrow-right"></i>
+                                        <span class="pl-2 text-nowrap">View all</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="contacts-section">
+            <div class="container">
+                <div class="section-header">
+                    <h1>contacts</h1>
+                </div>
+                <div class="map-info-wrapper d-flex justify-content-between">
+                    <div class="map-info f18 color-primary-gray-3 regular-text">
+                        <div class="d-flex mb-3">
+                            <i class="fal fa-clock mr-3 pt-2"></i>
+                            <div>
+                                Monday - Friday:<br>
+                                08:30 a.m. - 12:00 a.m.<br>
+                                13:00 p.m. - 17:00 p.m.
+                            </div>
+                        </div>
+                        <div class="d-flex mb-3">
+                            <i class="fal fa-envelope mr-3 pt-2"></i>
+                            <div>
+                                E-mail:<br>
+                                admissions@mu-varna.bg
+                            </div>
+                        </div>
+                        <div class="d-flex mb-3">
+                            <i class="fal fa-phone mr-3 pt-2"></i>
+                            <div>
+                                Мobile line:<br>
+                                +359 885 992 088 (EN)<br>
+                                +359 52 677 085 (EN) 
+                            </div>
+                        </div>
+                        <div class="d-flex mb-3">
+                            <i class="fal fa-location mr-3 pt-2"></i>
+                            <div>
+                                Address:<br>
+                                Office of Admissions (room 210A)<br>
+                                Medical University of Varna<br>
+                                55 "Marin Drinov Street"<br>
+                                9002 Varna, Bulgaria​
+                            </div>
+                        </div>
+                    </div>
+                    <div class="map-holder">
+                        <div id="google_map"></div>
+                        <a id="bigMapLink" runat="server" target="_blank" onclick="javascript:linkButton(this.id)">Bigger map</a>
+                    </div>
+                </div>
+                <div class="d-flex flex-wrap" id="admContactsOutput">
+                    <script id="admContacts" type="text/x-handlebars-template">
+                        {{#each admContacts}}
+                        <div class="contact-wrapper d-flex mb-5" >
+                            <div class="contact-image">
+                                <img src="{{this.picture.Url}}" alt="{{this.picture.Description}}">
+                            </div>
+                            <div class="contact-info f18">
+                                <h5 class="f24">{{this.Title}}</h5>
+                                <p class="mb-4">{{this.job_x002d_position}}</p>
+                                <div class="contact-phone d-flex mb-3">
+                                    <i class="fal fa-phone mr-3"></i>
+                                    <div>
+                                        Phone number:<br>
+                                        {{this.phone}}
+                                    </div>
+                                </div>
+                                <div class="contact-email d-flex">
+                                    <i class="fal fa-envelope mr-3"></i>
+                                    <div>
+                                        E-mail:<br>
+                                        {{this.email}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {{/each}}
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>

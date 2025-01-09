@@ -1,0 +1,1243 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <base href="file:///C:/Users/kaloyan.kolev/Desktop/MU/">
+    <title>Homepage</title>
+    <link rel="stylesheet" href="_layouts/15/MUVarna/css/bootstrap-modified.css" type="text/css" />
+    <link rel="stylesheet" href="_layouts/15/MUVarna/css/mainHome.css">
+    <link rel="stylesheet" href="_layouts/15/MUVarna/css/mainnew.css" type="text/css" />
+    <script src="_layouts/15/MUVarna/js/jquery.min.js" type="text/javascript"></script>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="_layouts/15/MUVarna/css/fontawesome-pro-5.15.0/all.min.css" rel="stylesheet">
+    <!-- <script src="httpRequestMain.js" type="text/javascript"></script> -->
+        <!-- 
+        <SharePoint:CssRegistration name="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" runat="server" after="SharepointCssFile" />
+    <SharePoint:CssRegistration name="/_layouts/15/MUVarna/css/bootstrap-modified.css" runat="server" after="SharepointCssFile" />
+    -->
+
+
+    <style>
+   .scroll-box {
+        width: 300px;
+        height: 150px;
+        overflow: auto;
+        position: relative;
+        border: 1px solid #ccc;
+    }
+
+    .scroll-content {
+        height: auto;
+        overflow: hidden; /* Important: don't add scrolling here */
+    }
+
+    /* Calendar div to trigger the popup */
+.calendar-trigger-button {
+    cursor: pointer;
+    padding: 10px;
+    background-color: lightblue;
+    display: inline-block;
+}
+
+/* Hidden popup initially */
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+/* Content inside the popup */
+.popup-content {
+    position: relative;
+}
+
+/* Close button styling */
+.close-btn {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    color: red;
+}
+
+/* Dark background to dim the rest of the page */
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+    </style>
+    <script>
+        function toggleHiddenMenu(name) {
+            // Stop the click event from bubbling up to the document click listener
+            event.stopPropagation();
+            $(name).toggle("slow");
+        }
+        $(document).click(function (event) {
+            // Check if the window width is less than 1200px
+            if ($(window).width() < 1200) {
+                // Check if the clicked element is NOT inside the .nav-collapse container
+                if (!$(event.target).closest('.nav-collapse').length) {
+                    // Close the menu by hiding it
+                    $('.nav-collapse').hide("slow");
+                }
+            }
+            if (!$(event.target).closest('.useful-links-wrapper').length) {
+                $('#usefulLinksMenu').hide("slow");
+            }
+        });
+        // Listen for window resize events
+        $(window).resize(function() {
+            // If window width is 1200px or more, show the .nav-collapse menu
+            if ($(window).width() >= 1200) {
+                $('.nav-collapse').show();
+            } else if($(window).width() <= 1200) {
+                $('.nav-collapse').hide();
+            }
+        });
+    </script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const scrollBox = document.querySelector('.scroll-box');
+    const scrollContent = document.querySelector('.scroll-content');
+
+    let scrollInterval;
+    let scrollSpeed = 1; // Adjust this for slower or faster scroll
+    let scrollBackSpeed = 10; // Adjust this for faster scroll back on mouse leave
+    let isMouseDown = false;
+
+    // Start auto-scrolling
+    function startAutoScroll() {
+        const scrollDistance = scrollContent.scrollHeight - scrollBox.clientHeight;
+
+        if (scrollDistance > 0) {
+            scrollInterval = setInterval(() => {
+                if (!isMouseDown) { // Only scroll if the mouse isn't pressed
+                    scrollBox.scrollTop += scrollSpeed;
+                    if (scrollBox.scrollTop >= scrollDistance) {
+                        clearInterval(scrollInterval);
+                    }
+                }
+            }, 16); // Runs every 16ms (~60fps)
+        }
+    }
+
+    // Scroll back to the top
+    function scrollToTop() {
+        scrollInterval = setInterval(() => {
+            scrollBox.scrollTop -= scrollBackSpeed;
+            if (scrollBox.scrollTop <= 0) {
+                clearInterval(scrollInterval);
+            }
+        }, 16);
+    }
+
+    // Mouse enters the scroll box
+    scrollBox.addEventListener('mouseenter', () => {
+        clearInterval(scrollInterval);
+        startAutoScroll();
+    });
+
+    // Mouse leaves the scroll box
+    scrollBox.addEventListener('mouseleave', () => {
+        clearInterval(scrollInterval);
+        scrollToTop();
+    });
+
+    // Stop auto-scroll when mouse is clicked
+    scrollBox.addEventListener('mousedown', () => {
+        isMouseDown = true;
+        clearInterval(scrollInterval); // Stop the auto-scroll when clicked
+    });
+
+    // Resume auto-scroll when mouse is released
+    scrollBox.addEventListener('mouseup', () => {
+        isMouseDown = false;
+        startAutoScroll(); // Resume auto-scroll when mouse is released
+    });
+
+    // Ensure scroll resumes when mouse is released outside the scroll box
+    document.addEventListener('mouseup', () => {
+        if (isMouseDown) {
+            isMouseDown = false;
+            startAutoScroll();
+        }
+    });
+    });
+</script>
+
+
+
+<script>
+    // window.onload = function () {
+    //     // initialize();
+    //     const important = document.getElementById('important');
+    //     important.addtileListener('click', () => {
+    //         document.body.classList.toggle('contrast-theme-on');
+    //     });
+    // }
+document.addEventListener('DOMContentLoaded', () => {
+        function customCarousel(carouselList,items,prevBtn,nextBtn,paginationDotsContainer,itemsPerPage) {
+            let currentIndex = 0;
+            const totalItems = items.length;
+            // const itemsPerPage = 4;  // Number of items to show per page
+            const totalPages = Math.ceil(totalItems / itemsPerPage); // Total pages
+            let autoRotate = true; // Set to true for automatic rotation
+            let autoRotateInterval;
+            let isAutoRotating = true; // Track if auto-rotation is running
+
+            // Function to update the carousel position
+            function updateCarousel() {
+                const translateXValue = -currentIndex * (100 / itemsPerPage); // Move by percentage of the visible items
+                carouselList.style.transform = `translateX(${translateXValue}%)`;
+                console.log(carouselList.className +' = '+ translateXValue)
+                // Update pagination dots
+                document.querySelectorAll('.' + paginationDotsContainer.className + '-main-dot').forEach((dot, index) => {
+                    dot.classList.toggle('active', index === currentIndex);
+                });
+                
+                // Disable buttons if at the start or end
+                prevBtn.disabled = currentIndex === 0;
+                nextBtn.disabled = currentIndex === totalItems - 1;
+            }
+            
+            // Create pagination dots
+            function createPaginationDots() {
+                for (let i = 0; i < totalItems; i++) {
+                    const dot = document.createElement('div');
+                    dot.classList.add(paginationDotsContainer.className + '-main-dot');
+                    if (i === currentIndex) {
+                        dot.classList.add('active');
+                    }
+                    // Add click event to each dot
+                    dot.addEventListener('click', () => {
+                        currentIndex = i;
+                        updateCarousel();
+                        resetAutoRotate();
+                    });
+                    paginationDotsContainer.appendChild(dot);
+                }
+            }
+
+            // Function to handle automatic rotation
+            function startAutoRotate() {
+                stopAutoRotate(); // Clear any existing interval first
+                isAutoRotating = true; // Set to True if you want auto rotate the carousel
+                autoRotateInterval = setInterval(() => {
+                    // itemsPerPage == 1 means that one item fill 100% of the carousel container
+                    if(itemsPerPage == 1) {
+                        currentIndex = (currentIndex + 1) % totalItems;
+                    } else {
+                        if(currentIndex == totalItems-(itemsPerPage-1)) {
+                            currentIndex = 0;
+                        } else {
+                            currentIndex = (currentIndex + 1) % totalItems;
+                        }
+                    }
+                    updateCarousel();
+                }, 4000); // Change slides every 4 seconds
+            }
+
+            function stopAutoRotate() {
+                clearInterval(autoRotateInterval);
+                isAutoRotating = false;
+            }
+
+            function resetAutoRotate() {
+                if (autoRotate) {
+                    startAutoRotate();
+                }
+            }
+
+            // Pause rotation on item hover and resume on mouse leave
+            items.forEach(item => {
+                item.addEventListener('mouseenter', stopAutoRotate);
+                item.addEventListener('mouseleave', resetAutoRotate);
+            });
+            
+            const swipeThreshold = 50; // Minimum swipe distance in pixels
+            let touchStartX = 0;
+            let touchStartY = 0;
+
+            carouselList.addEventListener("touchstart", (event) => {
+                const touch = event.touches[0];
+                touchStartX = touch.clientX; // Store the starting X position
+                touchStartY = touch.clientY;
+            });
+
+            carouselList.addEventListener("touchend", (event) => {
+                const touch = event.changedTouches[0];
+                const touchEndX = touch.clientX;
+                const touchEndY = touch.clientY;
+
+                const diffX = touchEndX - touchStartX;
+                const diffY = touchEndY - touchStartY;
+
+                // Check for horizontal or vertical swipe
+                if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > swipeThreshold) {
+                    if (diffX > 0) {
+                        if (currentIndex > 0) {
+                        currentIndex--;
+                        updateCarousel();
+                        resetAutoRotate();  // Restart auto-rotation after manual action
+                    }
+                    } else {
+                        if (currentIndex < totalItems - 1) {
+                            currentIndex++;
+                            updateCarousel();
+                            resetAutoRotate();  // Restart auto-rotation after manual action
+                        }
+                    }
+                } else if (Math.abs(diffY) > swipeThreshold) {
+                    if (diffY > 0) {
+                        console.log("Swipe down");
+                    } else {
+                        console.log("Swipe up");
+                    }
+                }
+
+            });
+
+            // Event listeners for the buttons
+            prevBtn.addEventListener('click', () => {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                    updateCarousel();
+                    resetAutoRotate();  // Restart auto-rotation after manual action
+                }
+            });
+
+            nextBtn.addEventListener('click', () => {
+                if (currentIndex < totalItems - 1) {
+                    currentIndex++;
+                    updateCarousel();
+                    resetAutoRotate();  // Restart auto-rotation after manual action
+                }
+            });
+
+            // Initialize carousel state
+            createPaginationDots();
+            updateCarousel();
+
+            // Start automatic rotation if enabled
+            if (autoRotate) {
+                startAutoRotate();
+                
+                // Pause rotation on mouse hover over the entire carousel and resume on mouse leave
+                document.querySelector('.main-carousel').addEventListener('mouseenter', stopAutoRotate);
+                document.querySelector('.main-carousel').addEventListener('mouseleave', resetAutoRotate);
+            }
+        }
+        
+        var carouselList = document.querySelector('.main-carousel-list');
+        var items = document.querySelectorAll('.main-carousel-item');
+        var prevBtn = document.getElementById('carousel-prevBtn');
+        var nextBtn = document.getElementById('carousel-nextBtn');
+        var paginationDotsContainer = document.querySelector('.carousel-pagination-dots');
+        customCarousel(carouselList,items,prevBtn,nextBtn,paginationDotsContainer,1);
+
+        carouselList = document.querySelector('.overview');
+        items = document.querySelectorAll('.gallery-thumb');
+        prevBtn = document.querySelector('.gallery-button.prev');
+        nextBtn = document.querySelector('.gallery-button.next');
+        paginationDotsContainer = document.querySelector('.gallery-paginator');
+        customCarousel(carouselList,items,prevBtn,nextBtn,paginationDotsContainer,4);
+
+
+        function getYouTubeVideoID(url) {
+            const regex = /(?:https?:\/\/)?(?:www\.)?youtube\.com\/(?:watch\?v=|embed\/|v\/|.+\/|watch\?.+&v=)?([^&\n?#]+)/;
+            const match = url.match(regex);
+            return match ? match[1] : null;
+        }
+
+        function getYouTubeThumbnail(url) {
+            const videoID = getYouTubeVideoID(url);
+            if (videoID) {
+                return {
+                    default: `https://img.youtube.com/vi/${videoID}/default.jpg`,
+                    medium: `https://img.youtube.com/vi/${videoID}/mqdefault.jpg`,
+                    high: `https://img.youtube.com/vi/${videoID}/hqdefault.jpg`,
+                    standard: `https://img.youtube.com/vi/${videoID}/sddefault.jpg`,
+                    maxRes: `https://img.youtube.com/vi/${videoID}/maxresdefault.jpg`
+                };
+            }
+            return null;
+        }
+
+        // Example usage:
+        const videoURL = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+        const thumbnails = getYouTubeThumbnail(videoURL);
+        // console.log(thumbnails);
+});
+
+</script>
+
+<script>
+    $(document).ready(function() {
+    // Show popup when clicking on the .calendar div
+    $('.calendar-trigger-button').click(function() {
+        $('.popup').fadeIn("slow");  // Show the popup
+        $('.overlay').fadeIn("slow"); // Show the overlay (background dim)
+    });
+
+    // Close popup when clicking on the close (X) button
+    $('.close-btn').click(function() {
+        $('.popup').fadeOut("slow");
+        $('.overlay').fadeOut("slow");
+    });
+
+    // Close popup when clicking outside of the popup
+    $(document).click(function(event) {
+        // If the click is outside the .popup-content and not on the calendar
+        if (!$(event.target).closest('.popup-content, .calendar-trigger-button').length) {
+            $('.popup').fadeOut("slow");
+            $('.overlay').fadeOut("slow");
+        }
+    });
+});
+
+</script>
+  </head>
+  <body class="s">
+
+    <header>
+        <div id="usefulLinksMenu" class="useful-links-wrapper">
+            <div class="useful-links-menu">
+                <div class="links-header">
+                    <a href="" >
+                        <i class="fa fa-external-link-square"></i>
+                        <span>Полезни връзки</span>
+                    </a>
+                    <span class="close-button" onclick="toggleHiddenMenu('#usefulLinksMenu')">
+                        <i class="fal fa-times"></i>
+                    </span>
+                </div>
+                <div class="links-list">
+                    <a href="/BG/sdo/specializirano-obuchenie-za-pravosposobnost" >
+                        <i class="fal fa-book-reader"></i>
+                        <span>Специализирано обучение</span>
+                    </a>
+                    <a href="https://webstudent.mu-varna.bg/#" >
+                        <i class="fal fa-users-class"></i>
+                        <span>Webstudent</span>
+                    </a>
+                    <a href="https://teacher.mu-varna.bg/#/login" >
+                        <i class="fal fa-chalkboard-teacher"></i>
+                        <span>Teacher</span>
+                    </a>
+                    <a href="http://otpuski.mu-varna.bg/" >
+                        <i class="fal fa-calendar"></i>
+                        <span>Отпуски</span>
+                    </a>
+                    <a href="" >
+                        <i class="fal fa-atom-alt"></i>
+                        <span>Образователни услуги</span>
+                    </a>
+                    <a href="https://elearn.mu-varna.bg/ultra/" >
+                        <i class="fal fa-chalkboard"></i>
+                        <span>Blackboard</span>
+                    </a>
+                    <a href="/BG/Admission/master-programs" >
+                        <i class="fal fa-globe"></i>
+                        <span>Дистанционно обучение</span>
+                    </a>
+                    <a href="https://phdschool.mu-varna.bg/login" >
+                        <i class="fal fa-stethoscope"></i>
+                        <span>Докторантско училище</span>
+                    </a>
+                    <a href="https://www.mu-varna.bg/BG/Research/Pages/konkursi.aspx" >
+                        <i class="fal fa-trophy"></i>
+                        <span>Конкурси</span>
+                    </a>
+                    <a href="https://mail.mu-varna.bg/lm_auth_proxy?DoLMLogin?curl=L2fowa&curlid=1118480776-4067449729" >
+                        <i class="fal fa-envelope"></i>
+                        <span>Служебна поща</span>
+                    </a>
+                    <hr>
+                    <a href="https://www.mu-varna.bg/BG/AboutUs/Pages/qs.aspx" >
+                        <img src="/_catalogs/masterpage/_layouts/15/MUVarna/img/quantum.png" alt="" style="width: 90px;
+                        height: 60px;
+                        object-fit: cover;">
+                        <span>Quantum satis </span>
+                    </a>
+                    <hr>
+                    <a href="/BG/Pages/baza-zornica-priema-slujiteli.aspx" >
+                        <img src="/_catalogs/masterpage/_layouts/15/MUVarna/img/zornica.png" alt="" style="width: 90px;
+                        height: 60px;
+                        object-fit: cover;">
+                        <span>Зорница </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="navbar" id="top">
+            <div class="useful-links" onclick="toggleHiddenMenu('#usefulLinksMenu')">
+                <i class="fa fa-external-link-square"></i>
+                <span>Полезни връзки</span>
+            </div>
+            <div class="nav-collapse">
+                        <div id="ctl00_MenuFirst" __webpartid="{65220EC2-3096-426E-84A4-D6761E365E46}">
+                            <ul class="nav" role="menu"><li><a href="/BG/Pages/NewsList.aspx">Новини</a></li><li class="dropdown"><a href="/BG/Students/Pages/u4ebnadejnost.aspx" class="dropdown-toggle disabled" data-toggle="dropdown">Учебна дейност</a><ul class="dropdown-menu" style="display: none;"><li><a href="/BG/AboutUs/Pages/y4ebenotdel.aspx">Учебен отдел</a></li><li><a href="/BG/Students/Pages/prepodavateli.aspx">За преподаватели</a></li><li><a href="/BG/Students/Pages/FeesAndCredits.aspx">Студенти</a></li></ul></li><li class="dropdown"><a href="/BG/InternationalActivity/Pages/Международно-сътрудничество.aspx" class="dropdown-toggle disabled" data-toggle="dropdown">Международнo сътрудничество</a><ul class="dropdown-menu" style="display: none;"><li class="dropdown-submenu"><a href="/BG/vagna_informaciq">Международно сътрудничество</a><ul class="dropdown-menu"><li><a href="/BG/vagna_informaciq">Международен календар</a></li><li><a href="/BG/InternationalActivity/Pages/kratkaistoriq.aspx">Кратка история</a></li><li><a href="/BG/InternationalActivity/Pages/Дейности.aspx">Дейности</a></li><li><a href="/BG/InternationalActivity/Pages/erazmus.aspx">Еразъм+</a></li><li><a href="/BG/InternationalActivity/Pages/Партньори-на-университета.aspx">Партньори на университета</a></li><li><a href="/BG/Students/Documents/Presentation_IPFs-BG.pdf">Международен форум на партньорствата</a></li><li><a href="/BG/InternationalActivity/Pages/proceduri.aspx">Процедури</a></li><li><a href="/BG/InternationalActivity/partners-tiles">Партньорски събития</a></li><li><a href="/BG/Students/Documents/Presentation_IPFs-BG.pdf">Стратегия за интернационализация</a></li><li><a href="/BG/InternationalActivity/Pages/Членство.aspx">Членства</a></li><li><a href="/BG/InternationalActivity/Pages/Контакти.aspx">Контакти</a></li></ul></li></ul></li><li><a href="/BG/sdo/Pages/Специализации.aspx">СДО</a></li><li class="dropdown"><a href="/BG/cdo/Pages/default.aspx" class="dropdown-toggle disabled" data-toggle="dropdown">ИЦЕДО</a><ul class="dropdown-menu" style="display: none;"><li><a href="/BG/cdo/Pages/Blackboard.aspx">Blackboard</a></li><li><a href="/BG/cdo/body-interact-mu-varna">Body Interact</a></li><li><a href="/BG/cdo/Pages/default.aspx">Интернационален център за електронно и дистанционно обучение</a></li></ul></li><li><a href="http://press.mu-varna.bg/" target="_blank">Издателска дейност</a></li><li><a href="/BG/AlumniClub/alumni-club-mu-varna-new">Alumni Club</a></li><li><a href="/BG/Pages/Contacts.aspx">Контакти</a></li></ul>
+                        </div>
+            </div>
+            <div class="language">
+               <a href="/BG">
+                <span>BG</span>
+               </a> /
+               <a href="/EN">
+                <span>EN</span>
+               </a>
+            </div>
+            <div class="contrast-theme">
+                <i class="fal fa-eye-slash"></i>
+            </div>
+        </div>
+        <div class="hamburger-menu" onclick="toggleHiddenMenu('.nav-collapse')">
+            <i class="fal fa-bars"></i>
+
+        </div>
+
+<div class="contrast-theme">
+            <i class="fal fa-eye-slash"></i>
+        </div>
+
+        <div class="container wrapper d-flex align-items-center">
+            <!-- Begin: Logo &#38; Slogan -->
+            <a href="/BG" title="Към начална страница">
+                <img src="_layouts/15/MUVarna/img/muvarna-logo-blue.png" class="logo">
+            </a>
+            <a href="/BG" title="Към начална страница" class="slogan-bg">
+                <div>Медицински университет - Варна</div> 
+                <div class="strong">Проф. д-р Параскев Стоянов</div>
+            </a>
+            <!-- End: Logo &#38; Slogan -->
+
+            <div class="menu-searchbox-wrapper">
+                <div class="searchbox" role="search">
+                    <div class="ms-webpart-chrome ms-webpart-chrome-fullWidth ">
+                    <div webpartid="00000000-0000-0000-0000-000000000000" haspers="true" id="WebPartWPQ1" width="100%" class="ms-WPBody " onlyformepart="true" allowdelete="false" ><div componentid="ctl00_SmallSearchInputBox1_csr" id="ctl00_SmallSearchInputBox1_csr"><div id="SearchBox" name="Control"><div class="ms-srch-sb ms-srch-sb-border" id="ctl00_SmallSearchInputBox1_csr_sboxdiv"><input type="search" value="Търсене..." maxlength="2048" title="Търсене..." id="ctl00_SmallSearchInputBox1_csr_sbox" autocomplete="off" autocorrect="off" onkeypress="EnsureScriptFunc('Search.ClientControls.js', 'Srch.U', function() {if (Srch.U.isEnterKey(String.fromCharCode(tile.keyCode))) {$find('ctl00_SmallSearchInputBox1_csr').search($get('ctl00_SmallSearchInputBox1_csr_sbox').value);return Srch.U.canceltile(tile);}})" onkeydown="EnsureScriptFunc('Search.ClientControls.js', 'Srch.U', function() {var ctl = $find('ctl00_SmallSearchInputBox1_csr');ctl.activateDefaultQuerySuggestionBehavior();})" onfocus="EnsureScriptFunc('Search.ClientControls.js', 'Srch.U', function() {var ctl = $find('ctl00_SmallSearchInputBox1_csr');ctl.hidePrompt();ctl.setBorder(true);})" onblur="EnsureScriptFunc('Search.ClientControls.js', 'Srch.U', function() {var ctl = $find('ctl00_SmallSearchInputBox1_csr'); if (ctl){ ctl.showPrompt(); ctl.setBorder(false);}})" class="ms-textSmall ms-srch-sb-prompt ms-helperText" role="combobox" aria-owns="ctl00_SmallSearchInputBox1_csr_AutoCompList" aria-haspopup="true" aria-autocomplete="list" aria-expanded="false"><a title="Търсене" role="button" class="btn btn-primary" id="ctl00_SmallSearchInputBox1_csr_SearchLink" onclick="EnsureScriptFunc('Search.ClientControls.js', 'Srch.U', function() {$find('ctl00_SmallSearchInputBox1_csr').search($get('ctl00_SmallSearchInputBox1_csr_sbox').value);})" href="javascript: {}" aria-label="Търсене"><i class="icon-white icon-search"></i></a><div class="ms-qSuggest-container ms-shadow" id="AutoCompContainer"><div id="ctl00_SmallSearchInputBox1_csr_AutoCompList" role="listbox" aria-label="Предложения"></div></div></div></div></div><noscript><div id="ctl00_SmallSearchInputBox1_noscript">Изглежда, че вашият браузър няма активиран JavaScript. Включете JavaScript и опитайте отново.</div></noscript><div id="ctl00_SmallSearchInputBox1">
+                    </div><div class="ms-clear"></div></div>
+                    </div>
+                </div>
+                <!-- Begin: Main menu -->
+                <div class="menu">
+                    <div id="ctl00_MenuSecond" __webpartid="{E5BFC46C-C044-44E4-94E9-6316B8C0BFF6}">
+                        <ul class="nav nav-pills" role="menu"><li class="dropdown"><a href="/BG/AboutUs/Pages/MedicalUniversityVarna.aspx" class="dropdown-toggle" data-toggle="dropdown">За нас</a><ul class="dropdown-menu" style="display: none;"><li><a href="/BG/AboutUs/Pages/MedicalUniversityVarna.aspx">Медицински университет - Варна</a></li><li><a href="/BG/AboutUs/Pages/CircleMenu.aspx">Факултети, филиали, колежи и департаменти</a></li><li><a href="/BG/AboutUs/Pages/Centers.aspx">Центрове</a></li><li><a href="/BG/AboutUs/Pages/Accreditation.aspx">Качество и акредитация</a></li><li class="dropdown-submenu"><a href="/BG/InternationalActivity/Pages/Actions.aspx">Проектна дейност</a><ul class="dropdown-menu" style="display: none;"><li><a href="/BG/InternationalActivity/Pages/Текущи-проекти.aspx">Активни проекти</a></li><li><a href="/BG/vajno-proekti">Важна информация</a></li><li><a href="/BG/InternationalActivity/Pages/Галерия.aspx">Галерия</a></li><li><a href="/BG/InternationalActivity/Pages/Actions.aspx">Дейност</a></li><li><a href="/BG/InternationalActivity/Pages/Международни-проекти-и-програми.aspx">Каталог</a></li><li><a href="/BG/InternationalActivity/Pages/kontakti-proektna-deinost-mu-varna.aspx">Контакти</a></li><li><a href="/BG/riklu4ili_proekti">Приключили проекти</a></li></ul></li><li><a href="/BG/AboutUs/Pages/admin-zvena.aspx">Административни звена</a></li><li><a href="/BG/AboutUs/Pages/Zastita-na-lichnite-danni.aspx">Защита на личните данни</a></li><li><a href="/BG/AboutUs/Pages/Другите-за-нас.aspx">Другите за нас</a></li><li><a href="/BG/AboutUs/Pages/PicturesAndVideos.aspx">В снимки и видео</a></li></ul></li><li class="dropdown"><a href="/BG/Admission/Pages/default.aspx" class="dropdown-toggle disabled" data-toggle="dropdown" target="_blank">Прием</a><ul class="dropdown-menu" style="display: none;"><li><a href="/BG/specialnosti" target="_blank">Специалности</a></li><li><a href="/BG/SDO/Pages/Специализации.aspx">Специализанти</a></li><li><a href="/BG/Research/Pages/PhDStudents.aspx">Докторанти</a></li><li><a href="/BG/AboutUs/Pages/CentProfEducSpec.aspx">ЦПО</a></li></ul></li><li class="dropdown"><a href="/BG/Students/Pages/FeesAndCredits.aspx" class="dropdown-toggle disabled" data-toggle="dropdown">Студенти</a><ul class="dropdown-menu" style="display: none;"><li><a href="/BG/Students/Pages/Specialties.aspx">Специалности</a></li><li><a href="/BG/Students/Pages/FeesAndCredits.aspx">Учебни такси</a></li><li class="dropdown-submenu"><a href="/BG/Students/Pages/Учебна-информация.aspx">Учебна информация</a><ul class="dropdown-menu" style="display: none;"><li><a href="/BG/Students/Pages/info-stud-fm.aspx">Факултет Медицина</a></li><li><a href="/BG/Students/Pages/StudentInfo-fdm.aspx">Факултет Дентална медицина</a></li><li><a href="/BG/Students/Pages/info-stud-ff.aspx">Факултет Фармация</a></li><li><a href="/BG/Students/Pages/StudentInfo-foz.aspx">ФОЗ</a></li><li><a href="/BG/Students/Pages/StudentInfo.aspx">Медицински колеж</a></li><li><a href="/BG/Students/Pages/akademichen-kalendar.aspx">Академичен календар</a></li><li><a href="/BG/Students/Pages/info-studenti.aspx">Комуникации, езици, спорт</a></li></ul></li><li><a href="/BG/Students/Pages/TrainingCenters.aspx">Учебни бази</a></li><li><a href="/BG/Students/Pages/Студентско-кредитиране.aspx">Студентско кредитиране</a></li><li><a href="/BG/Students/Pages/SocialQuestions.aspx">Социално-битови въпроси</a></li><li><a href="/BG/Students/Pages/StudentsOrganizations.aspx">Студентски организации</a></li><li><a href="/BG/Students/Pages/Sport.aspx">Спорт</a></li><li><a href="/BG/Students/praktiki">Проект „Студентски практики“</a></li><li><a href="/BG/InternationalActivity/Pages/erazmus.aspx">Студентска мобилност Еразъм</a></li><li><a href="/BG/Students/Pages/CreditSystem.aspx">Кредитна система</a></li><li class="dropdown-submenu"><a href="webstudent">Webstudent</a><ul class="dropdown-menu"><li><a href="https://webstudent.mu-varna.bg/">Вход в Webstudent</a></li><li><a href="/BG/Documents/UkazanieWebstudent.pdf">Указание за ползване</a></li></ul></li></ul></li><li><a href="http://library.mu-varna.bg/">Библиотека</a></li><li class="dropdown"><a href="/BG/Research/Pages/Проекти.aspx" class="dropdown-toggle disabled" data-toggle="dropdown">Научна дейност</a><ul class="dropdown-menu pull-right" style="display: none;"><li><a href="/BG/Research/Pages/PhDStudents.aspx">Докторантско училище</a></li><li><a href="/BG/Research/otdel-karierno-razvitie">Кариерно развитие</a></li><li><a href="/BG/Research/Pages/konkursi.aspx">Конкурси</a></li><li><a href="/BG/Research/Pages/Degrees.aspx">Процедури</a></li><li><a href="/BG/nauchni-izdaniq">Научни издания</a></li><li><a href="http://press.mu-varna.bg/">Университетско издателство</a></li><li><a href="/BG/Research/Pages/ScientificЕvents.aspx">Научни прояви</a></li><li><a href="http://library.mu-varna.bg/databases/">Научни бази данни</a></li><li><a href="/BG/Research/Pages/normativni-dokumenti-nauchen-otdel.aspx">Нормативни документи</a></li><li><a href="/BG/Research/Pages/medical-university-fond-nauka.aspx">Фонд Наука</a></li><li><a href="/BG/Research/Pages/keni.aspx">КЕНИ</a></li><li><a href="/BG/AboutUs/Pages/Research-Institute.aspx">Научноизследователски институт</a></li><li><a href="/BG/Research/Pages/Contacts.aspx">Контакти</a></li></ul></li></ul>
+                    </div>
+                </div>
+                <!-- End: Main menu -->
+            </div>
+        </div>
+    </header>
+
+    <div class="calendar-trigger-button">Open Calendar</div>
+    <div class="overlay"></div>
+    <div class="popup">
+        <div class="popup-content">
+            <span class="close-btn">X</span>
+            <p>This is the popup content!</p>
+        </div>
+    </div>
+    <div class="scroll-box">
+        <div class="scroll-content">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent lacinia placerat justo, eu efficitur nisi dapibus a. Sed mollis eget odio in pulvinar. Maecenas ultricies...
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent lacinia placerat justo, eu efficitur nisi dapibus a. Sed mollis eget odio in pulvinar. Maecenas ultricies...
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent lacinia placerat justo, eu efficitur nisi dapibus a. Sed mollis eget odio in pulvinar. Maecenas ultricies...
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent lacinia placerat justo, eu efficitur nisi dapibus a. Sed mollis eget odio in pulvinar. Maecenas ultricies...
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent lacinia placerat justo, eu efficitur nisi dapibus a. Sed mollis eget odio in pulvinar. Maecenas ultricies...
+            
+            <!-- Add more text to make the content scrollable -->
+        </div>
+    </div>
+
+    <div class="admissions-wrapper main-wrapper">
+        <div class="main-slider">
+            <div class="container">
+                <div class="main-carousel">
+                    <div class="main-carousel-content">
+                        <div class="main-carousel-list">
+                            <div class="main-carousel-item d-flex">
+                                <div class="carousel-title title-text">Онлайн прием</div>
+                                <div class="carousel-text regular-text f18">
+                                    <p>На вниманието на кандидат-студентите за учебната 2022/2023 г. в МУ-Варна</p>
+                                    <p>Срокът за прием на документи за кандидатстване за двете нови магистърски програми към факултет „Фармация“ е удължен до 22 ноември 2021 г.</p>
+                                    <p>НОВО!!! Кандидатстудентски подготвителни курсове за уч. 2022/2023 г.</p>
+                                    Справочник за прием на студенти в МУ-Варна и сборници за подготовка по биология и химия
+                                </div>
+                            </div>
+                            <div class="main-carousel-item">Item 2</div>
+                            <div class="main-carousel-item">Item 3</div>
+                            <div class="main-carousel-item">Item 4</div>
+                            <div class="main-carousel-item">Item 5</div>
+                        </div>
+                    </div>
+                    <div class="carousel-controls">
+                        <div class="carousel-pagination-dots"></div> <!-- Pagination Dots -->
+                        <div class="tile-buttons-wrapper d-flex">
+                            <button id="carousel-prevBtn" class="tile-button" type="button"> <i class="fal fa-chevron-left"></i></button>
+                            <button id="carousel-nextBtn" class="tile-button" type="button"> <i class="fal fa-chevron-right"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="main-languages mb-4">
+            <div class="container ">
+                <div class="languages-wrapper d-flex align-items-center py-5">
+                    <a href="" class="d-flex align-items-center">
+                        <div class="language-flag bg"></div>
+                        <div class="title-text upper-case f24 text-white ml-3">прием</div>
+                    </a>
+                    <a href="" class="d-flex align-items-center">
+                        <div class="language-flag gb">
+                            <div class="rect1"></div>
+                            <div class="rect2"></div>
+                            <div class="rect3"></div>
+                            <div class="rect4"></div>
+                            <div class="rect5"></div>
+                        </div>
+                        <div class="title-text upper-case f24 text-white ml-3">Admission</div>
+                    </a>
+                    <a href="" class="d-flex align-items-center">
+                        <div class="language-flag de"></div>
+                        <div class="title-text upper-case f24 text-white ml-3">Bewerbungsportal</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="main-important">
+            <div class="container">
+                <div class="section-header">
+                    <h1>Важно</h1>
+                </div>
+                <div class="important-box-wrapper color-primary-gray-3 f16">
+                    <div class="important-box">
+                        <div class="important-text">
+                            Обновената почивна база в с.Зорница започва да приема служители на МУ-Варна за настаняване за краткотраен отдих за настаняване за краткотраен отдих
+                        </div>
+                    </div>
+                    <div class="important-box">
+                        <div class="important-text">
+                            Обновената почивна база в с.Зорница започва да приема служители на МУ-Варна за настаняване за краткотраен отдих
+                        </div>
+                    </div>
+                    <div class="important-box">
+                        <div class="important-text">
+                            Обновената почивна база в с.Зорница започва да приема служители на МУ-Варна за настаняване за краткотраен отдих
+                        </div>
+                    </div>
+                    <div class="important-box">
+                        <div class="important-text">
+                            Обновената почивна база в с.Зорница започва да приема служители на МУ-Варна за настаняване за краткотраен отдих
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="main-news">
+            <div class="container">
+                <div class="section-header">
+                    <h1>Новини</h1>
+                </div>
+                <div class="tiles-box-wrapper">
+                    <div class="tile-box">
+                        <div class="tile-image">
+                            <img src="https://dummyimage.com/320x460/" alt="">
+                        </div>
+                        <div class="tile-content">
+                            <div class="tile-texts-wrapper">
+                                <div class="tile-title">Кандидатстудентски издания на МУ-Варна</div>
+                                <div class="tile-text">Подаване на кандидатстудентски документи през системата за онлайн прием на МУ-Варна!</div>
+                            </div>
+                            <div class="tile-buttons-wrapper">
+                                <div class="tile-button">
+                                    <a href="" >
+                                        <i class="fal fa-arrow-right"></i>
+                                        <span>Полезни връзки</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tile-box  big-box">
+                        <div class="tile-image">
+                            <img src="https://dummyimage.com/480x350/" alt="">
+                        </div>
+                        <div class="tile-content">
+                            <div class="tile-texts-wrapper">
+                                <div class="tile-title">График за издаване на библиотечна карта на студентите от първи курс</div>
+                                <div class="tile-text">Библиотечни карти се издават в Централната библиотека на МУ-Варна, сграда Ректорат, етаж 2.
+                                    За студентите първокурсници, желаещи да получат библиотечна карта, има създадена организация
+                                    </div>
+                            </div>
+                            <div class="tile-buttons-wrapper">
+                                <div class="tile-button">
+                                    <a href="" >
+                                        <i class="fa fa-external-link-square"></i>
+                                        <span>Вижте графика</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tile-box">
+                        <div class="tile-image">
+                            <img src="https://dummyimage.com/480x350/" alt="">
+                        </div>
+                        <div class="tile-content">
+                            <div class="tile-texts-wrapper">
+                                <div class="tile-title">Кандидатстудентски издания на МУ-Варна</div>
+                                <div class="tile-text">Подаване на кандидатстудентски документи през системата за онлайн прием на МУ-Варна!</div>
+                            </div>
+                            <div class="tile-buttons-wrapper">
+                                <div class="tile-button">
+                                    <a href="" >
+                                        <i class="fal fa-arrow-right"></i>
+                                        <span>Полезни връзки</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tile-box">
+                        <div class="tile-image">
+                            <img src="https://dummyimage.com/480x350/" alt="">
+                        </div>
+                        <div class="tile-content">
+                            <div class="tile-texts-wrapper">
+                                <div class="tile-title">Кандидатстудентски издания на МУ-Варна</div>
+                                <div class="tile-text">Подаване на кандидатстудентски документи през системата за онлайн прием на МУ-Варна!</div>
+                            </div>
+                            <div class="tile-buttons-wrapper">
+                                <div class="tile-button">
+                                    <a href="" >
+                                        <i class="fal fa-arrow-right"></i>
+                                        <span>Полезни връзки</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        <div class="internet-news">
+            <div class="container" id="internetNewsOutput">
+                <div class="internet-news-wrapper">
+                    <a href="{{FileRef}}" class="internet-news-item title-text">
+                        <img src="https://intd.mu-varna.bg/BG/NewsImages/2023-%20Yanuari/sv%20marina/terapia.jpg" alt="">
+                        <div class="internet-news-title">Безплатни ревматологични прегледи в УМБАЛ „Св. Марина“ - Варна на 13 януари 2023 г. под надслов „Ранната диагностика предотвратява инвалидизация“</div>
+                    </a>
+                    <a href="{{FileRef}}" class="internet-news-item title-text">
+                        <img src="https://intd.mu-varna.bg/BG/NewsImages/2023-%20Yanuari/sv%20marina/terapia.jpg" alt="">
+                        <div class="internet-news-title">Безплатни ревматологични прегледи в УМБАЛ „Св. Марина“ - Варна на 13 януари 2023 г. под надслов „Ранната диагностика предотвратява инвалидизация диагностика предотвратява инвалидизация“</div>
+                    </a>
+                    <a href="{{FileRef}}" class="internet-news-item title-text">
+                        <img src="https://intd.mu-varna.bg/BG/NewsImages/2023-%20Yanuari/sv%20marina/terapia.jpg" alt="">
+                        <div class="internet-news-title">Безплатни ревматологични прегледи в УМБАЛ „Св. Марина“ - Варна на 13 януари 2023 г. под надслов „Ранната диагностика предотвратява инвалидизация“</div>
+                    </a>
+                    <a href="{{FileRef}}" class="internet-news-item title-text">
+                        <img src="https://intd.mu-varna.bg/BG/NewsImages/2023-%20Yanuari/sv%20marina/terapia.jpg" alt="">
+                        <div class="internet-news-title">Безплатни ревматологични прегледи в УМБАЛ „Св. Марина“ - Варна на 13 януари 2023 г. под надслов „Ранната диагностика предотвратява инвалидизация“</div>
+                    </a>
+                    <a href="{{FileRef}}" class="internet-news-item title-text">
+                        <img src="https://intd.mu-varna.bg/BG/NewsImages/2023-%20Yanuari/sv%20marina/terapia.jpg" alt="">
+                        <div class="internet-news-title">Безплатни ревматологични прегледи в УМБАЛ „Св. Марина“ - Варна на 13 януари 2023 г. под надслов „Ранната диагностика предотвратява инвалидизация“</div>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+        <div class="main-admission">
+            <div class="container">
+                <div class="section-header">
+                    <h1>Прием</h1>
+                    <a href="/BG/Admission/Pages/default.aspx">
+                        <i class="fal fa-arrow-right"></i>
+                    </a>
+                </div>
+                <div class="tiles-wrapper">
+                    <div class="tile-box big-box full-width">
+                        <div class="tile-image">
+                            <img src="https://dummyimage.com/320x460/" alt="">
+                        </div>
+                        <div class="tile-content">
+                            <div class="tile-texts-wrapper">
+                                <div class="tile-title">Кандидатстудентски издания на МУ-Варна</div>
+                                <div class="tile-text">Подаване на кандидатстудентски документи през системата за онлайн прием на МУ-Варна!</div>
+                            </div>
+                            <div class="tile-buttons-wrapper">
+                                <div class="tile-button">
+                                    <a href="" >
+                                        <i class="fal fa-arrow-right"></i>
+                                        <span>Полезни връзки</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tile-box big-box full-width flipped">
+                        <div class="tile-image">
+                            <img src="https://dummyimage.com/320x460/" alt="">
+                        </div>
+                        <div class="tile-content">
+                            <div class="tile-texts-wrapper">
+                                <div class="tile-title">Кандидатстудентски издания на МУ-Варна</div>
+                                <div class="tile-text">Подаване на кандидатстудентски документи през системата за онлайн прием на МУ-Варна!</div>
+                            </div>
+                            <div class="tile-buttons-wrapper">
+                                <div class="tile-button">
+                                    <a href="" >
+                                        <i class="fal fa-arrow-right"></i>
+                                        <span>Полезни връзки</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="main-events">
+            <div class="container">
+                <div class="section-header">
+                    <h1>Събития</h1>
+                    <a href="/BG/Pages/FutureEvents.aspx">
+                        <i class="fal fa-arrow-right"></i>
+                    </a>
+                </div>
+                <div class="tiles-wrapper grid">
+                    <div class="tile-box">
+                        <div class="tile-content">
+                            <div class="tile-texts-wrapper">
+                                <div class="tile-title">Кандидатстудентски издания на МУ-Варна</div>
+                                <div class="tile-text">Подаване на кандидатстудентски документи през системата за онлайн прием на МУ-Варна!</div>
+                            </div>
+                            <div class="tile-buttons-wrapper">
+                                <div class="tile-button">
+                                    <a href="" >
+                                        <i class="fal fa-arrow-right"></i>
+                                        <span>Полезни връзки</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tile-box">
+                        <div class="tile-content">
+                            <div class="tile-texts-wrapper">
+                                <div class="tile-title">Кандидатстудентски издания на МУ-Варна</div>
+                                <div class="tile-text">Подаване на кандидатстудентски документи през системата за онлайн прием на МУ-Варна!</div>
+                            </div>
+                            <div class="tile-buttons-wrapper">
+                                <div class="tile-button">
+                                    <a href="" >
+                                        <i class="fal fa-arrow-right"></i>
+                                        <span>Полезни връзки</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tile-box">
+                        <div class="tile-content">
+                            <div class="tile-texts-wrapper">
+                                <div class="tile-title">Кандидатстудентски издания на МУ-Варна</div>
+                                <div class="tile-text">Подаване на кандидатстудентски документи през системата за онлайн прием на МУ-Варна!</div>
+                            </div>
+                            <div class="tile-buttons-wrapper">
+                                <div class="tile-button">
+                                    <a href="" >
+                                        <i class="fal fa-arrow-right"></i>
+                                        <span>Полезни връзки</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tile-box">
+                        <div class="tile-content">
+                            <div class="tile-texts-wrapper">
+                                <div class="tile-title">Кандидатстудентски издания на МУ-Варна</div>
+                                <div class="tile-text">Подаване на кандидатстудентски документи през системата за онлайн прием на МУ-Варна!</div>
+                            </div>
+                            <div class="tile-buttons-wrapper">
+                                <div class="tile-button">
+                                    <a href="" >
+                                        <i class="fal fa-arrow-right"></i>
+                                        <span>Полезни връзки</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="main-current blue-contrast-section">
+            <div class="container">
+                <div class="section-header">
+                    <h1>Актуално</h1>
+                </div>
+                <div class="tiles-wrapper">
+                    <div class="tile-box big-box full-width">
+                        <div class="tile-image">
+                            <img src="https://www.mu-varna.bg/BG/Admission/Admission/img/otzivi.jpg" alt="">
+                        </div>
+                        <div class="tile-content">
+                            <div class="tile-texts-wrapper">
+                                <div class="tile-title">Стипендии</div>
+                                <div class="tile-text">Подаване на кандидатстудентски документи през системата за онлайн прием на МУ-Варна!</div>
+                            </div>
+                            <div class="tile-buttons-wrapper">
+                                <div class="tile-button">
+                                    <a href="" >
+                                        <i class="fal fa-arrow-right"></i>
+                                        <span>Кой може да получи стипендия</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tile-box big-box full-width flipped">
+                        <div class="tile-image">
+                            <img src="https://www.mu-varna.bg/BG/Admission/Admission/img/galeriq.jpg" alt="">
+                        </div>
+                        <div class="tile-content">
+                            <div class="tile-texts-wrapper">
+                                <div class="tile-title">Тържествени церемонии по дипломиране</div>
+                                <div class="tile-text">Подаване на кандидатстудентски документи през системата за онлайн прием на МУ-Варна!</div>
+                            </div>
+                            <div class="tile-buttons-wrapper">
+                                <div class="tile-button">
+                                    <a href="" >
+                                        <i class="fal fa-arrow-right"></i>
+                                        <span>Подробности</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="main-gallery">
+            <div class="container">
+                <img src="http://mu-vi.tv/SiteAssets/logo-mu-tv.png" alt="" style=" margin: auto; display: block; padding-top: 60px; "> 
+                <div class="gallery-viewport">
+                    <div class="overview d-flex mb-5">
+                        <div class="gallery-thumb">
+                            <a href="" >
+                                <img class="mb-3" src="https://baijs.com/tinycarousel/images/picture6.jpg" />
+                                <div class="gallery-text f14 regular-text">Промоция на Випуск 2021 на МК-Варна</div>
+                            </a>
+                        </div>
+                        <div class="gallery-thumb">
+                            <img src="https://baijs.com/tinycarousel/images/picture5.jpg" />
+                        </div>
+                        <div class="gallery-thumb">
+                            <img src="https://baijs.com/tinycarousel/images/picture4.jpg" />
+                        </div>
+                        <div class="gallery-thumb">
+                            <img src="https://baijs.com/tinycarousel/images/picture3.jpg" />
+                        </div>
+                        <div class="gallery-thumb">
+                            <img src="https://baijs.com/tinycarousel/images/picture2.jpg" />
+                        </div>
+                        <div class="gallery-thumb">
+                            <img src="https://baijs.com/tinycarousel/images/picture1.jpg" />
+                        </div>
+                    </div>
+    
+                    <div class="gallery-contorls">
+                        <div class="gallery-paginator"></div>
+                        <div>
+                            <p class="color-primary-gray-4 f14">
+                                СЪВЕТ ЗА ЕЛЕКТРОННИ МЕДИИ<br>
+                                Адрес: гр. софия, бул."шипченски проход" 69, тел: 02/9708810, факс:02/9733769, e-mail:office@cem.bg, www.cem.bg
+                            </p>
+                        </div>
+                        <div class="gallery-buttons-wrapper d-flex">
+                            <button class="gallery-button prev" type="button"> <i class="fal fa-chevron-left"></i></button>
+                            <button class="gallery-button next mr-2" type="button"> <i class="fal fa-chevron-right"></i></button>
+                            <div class="tile-buttons-wrapper">
+                                <div class="tile-button">
+                                    <a href="http://mu-vi.tv/Pages/HomePage.aspx" target="_blank" class="d-flex align-items-center">
+                                        <i class="fal fa-arrow-right"></i>
+                                        <span class="pl-2 text-nowrap">Към mu-vi.tv</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="main-learn-bases blue-contrast-section">
+            <div class="container">
+                <div class="section-header">
+                </div>
+                <div class="tiles-wrapper">
+                    <div class="tile-box big-box full-width flipped">
+                        <div class="tile-image">
+                            <img src="https://www.mu-varna.bg/BG/Admission/Admission/img/galeriq.jpg" alt="">
+                        </div>
+                        <div class="tile-content">
+                            <div class="tile-texts-wrapper">
+                                <div class="tile-title">Учебни бази</div>
+                                <div class="tile-text">​​​Университетските бази за обучение на студентите от МУ-Варна предоставят възможност за високо качество на клиничното и предклинично обучение на студентите от медицинските специалности. Университетът разполага с модерни високотехнологични диагностични звена, оборудвани с конвенционална и с уникална апаратура за практическо обучение както на студенти, така и на докторанти и специализанти.</div>
+                            </div>
+                            <div class="tile-buttons-wrapper">
+                                <div class="tile-button">
+                                    <a href="" >
+                                        <i class="fal fa-arrow-right"></i>
+                                        <span>Подробности</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bg-white mb-4">
+            <div class="container d-flex align-items-center justify-content-center py-5">
+                <img src="https://books.mu-varna.bg/userfiles/logo/logoEBOOKS.png" height="120" alt="">
+            </div>
+        </div>
+        
+        <div class="main-gallery">
+            <div class="container">
+                <div class="section-header">
+                    <h1>Галерия</h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-sponsors">
+            <div class="container">
+                <div class="sponsors-wrapper d-flex justify-content-between">
+                    <a href="www.google.com" target="_blank">
+                        <div class="sponsor-image">
+                            <img src="https://www.mu-varna.bg/BG/MyCarousel/loga2/umbal.jpg" alt="">
+                        </div>
+                    </a>
+                    <div class="sponsor-image">
+                        <img src="https://www.mu-varna.bg/BG/MyCarousel/loga2/2.jpg" alt="">
+                    </div>
+                    <div class="sponsor-image">
+                        <img src="https://www.mu-varna.bg/EN/AboutUs/PublishingImages/Loga%20proekti%202022/HR_01.jpg" alt="">
+                    </div>
+                    <div class="sponsor-image">
+                        <img src="https://www.mu-varna.bg/BG/drugi%20snimki/first_page/eua_logo_official_en.jpg" alt="">
+                    </div>
+                    <div class="sponsor-image">
+                        <img src="https://www.mu-varna.bg/BG/drugi%20snimki/first_page/EHMA_logo.jpg" alt="">
+                    </div>
+                    <div class="sponsor-image">
+                        <img src="https://www.mu-varna.bg/BG/drugi%20snimki/2023%20-Baneri%20i%20butoni/morsko%20delo.png" alt="">
+                    </div>
+                    <div class="sponsor-image">
+                        <img src="https://books.mu-varna.bg/userfiles/productlargeimages/product_3955.jpg" alt="">
+                    </div>
+                    <div class="sponsor-image">
+                        <img src="https://www.mu-varna.bg/BG/NewsImages/2024-august/nov%20priem/nov%20priem.png" alt="">
+                    </div>
+                    <div class="sponsor-image">
+                        <img src="https://books.mu-varna.bg/userfiles/productlargeimages/product_3955.jpg" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="map-holder">
+            <div class="map">
+                <a class="map-label" data-placement="bottom" title="" style="display:block !important;">
+                    <span style="font-size: 2rem;">
+                        <span style="color: white;">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </span>
+                    </span>
+                </a>
+                <div class="map-popup">
+                    <div class="popover fade right in" id="contacts">
+                        <div class="popover-content">
+                            <p>МЕДИЦИНСКИ УНИВЕРСИТЕТ
+                                <br />
+                                ПРОФ. Д-Р П. СТОЯНОВ - ВАРНА
+                            </p>
+                            <p>гр. Варна, ул. Марин Дринов 55
+
+                                <br />
+
+                                тел: +35952/677 050 <br />
+
+                                факс: +35952/650 019 <br />
+
+                                e-mail: <a style="color:#007cc3" href="mailto:uni@mu-varna.bg">uni@mu-varna.bg
+
+                                </a>
+                            </p>
+                            <p>
+                                <a style="color:#007cc3" href="/BG/Pages/Contacts.aspx" title="Google Maps">виж карта
+
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="links-container d-flex justify-content-between">
+                <div class="d-flex flex-column justify-content-center">
+                    <a href="">
+                        <img src="_layouts/15/MUVarna/img/muvarna-logo.png" alt="">
+                    </a>
+                </div>
+                
+
+
+
+                <div class="d-flex flex-column">
+                    <a href="/BG/Admission/Pages/default.aspx">Прием
+                    </a>
+                    <a href="/BG/Students/Pages/FeesAndCredits.aspx">Студенти
+                    </a>
+                    <a href="/BG/Research/Pages/%D0%9F%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8.aspx">Научна дейност
+                    </a>
+                    <a href="/BG/AboutUs/Pages/MedicalUniversityVarna.aspx">За нас
+                    </a>
+                    <a href="http://library.mu-varna.bg/">Библиотека
+                    </a>
+                </div>
+                <div class="d-flex flex-column">
+                    <a href="/BG/Pages/NewsList.aspx">Новини
+                    </a>
+                    <a href="/BG/Students/Pages/u4ebnadejnost.aspx">Учебна дейност
+                    </a>
+                    <a href="/BG/InternationalActivity/Pages/%D0%9C%D0%B5%D0%B6%D0%B4%D1%83%D0%BD%D0%B0%D1%80%D0%BE%D0%B4%D0%BD%D0%BE-%D1%81%D1%8A%D1%82%D1%80%D1%83%D0%B4%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D1%82%D0%B2%D0%BE.aspx">Международна дейност
+                    </a>
+                    <a href="/BG/sdo/Pages/%D0%A1%D0%BF%D0%B5%D1%86%D0%B8%D0%B0%D0%BB%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D0%B8.aspx">СДО
+                    </a>
+                    <a href="/BG/cdo/Pages/default.aspx">ИЦЕДО
+                    </a>
+                </div>
+                <div class="d-flex flex-column">
+                    <a href="/BG/ACRO">ACRO
+                    </a>
+                    <a href="http://press.mu-varna.bg/">Издателска дейност
+                    </a>
+                    <a href="/BG/AlumniClub/alumni-club-mu-varna-new">Alumni Club
+                    </a>
+                    <a href="/BG/Pages/Contacts.aspx">Контакти
+                    </a>
+                    <a href="/BG/AboutUs/Pages/dostyp-do-informaciya.aspx">Достъп до информация
+                    </a>
+                </div>
+                <div class="d-flex flex-column">
+                    <a href="/BG/AboutUs/Pages/Structure.aspx">Управление 
+                    </a>
+                    <a href="/BG/AboutUs/Pages/pravilnici_MU-Varna.aspx">Правилници
+                    </a>
+                    <a href="/BG/AboutUs/Pages/Accreditation.aspx">Акредитация
+                    </a>
+                    <a href="/BG/AboutUs/Pages/normuredba.aspx">Нормативна уредба
+                    </a>
+                    <a href="/BG/AboutUs/Pages/obqvi-mu.aspx">Обяви
+                    </a>
+                </div>
+                <div class="d-flex flex-column">
+                    <a href="/BG/AboutUs/Pages/tyrgove.aspx">Търгове
+                    </a>
+                    <a href="/BG/CustomerProfile/Pages/ProceduresAll.aspx">Профил на купувача
+                    </a>
+                    <a href="/BG/Research/Pages/konkursi.aspx">Конкурси
+                    </a>
+                    <a href="/BG/AboutUs/Pages/godishen-finansov-otchet.aspx">Финансова информация
+                    </a>
+                    <a href="/BG/AboutUs/Pages/signali-za-nerednosti-izmama-i-korupciya.aspx">Подаване на сигнали за корупция
+                    </a>
+                </div>
+    
+            </div>
+        </div>
+        <div class="subscription-wrapper">
+            <p>Бъдете в крак с последните новини и събития на Медицински университет - Варна!
+                Абонирайте се и научавайте първи за важна информация.
+                </p>
+            <button class="subscribe-trigger-button">
+                <div class="half-circle left">
+                    <div class="live-icon-wrapper">
+                        <!-- <i class="fal fa-envelope"></i> -->
+                    </div>
+                </div>
+                <div class="center-rectangle">
+                    <div class="center-rectangle-text">
+                        Абонамент за новини
+                    </div>
+                </div>
+                <div class="half-circle right"></div>
+            </button>
+            <hr>
+        </div>
+        <div class="socials-wrapper d-flex justify-content-center">
+            <a href="https://www.facebook.com/pages/Medical-University-of-Varna/164326093736811" target="blank" title="Facebook">
+                <!-- <i class="fab fa-facebook"></i> -->
+                <img src="_layouts/15/MUVarna/img/facebook.svg" alt="">
+                <span>Facebook</span>
+            </a>
+            <a href="https://www.instagram.com/muvarna/" target="blank" title="Instagram">
+                <!-- <i class="fab fa-facebook"></i> -->
+                <img src="_layouts/15/MUVarna/img/instagram.svg" alt="">
+                <span>Instagram</span>
+            </a>
+            <a href="https://twitter.com/MUVarna_BG" target="blank" title="X">
+                <!-- <i class="fab fa-twitter"></i> -->
+                <img src="_layouts/15/MUVarna/img/x.svg" alt="">
+                <span>Twitter</span>
+            </a>
+            <a href="https://www.mu-varna.bg/BG" target="blank" title="Linkedin">
+                <!-- <i class="fab fa-linkedin"></i> -->
+                <img src="_layouts/15/MUVarna/img/linkedin.svg" alt="">
+                <span>Linkedin</span>
+            </a>
+            
+            <a href="http://www.youtube.com/user/Medicinskiuniversite" target="blank" title="YouTube">
+                <!-- <i class="fab fa-youtube"></i> -->
+                <img src="_layouts/15/MUVarna/img/youtube.svg" alt="">
+                <span>YouTube</span>
+            </a>
+        </div>
+        <p class="copyrights">© 1961-2022 Медицински университет - Варна. 
+        <a href="#">Всички права запазени</a>        
+        <a href="/BG/Pages/SiteMap.aspx">Карта на сайта</a>                                                                                                                                     </p>
+
+        <button class="up-chevron-button" onClick="document.getElementById('top').scrollIntoView({ behavior: 'smooth'});">
+            <i class="fas fa-chevron-up"></i>
+        </button>
+    </footer>
+  </body>
+</html>

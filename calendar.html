@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Calendar with Handlebars</title>
+    <!-- <link rel="stylesheet" href="styles.css">
+      -->
+      <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+      <link rel="stylesheet" href="_layouts/15/MUVarna/css/mainnew.css" type="text/css" />
+      
+    <script src="_layouts/15/MUVarna/js/jquery.min.js" type="text/javascript"></script>
+    <link href="_layouts/15/MUVarna/css/fontawesome-pro-5.15.0/all.min.css" rel="stylesheet">
+
+
+</head>
+<body>
+    <div class="d-flex">
+        <!-- Event details section -->
+        <div class="event-details">
+            <div id="event-content">Click on a date to see events.</div>
+        </div>
+        <div>
+            <!-- Navigation for month and year -->
+            <div class="calendar-navigation">
+                <div class="month-select d-flex align-items-center">
+                    <div class="nav-arrows" id="prev-month">
+                        <span>&#11207;</span>
+                    </div>
+                    <span class="current-month-wrapper">
+                        <span id="current-month"></span>
+                    </span>
+                    <div class="nav-arrows" id="next-month">
+                        <span>&#11208;</span>
+                    </div>
+                </div>
+                <select id="year-select"></select>
+            </div>
+            <!-- Calendar will be rendered here -->
+            <div id="calendar-container"></div>
+        </div>
+    </div>
+
+
+
+    <!-- Handlebars template for calendar -->
+    <script id="calendar-template" type="text/x-handlebars-template">
+        <table class="calendar">
+            <thead>
+                <tr>
+                    {{#each weekDays}}
+                        <th>{{this}}</th>
+                    {{/each}}
+                </tr>
+            </thead>
+            <tbody>
+                {{#each days}}
+                    {{#if (isStartOfWeek @index)}}
+                        <tr>
+                    {{/if}}
+                    <td class="day{{#if events}} has-event{{/if}}{{#if isToday}} today{{/if}}" data-index="{{@index}}">
+                        <span class="day-number">{{date}}</span>
+                        <!-- {{#if events.length}}
+                            <ul class="events-list">
+                                {{#each events}}
+                                    <li>{{this}}</li>
+                                {{/each}}
+                            </ul>
+                        {{/if}} -->
+                    </td>
+                    {{#if (isEndOfWeek @index)}}
+                        </tr>
+                    {{/if}}
+                {{/each}}
+            </tbody>
+        </table>
+    </script>
+    
+
+
+
+
+    <!-- Handlebars and your JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+    <script >
+document.addEventListener("DOMContentLoaded", function () {
+    Handlebars.registerHelper('isStartOfWeek', function (index) {
+        return (index % 7 === 0);
+    });
+
+    Handlebars.registerHelper('isEndOfWeek', function (index) {
+        return (index % 7 === 6);
+    });
+
+    const eventCalendarData = [
+        {
+            EventStartDate: '2024-10-01T21:00:00Z',
+            Title: 'Meeting with Team',
+            Description: 'Let\'s have a meeting dudes',
+            Url: 'www.google.com'
+        },
+        {
+            EventStartDate: '2024-10-01T21:10:00Z',
+            Title: 'Meeting with Team',
+            Description: 'Let\'s have a meeting dudes',
+            Url: 'www.google.com'
+        },
+        {
+            EventStartDate: '2024-10-03T22:00:00Z',
+            Title: 'Project Deadline',
+            Description: 'Finish the project',
+            Url: 'www.google.com'
+        },
+        {
+            EventStartDate: '2024-10-05T22:00:00Z',
+            Title: 'Client Call',
+            Description: 'Discussion with the client',
+            Url: 'www.google.com'
+        },
+        {
+            EventStartDate: '2024-10-19T22:01:00Z',
+            Title: 'Product Launch',
+            Description: 'Launching new product',
+            Url: 'www.google.com'
+        }
+    ];
+
+    // Get current date for initial calendar load
+    let currentMonth = new Date().getMonth(); // Month is zero-based
+    let currentYear = new Date().getFullYear();
+
+    // Compile Handlebars template
+    const source = document.getElementById('calendar-template').innerHTML;
+    const template = Handlebars.compile(source);
+
+    function generateDaysForMonth(month, year) {
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
+        const days = [];
+        const firstDay = new Date(year, month, 1).getDay();
+        const weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+        const today = new Date();
+
+        // Helper function to format date into YYYY-MM-DD
+        function formatDate(date) {
+            return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+        }
+
+        // Create a map to group events by day (e.g. '2024-10-01': [event1, event2])
+        const eventsByDay = {};
+
+        eventCalendarData.forEach(event => {
+            const eventDate = new Date(event.EventStartDate);
+            const eventDateKey = formatDate(eventDate);
+
+            // Initialize the array for the date if not yet created
+            if (!eventsByDay[eventDateKey]) {
+                eventsByDay[eventDateKey] = [];
+            }
+
+            // Add event to the corresponding date
+            eventsByDay[eventDateKey].push({
+                title: event.Title,
+                description: event.Description,
+                url: event.Url,
+                eventDate: eventDate
+            });
+        });
+
+        // Populate days array with empty placeholders for days before the 1st
+        for (let i = 0; i < firstDay; i++) {
+            days.push({ date: '' });
+        }
+
+        // Populate days array with actual days of the month
+        for (let day = 1; day <= daysInMonth; day++) {
+            const dateKey = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+            const isToday = today.getFullYear() === year && today.getMonth() === month && today.getDate() === day;
+
+            days.push({
+                date: day,
+                isToday: isToday,
+                events: eventsByDay[dateKey] || []
+            });
+        }
+
+        // Ensure days array has exactly 7 columns per row
+        while (days.length % 7 !== 0) {
+            days.push({ date: '' });
+        }
+
+        return { days, weekDays };
+    }
+
+    function renderCalendar(month, year) {
+        // Generate all days and week days for the selected month and year
+        const { days, weekDays } = generateDaysForMonth(month, year);
+        const eventsData = { days, weekDays };
+
+        // Generate the HTML using the template and data
+        const html = template(eventsData);
+
+        // Inject the generated HTML into the DOM
+        document.getElementById('calendar-container').innerHTML = html;
+
+        // Update the current month and year display
+        const monthName = new Date(year, month).toLocaleString('default', { month: 'long' });
+        document.getElementById('current-month').textContent = monthName;
+
+        // Ensure the year dropdown reflects the current year
+        document.getElementById('year-select').value = year;
+
+        // Add event listeners for each day
+        addDayClickListeners(eventsData);
+
+        // Select the nearest day with an event
+        selectNearestDayWithEvent(eventsData);
+    }
+
+    function addDayClickListeners(eventsData) {
+        const days = document.querySelectorAll('.day.has-event');
+        const eventContentDiv = document.getElementById('event-content');
+
+        let previouslySelectedDay = null; // Keep track of the previously selected day
+
+        days.forEach(day => {
+            day.addEventListener('click', function () {
+                // Remove 'selected' class from the previously selected day
+                if (previouslySelectedDay) {
+                    previouslySelectedDay.classList.remove('selected');
+                }
+
+                // Add 'selected' class to the currently clicked day
+                this.classList.add('selected');
+                previouslySelectedDay = this; // Update the previously selected day
+
+                // Get the index and retrieve events for the clicked day
+                const index = this.getAttribute('data-index');
+                const dayData = eventsData.days[index];
+
+                if (dayData && dayData.events.length) {
+                    // Display the events in the 'event-content' div
+                eventContentDiv.innerHTML = `
+                <div class="tiles-wrapper grid">
+                    ${dayData.events.map(event => `
+                        <div class="tile-box">
+                            <div class="tile-content">
+                                <div class="tile-texts-wrapper">
+                                    <div class="tile-title">${event.title}</div>
+                                    <div class="tile-text">${event.description}</div>
+                                </div>
+                                <div class="tile-buttons-wrapper">
+                                    <div class="tile-button">
+                                        <a target="_blank" href="${event.url}" >
+                                            <i class="fal fa-arrow-right"></i>
+                                            <span>Вижте повече</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    `).join('')
+                    }
+                </div>
+                    `;
+                    // eventContentDiv.innerHTML = `
+                    //     <strong>${dayData.date}</strong>
+                    //     <ul>${dayData.events.map(event => `<li>${event}</li>`).join('')}</ul>
+                    // `;
+                } else {
+                    // If no events, display a message
+                    eventContentDiv.innerHTML = `
+                        <strong>${dayData.date}</strong>
+                        <p>No events for this day.</p>
+                    `;
+                }
+            });
+        });
+    }
+        // Find and select the nearest day with an event
+    function selectNearestDayWithEvent(eventsData) {
+        const today = new Date();
+        const todayIndex = eventsData.days.findIndex(day => day.isToday);
+
+        // Find the nearest day with an event
+        let nearestDayIndex = null;
+        let minDiff = Infinity;
+
+        eventsData.days.forEach((day, index) => {
+            if (day?.events?.length > 0) {
+                const dayDiff = Math.abs(index - todayIndex);
+                if (dayDiff < minDiff) {
+                    nearestDayIndex = index;
+                    minDiff = dayDiff;
+                }
+            }
+        });
+
+        if (nearestDayIndex !== null) {
+            const nearestDayElement = document.querySelectorAll('.day')[nearestDayIndex];
+            nearestDayElement.classList.add('selected');
+            nearestDayElement.click(); // Simulate click to display event content
+        }
+    }
+
+    // Render year dropdown
+    function renderYearDropdown(startYear, endYear) {
+        const yearSelect = document.getElementById('year-select');
+        for (let year = startYear; year <= endYear; year++) {
+            const option = document.createElement('option');
+            option.value = year;
+            option.textContent = year;
+            yearSelect.appendChild(option);
+        }
+        yearSelect.value = currentYear; // Set the current year
+    }
+
+    // Initial rendering of the year dropdown and calendar
+    const startYear = 2020;
+    const endYear = 2030;
+    renderYearDropdown(startYear, endYear);
+    renderCalendar(currentMonth, currentYear);
+
+    // Add event listeners for month navigation buttons
+    document.getElementById('prev-month').addEventListener('click', function () {
+        if (currentMonth === 0) {
+            currentMonth = 11;
+            currentYear -= 1;
+        } else {
+            currentMonth -= 1;
+        }
+        renderCalendar(currentMonth, currentYear);
+    });
+
+    document.getElementById('next-month').addEventListener('click', function () {
+        if (currentMonth === 11) {
+            currentMonth = 0;
+            currentYear += 1;
+        } else {
+            currentMonth += 1;
+        }
+        renderCalendar(currentMonth, currentYear);
+    });
+
+    // Add event listener for year dropdown change
+    document.getElementById('year-select').addEventListener('change', function () {
+        currentYear = parseInt(this.value, 10);
+        renderCalendar(currentMonth, currentYear);
+    });
+});
+
+
+    </script>
+</body>
+</html>

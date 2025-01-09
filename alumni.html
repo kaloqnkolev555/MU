@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <base href="file:///C:/Users/kaloyan.kolev/Desktop/MU/">
+    <title>AlumniClub</title>
+    <link rel="stylesheet" href="_layouts/15/MUVarna/css/bootstrap-modified.css" type="text/css" />
+    <link rel="stylesheet" href="_layouts/15/MUVarna/css/mainHome.css">
+
+    <link rel="stylesheet" href="_layouts/15/MUVarna/css/alumni.css">
+    <link rel="stylesheet" href="_layouts/15/MUVarna/css/mainnew.css" type="text/css" />
+    <script src="_layouts/15/MUVarna/js/jquery.min.js" type="text/javascript"></script>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="_layouts/15/MUVarna/css/fontawesome-pro-5.15.0/all.min.css" rel="stylesheet">
+<script>
+    // window.onload = function () {
+    //     // initialize();
+    //     const important = document.getElementById('important');
+    //     important.addtileListener('click', () => {
+    //         document.body.classList.toggle('contrast-theme-on');
+    //     });
+    // }
+document.addEventListener('DOMContentLoaded', () => {
+        function customCarousel(carouselList,items,prevBtn,nextBtn,paginationDotsContainer,itemsPerPage) {
+            let currentIndex = 0;
+            const totalItems = items.length;
+            // const itemsPerPage = 4;  // Number of items to show per page
+            const totalPages = Math.ceil(totalItems / itemsPerPage); // Total pages
+            let autoRotate = true; // Set to true for automatic rotation
+            let autoRotateInterval;
+            let isAutoRotating = false; // Track if auto-rotation is running
+
+            // Function to update the carousel position
+            function updateCarousel() {
+                const translateXValue = -currentIndex * (100 / itemsPerPage); // Move by percentage of the visible items
+                carouselList.style.transform = `translateX(${translateXValue}%)`;
+                
+                // Update pagination dots
+                document.querySelectorAll('.' + paginationDotsContainer.className + '-main-dot').forEach((dot, index) => {
+                    dot.classList.toggle('active', index === currentIndex);
+                });
+                
+                // Disable buttons if at the start or end
+                prevBtn.disabled = currentIndex === 0;
+                nextBtn.disabled = currentIndex === totalItems - 1;
+            }
+            
+            // Create pagination dots
+            function createPaginationDots() {
+                for (let i = 0; i < totalItems; i++) {
+                    const dot = document.createElement('div');
+                    dot.classList.add(paginationDotsContainer.className + '-main-dot');
+                    if (i === currentIndex) {
+                        dot.classList.add('active');
+                    }
+                    // Add click event to each dot
+                    dot.addEventListener('click', () => {
+                        currentIndex = i;
+                        updateCarousel();
+                        resetAutoRotate();
+                    });
+                    paginationDotsContainer.appendChild(dot);
+                }
+            }
+
+            // Function to handle automatic rotation
+            function startAutoRotate() {
+                stopAutoRotate(); // Clear any existing interval first
+                isAutoRotating = false; // Set to True if you want auto rotate the carousel
+                // autoRotateInterval = setInterval(() => {
+                //     currentIndex = (currentIndex + 1) % totalItems;
+                //     updateCarousel();
+                // }, 3000); // Change slides every 3 seconds
+            }
+
+            function stopAutoRotate() {
+                clearInterval(autoRotateInterval);
+                isAutoRotating = false;
+            }
+
+            function resetAutoRotate() {
+                if (autoRotate) {
+                    startAutoRotate();
+                }
+            }
+
+            // Pause rotation on item hover and resume on mouse leave
+            items.forEach(item => {
+                item.addEventListener('mouseenter', stopAutoRotate);
+                item.addEventListener('mouseleave', resetAutoRotate);
+            });
+
+            // Event listeners for the buttons
+            prevBtn.addEventListener('click', () => {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                    updateCarousel();
+                    resetAutoRotate();  // Restart auto-rotation after manual action
+                }
+            });
+
+            nextBtn.addEventListener('click', () => {
+                if (currentIndex < totalItems - 1) {
+                    currentIndex++;
+                    updateCarousel();
+                    resetAutoRotate();  // Restart auto-rotation after manual action
+                }
+            });
+
+            // Initialize carousel state
+            createPaginationDots();
+            updateCarousel();
+
+            // Start automatic rotation if enabled
+            if (autoRotate) {
+                startAutoRotate();
+                
+                // Pause rotation on mouse hover over the entire carousel and resume on mouse leave
+                document.querySelector('.main-carousel').addEventListener('mouseenter', stopAutoRotate);
+                document.querySelector('.main-carousel').addEventListener('mouseleave', resetAutoRotate);
+            }
+        }
+        
+        var carouselList = document.querySelector('.main-carousel-list');
+        var items = document.querySelectorAll('.main-carousel-item');
+        var prevBtn = document.getElementById('carousel-prevBtn');
+        var nextBtn = document.getElementById('carousel-nextBtn');
+        var paginationDotsContainer = document.querySelector('.carousel-pagination-dots');
+        customCarousel(carouselList,items,prevBtn,nextBtn,paginationDotsContainer,1);
+
+        carouselList = document.querySelector('.overview');
+        items = document.querySelectorAll('.gallery-thumb');
+        prevBtn = document.querySelector('.gallery-button.prev');
+        nextBtn = document.querySelector('.gallery-button.next');
+        paginationDotsContainer = document.querySelector('.gallery-paginator');
+        customCarousel(carouselList,items,prevBtn,nextBtn,paginationDotsContainer,4);
+
+
+        function getYouTubeVideoID(url) {
+            const regex = /(?:https?:\/\/)?(?:www\.)?youtube\.com\/(?:watch\?v=|embed\/|v\/|.+\/|watch\?.+&v=)?([^&\n?#]+)/;
+            const match = url.match(regex);
+            return match ? match[1] : null;
+        }
+
+        function getYouTubeThumbnail(url) {
+            const videoID = getYouTubeVideoID(url);
+            if (videoID) {
+                return {
+                    default: `https://img.youtube.com/vi/${videoID}/default.jpg`,
+                    medium: `https://img.youtube.com/vi/${videoID}/mqdefault.jpg`,
+                    high: `https://img.youtube.com/vi/${videoID}/hqdefault.jpg`,
+                    standard: `https://img.youtube.com/vi/${videoID}/sddefault.jpg`,
+                    maxRes: `https://img.youtube.com/vi/${videoID}/maxresdefault.jpg`
+                };
+            }
+            return null;
+        }
+
+        // Example usage:
+        const videoURL = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+        const thumbnails = getYouTubeThumbnail(videoURL);
+        console.log(thumbnails);
+
+});
+
+</script>
+
+  </head>
+  <body class="ms-rtestate-field">
+
+    <header>
+        <div id="usefulLinksMenu" class="useful-links-wrapper">
+            <div class="useful-links-menu">
+                <div class="links-header">
+                    <a href="" >
+                        <i class="fa fa-external-link-square"></i>
+                        <span>Полезни връзки</span>
+                    </a>
+                    <span class="close-button" onclick="toggleHiddenMenu()">
+                        <i class="fal fa-times"></i>
+                    </span>
+                </div>
+                <div class="links-list">
+                    <a href="/BG/sdo/specializirano-obuchenie-za-pravosposobnost" >
+                        <i class="fal fa-book-reader"></i>
+                        <span>Специализирано обучение</span>
+                    </a>
+                    <a href="https://webstudent.mu-varna.bg/#" >
+                        <i class="fal fa-users-class"></i>
+                        <span>Webstudent</span>
+                    </a>
+                    <a href="https://teacher.mu-varna.bg/#/login" >
+                        <i class="fal fa-chalkboard-teacher"></i>
+                        <span>Teacher</span>
+                    </a>
+                    <a href="http://otpuski.mu-varna.bg/" >
+                        <i class="fal fa-calendar"></i>
+                        <span>Отпуски</span>
+                    </a>
+                    <a href="" >
+                        <i class="fal fa-atom-alt"></i>
+                        <span>Образователни услуги</span>
+                    </a>
+                    <a href="https://elearn.mu-varna.bg/ultra/" >
+                        <i class="fal fa-chalkboard"></i>
+                        <span>Blackboard</span>
+                    </a>
+                    <a href="/BG/Admission/master-programs" >
+                        <i class="fal fa-globe"></i>
+                        <span>Дистанционно обучение</span>
+                    </a>
+                    <a href="https://phdschool.mu-varna.bg/login" >
+                        <i class="fal fa-stethoscope"></i>
+                        <span>Докторантско училище</span>
+                    </a>
+                    <a href="https://www.mu-varna.bg/BG/Research/Pages/konkursi.aspx" >
+                        <i class="fal fa-trophy"></i>
+                        <span>Конкурси</span>
+                    </a>
+                    <a href="https://mail.mu-varna.bg/lm_auth_proxy?DoLMLogin?curl=L2fowa&curlid=1118480776-4067449729" >
+                        <i class="fal fa-envelope"></i>
+                        <span>Служебна поща</span>
+                    </a>
+                    <hr>
+                    <a href="https://www.mu-varna.bg/BG/AboutUs/Pages/qs.aspx" >
+                        <img src="/_catalogs/masterpage/_layouts/15/MUVarna/img/quantum.png" alt="" style="width: 90px;
+                        height: 60px;
+                        object-fit: cover;">
+                        <span>Quantum satis </span>
+                    </a>
+                    <hr>
+                    <a href="/BG/Pages/baza-zornica-priema-slujiteli.aspx" >
+                        <img src="/_catalogs/masterpage/_layouts/15/MUVarna/img/zornica.png" alt="" style="width: 90px;
+                        height: 60px;
+                        object-fit: cover;">
+                        <span>Зорница </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="navbar" id="top">
+            <div class="useful-links" onclick="toggleHiddenMenu()">
+                <i class="fa fa-external-link-square"></i>
+                <span>Полезни връзки</span>
+            </div>
+            <div class="nav-collapse">
+                        <div id="ctl00_MenuFirst" __webpartid="{65220EC2-3096-426E-84A4-D6761E365E46}">
+                            <ul class="nav" role="menu"><li><a href="/BG/Pages/NewsList.aspx">Новини</a></li><li class="dropdown"><a href="/BG/Students/Pages/u4ebnadejnost.aspx" class="dropdown-toggle disabled" data-toggle="dropdown">Учебна дейност</a><ul class="dropdown-menu" style="display: none;"><li><a href="/BG/AboutUs/Pages/y4ebenotdel.aspx">Учебен отдел</a></li><li><a href="/BG/Students/Pages/prepodavateli.aspx">За преподаватели</a></li><li><a href="/BG/Students/Pages/FeesAndCredits.aspx">Студенти</a></li></ul></li><li class="dropdown"><a href="/BG/InternationalActivity/Pages/Международно-сътрудничество.aspx" class="dropdown-toggle disabled" data-toggle="dropdown">Международнo сътрудничество</a><ul class="dropdown-menu" style="display: none;"><li class="dropdown-submenu"><a href="/BG/vagna_informaciq">Международно сътрудничество</a><ul class="dropdown-menu"><li><a href="/BG/vagna_informaciq">Международен календар</a></li><li><a href="/BG/InternationalActivity/Pages/kratkaistoriq.aspx">Кратка история</a></li><li><a href="/BG/InternationalActivity/Pages/Дейности.aspx">Дейности</a></li><li><a href="/BG/InternationalActivity/Pages/erazmus.aspx">Еразъм+</a></li><li><a href="/BG/InternationalActivity/Pages/Партньори-на-университета.aspx">Партньори на университета</a></li><li><a href="/BG/Students/Documents/Presentation_IPFs-BG.pdf">Международен форум на партньорствата</a></li><li><a href="/BG/InternationalActivity/Pages/proceduri.aspx">Процедури</a></li><li><a href="/BG/InternationalActivity/partners-tiles">Партньорски събития</a></li><li><a href="/BG/Students/Documents/Presentation_IPFs-BG.pdf">Стратегия за интернационализация</a></li><li><a href="/BG/InternationalActivity/Pages/Членство.aspx">Членства</a></li><li><a href="/BG/InternationalActivity/Pages/Контакти.aspx">Контакти</a></li></ul></li></ul></li><li><a href="/BG/sdo/Pages/Специализации.aspx">СДО</a></li><li class="dropdown"><a href="/BG/cdo/Pages/default.aspx" class="dropdown-toggle disabled" data-toggle="dropdown">ИЦЕДО</a><ul class="dropdown-menu" style="display: none;"><li><a href="/BG/cdo/Pages/Blackboard.aspx">Blackboard</a></li><li><a href="/BG/cdo/body-interact-mu-varna">Body Interact</a></li><li><a href="/BG/cdo/Pages/default.aspx">Интернационален център за електронно и дистанционно обучение</a></li></ul></li><li><a href="http://press.mu-varna.bg/" target="_blank">Издателска дейност</a></li><li><a href="/BG/AlumniClub/alumni-club-mu-varna-new">Alumni Club</a></li><li><a href="/BG/Pages/Contacts.aspx">Контакти</a></li></ul>
+                        </div>
+            </div>
+            <div class="language">
+               <a href="/BG">
+                <span>BG</span>
+               </a> /
+               <a href="/EN">
+                <span>EN</span>
+               </a>
+            </div>
+            <div class="contrast-theme">
+                <i class="fal fa-eye-slash"></i>
+            </div>
+        </div>
+        <div class="container wrapper d-flex align-items-center">
+            <!-- Begin: Logo &#38; Slogan -->
+            <a href="/BG" title="Към начална страница">
+                <img src="_layouts/15/MUVarna/img/muvarna-logo-blue.png" class="logo">
+            </a>
+            <a href="/BG" title="Към начална страница" class="slogan-bg">
+                <div>Медицински университет - Варна</div> 
+                <div class="strong">Проф. д-р Параскев Стоянов</div>
+            </a>
+            <!-- End: Logo &#38; Slogan -->
+
+            <div class="menu-searchbox-wrapper">
+                <div class="searchbox" role="search">
+                    <div class="ms-webpart-chrome ms-webpart-chrome-fullWidth ">
+                    <div webpartid="00000000-0000-0000-0000-000000000000" haspers="true" id="WebPartWPQ1" width="100%" class="ms-WPBody " onlyformepart="true" allowdelete="false" ><div componentid="ctl00_SmallSearchInputBox1_csr" id="ctl00_SmallSearchInputBox1_csr"><div id="SearchBox" name="Control"><div class="ms-srch-sb ms-srch-sb-border" id="ctl00_SmallSearchInputBox1_csr_sboxdiv"><input type="search" value="Търсене..." maxlength="2048" title="Търсене..." id="ctl00_SmallSearchInputBox1_csr_sbox" autocomplete="off" autocorrect="off" onkeypress="EnsureScriptFunc('Search.ClientControls.js', 'Srch.U', function() {if (Srch.U.isEnterKey(String.fromCharCode(tile.keyCode))) {$find('ctl00_SmallSearchInputBox1_csr').search($get('ctl00_SmallSearchInputBox1_csr_sbox').value);return Srch.U.canceltile(tile);}})" onkeydown="EnsureScriptFunc('Search.ClientControls.js', 'Srch.U', function() {var ctl = $find('ctl00_SmallSearchInputBox1_csr');ctl.activateDefaultQuerySuggestionBehavior();})" onfocus="EnsureScriptFunc('Search.ClientControls.js', 'Srch.U', function() {var ctl = $find('ctl00_SmallSearchInputBox1_csr');ctl.hidePrompt();ctl.setBorder(true);})" onblur="EnsureScriptFunc('Search.ClientControls.js', 'Srch.U', function() {var ctl = $find('ctl00_SmallSearchInputBox1_csr'); if (ctl){ ctl.showPrompt(); ctl.setBorder(false);}})" class="ms-textSmall ms-srch-sb-prompt ms-helperText" role="combobox" aria-owns="ctl00_SmallSearchInputBox1_csr_AutoCompList" aria-haspopup="true" aria-autocomplete="list" aria-expanded="false"><a title="Търсене" role="button" class="btn btn-primary" id="ctl00_SmallSearchInputBox1_csr_SearchLink" onclick="EnsureScriptFunc('Search.ClientControls.js', 'Srch.U', function() {$find('ctl00_SmallSearchInputBox1_csr').search($get('ctl00_SmallSearchInputBox1_csr_sbox').value);})" href="javascript: {}" aria-label="Търсене"><i class="icon-white icon-search"></i></a><div class="ms-qSuggest-container ms-shadow" id="AutoCompContainer"><div id="ctl00_SmallSearchInputBox1_csr_AutoCompList" role="listbox" aria-label="Предложения"></div></div></div></div></div><noscript><div id="ctl00_SmallSearchInputBox1_noscript">Изглежда, че вашият браузър няма активиран JavaScript. Включете JavaScript и опитайте отново.</div></noscript><div id="ctl00_SmallSearchInputBox1">
+                    </div><div class="ms-clear"></div></div>
+                    </div>
+                </div>
+                <!-- Begin: Main menu -->
+                <div class="menu">
+                    <div id="ctl00_MenuSecond" __webpartid="{E5BFC46C-C044-44E4-94E9-6316B8C0BFF6}">
+                        <ul class="nav nav-pills" role="menu"><li class="dropdown"><a href="/BG/AboutUs/Pages/MedicalUniversityVarna.aspx" class="dropdown-toggle" data-toggle="dropdown">За нас</a><ul class="dropdown-menu" style="display: none;"><li><a href="/BG/AboutUs/Pages/MedicalUniversityVarna.aspx">Медицински университет - Варна</a></li><li><a href="/BG/AboutUs/Pages/CircleMenu.aspx">Факултети, филиали, колежи и департаменти</a></li><li><a href="/BG/AboutUs/Pages/Centers.aspx">Центрове</a></li><li><a href="/BG/AboutUs/Pages/Accreditation.aspx">Качество и акредитация</a></li><li class="dropdown-submenu"><a href="/BG/InternationalActivity/Pages/Actions.aspx">Проектна дейност</a><ul class="dropdown-menu" style="display: none;"><li><a href="/BG/InternationalActivity/Pages/Текущи-проекти.aspx">Активни проекти</a></li><li><a href="/BG/vajno-proekti">Важна информация</a></li><li><a href="/BG/InternationalActivity/Pages/Галерия.aspx">Галерия</a></li><li><a href="/BG/InternationalActivity/Pages/Actions.aspx">Дейност</a></li><li><a href="/BG/InternationalActivity/Pages/Международни-проекти-и-програми.aspx">Каталог</a></li><li><a href="/BG/InternationalActivity/Pages/kontakti-proektna-deinost-mu-varna.aspx">Контакти</a></li><li><a href="/BG/riklu4ili_proekti">Приключили проекти</a></li></ul></li><li><a href="/BG/AboutUs/Pages/admin-zvena.aspx">Административни звена</a></li><li><a href="/BG/AboutUs/Pages/Zastita-na-lichnite-danni.aspx">Защита на личните данни</a></li><li><a href="/BG/AboutUs/Pages/Другите-за-нас.aspx">Другите за нас</a></li><li><a href="/BG/AboutUs/Pages/PicturesAndVideos.aspx">В снимки и видео</a></li></ul></li><li class="dropdown"><a href="/BG/Admission/Pages/default.aspx" class="dropdown-toggle disabled" data-toggle="dropdown" target="_blank">Прием</a><ul class="dropdown-menu" style="display: none;"><li><a href="/BG/specialnosti" target="_blank">Специалности</a></li><li><a href="/BG/SDO/Pages/Специализации.aspx">Специализанти</a></li><li><a href="/BG/Research/Pages/PhDStudents.aspx">Докторанти</a></li><li><a href="/BG/AboutUs/Pages/CentProfEducSpec.aspx">ЦПО</a></li></ul></li><li class="dropdown"><a href="/BG/Students/Pages/FeesAndCredits.aspx" class="dropdown-toggle disabled" data-toggle="dropdown">Студенти</a><ul class="dropdown-menu" style="display: none;"><li><a href="/BG/Students/Pages/Specialties.aspx">Специалности</a></li><li><a href="/BG/Students/Pages/FeesAndCredits.aspx">Учебни такси</a></li><li class="dropdown-submenu"><a href="/BG/Students/Pages/Учебна-информация.aspx">Учебна информация</a><ul class="dropdown-menu" style="display: none;"><li><a href="/BG/Students/Pages/info-stud-fm.aspx">Факултет Медицина</a></li><li><a href="/BG/Students/Pages/StudentInfo-fdm.aspx">Факултет Дентална медицина</a></li><li><a href="/BG/Students/Pages/info-stud-ff.aspx">Факултет Фармация</a></li><li><a href="/BG/Students/Pages/StudentInfo-foz.aspx">ФОЗ</a></li><li><a href="/BG/Students/Pages/StudentInfo.aspx">Медицински колеж</a></li><li><a href="/BG/Students/Pages/akademichen-kalendar.aspx">Академичен календар</a></li><li><a href="/BG/Students/Pages/info-studenti.aspx">Комуникации, езици, спорт</a></li></ul></li><li><a href="/BG/Students/Pages/TrainingCenters.aspx">Учебни бази</a></li><li><a href="/BG/Students/Pages/Студентско-кредитиране.aspx">Студентско кредитиране</a></li><li><a href="/BG/Students/Pages/SocialQuestions.aspx">Социално-битови въпроси</a></li><li><a href="/BG/Students/Pages/StudentsOrganizations.aspx">Студентски организации</a></li><li><a href="/BG/Students/Pages/Sport.aspx">Спорт</a></li><li><a href="/BG/Students/praktiki">Проект „Студентски практики“</a></li><li><a href="/BG/InternationalActivity/Pages/erazmus.aspx">Студентска мобилност Еразъм</a></li><li><a href="/BG/Students/Pages/CreditSystem.aspx">Кредитна система</a></li><li class="dropdown-submenu"><a href="webstudent">Webstudent</a><ul class="dropdown-menu"><li><a href="https://webstudent.mu-varna.bg/">Вход в Webstudent</a></li><li><a href="/BG/Documents/UkazanieWebstudent.pdf">Указание за ползване</a></li></ul></li></ul></li><li><a href="http://library.mu-varna.bg/">Библиотека</a></li><li class="dropdown"><a href="/BG/Research/Pages/Проекти.aspx" class="dropdown-toggle disabled" data-toggle="dropdown">Научна дейност</a><ul class="dropdown-menu pull-right" style="display: none;"><li><a href="/BG/Research/Pages/PhDStudents.aspx">Докторантско училище</a></li><li><a href="/BG/Research/otdel-karierno-razvitie">Кариерно развитие</a></li><li><a href="/BG/Research/Pages/konkursi.aspx">Конкурси</a></li><li><a href="/BG/Research/Pages/Degrees.aspx">Процедури</a></li><li><a href="/BG/nauchni-izdaniq">Научни издания</a></li><li><a href="http://press.mu-varna.bg/">Университетско издателство</a></li><li><a href="/BG/Research/Pages/ScientificЕvents.aspx">Научни прояви</a></li><li><a href="http://library.mu-varna.bg/databases/">Научни бази данни</a></li><li><a href="/BG/Research/Pages/normativni-dokumenti-nauchen-otdel.aspx">Нормативни документи</a></li><li><a href="/BG/Research/Pages/medical-university-fond-nauka.aspx">Фонд Наука</a></li><li><a href="/BG/Research/Pages/keni.aspx">КЕНИ</a></li><li><a href="/BG/AboutUs/Pages/Research-Institute.aspx">Научноизследователски институт</a></li><li><a href="/BG/Research/Pages/Contacts.aspx">Контакти</a></li></ul></li></ul>
+                    </div>
+                </div>
+                <!-- End: Main menu -->
+            </div>
+        </div>
+    </header>
+
+    <div class="alumni-wrapper lang-version">
+        <div class="slider" style="background-image: url('_layouts/15/MUVarna/img/alumni-bg.jpg');">
+            <div class="container slider-title">Alumni</div>
+        </div>
+        <div class="alumni-header-wrapper white-bg-section">
+            <div class="container text-center">
+                <p class="title-text f24 color-main-deep-blue text-center mb-3">
+                    АЛУМНИ КЛУБ И ПРИЯТЕЛИ КЪМ МЕДИЦИНСКИ УНИВЕРСИТЕТ-ВАРНА
+                </p>
+                <p class="regular-text color-primary-gray-3 f18">
+                    Доброволна организация на завършилите университета, по-общо казано, на бившистуденти (възпитаници) <br>
+                    на този университет. Алумни клуб и приятели към Медицински универстет Варна -дейности и активности
+                </p>
+            </div>
+        </div>
+        <div class="admission-section white-bg-section">
+            <div class="container">
+                <div class="section-header">
+                    <h1>Важно</h1>
+                    <a href="/BG/">
+                        <i class="fal fa-arrow-right"></i>
+                    </a>
+                </div>
+                <div class="tiles-wrapper">
+                    <div class="tile-box big-box full-width flipped">
+                        <div class="tile-image">
+                            <img src="https://dummyimage.com/320x460/" alt="">
+                        </div>
+                        <div class="tile-content">
+                            <div class="tile-texts-wrapper">
+                                <div class="tile-title">ЗА ALUMNI</div>
+                                <div class="tile-text">Kолективна награда „Почетен знак със синя лента"</div>
+                            </div>
+                            <div class="tile-buttons-wrapper">
+                                <div class="tile-button">
+                                    <a href="" >
+                                        <i class="fal fa-arrow-right"></i>
+                                        <span>Повече информация</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="news-section white-bg-section">
+            <div class="container">
+                <div class="section-header">
+                    <h1>Новини</h1>
+                    <a href="/BG/">
+                        <i class="fal fa-arrow-right"></i>
+                    </a>
+                </div>
+                <div class="tiles-wrapper">
+                    <div class="tile-box big-box full-width ">
+                        <div class="tile-image">
+                            <img src="https://dummyimage.com/320x460/" alt="">
+                        </div>
+                        <div class="tile-content">
+                            <div class="tile-texts-wrapper">
+                                <div class="tile-title">ЗА ALUMNI</div>
+                                <div class="tile-text">Kолективна награда „Почетен знак със синя лента"</div>
+                            </div>
+                            <div class="tile-buttons-wrapper">
+                                <div class="tile-button">
+                                    <a href="" >
+                                        <i class="fal fa-arrow-right"></i>
+                                        <span>Повече информация</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="prize-section white-bg-section">
+            <div class="container">
+                <div class="section-header">
+                    <h1>награди</h1>
+                    <a href="/BG/">
+                        <i class="fal fa-arrow-right"></i>
+                    </a>
+                </div>
+                <div class="tiles-wrapper">
+                    <div class="tile-box big-box full-width flipped">
+                        <div class="tile-image">
+                            <img src="https://dummyimage.com/320x460/" alt="">
+                        </div>
+                        <div class="tile-content">
+                            <div class="tile-texts-wrapper">
+                                <div class="tile-title">ЗА ALUMNI</div>
+                                <div class="tile-text">Kолективна награда „Почетен знак със синя лента"</div>
+                            </div>
+                            <div class="tile-buttons-wrapper">
+                                <div class="tile-button">
+                                    <a href="" >
+                                        <i class="fal fa-arrow-right"></i>
+                                        <span>Повече информация</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="news-section white-bg-section">
+            <div class="container">
+                <div class="section-header">
+                    <h1>Новини</h1>
+                    <a href="/BG/">
+                        <i class="fal fa-arrow-right"></i>
+                    </a>
+                </div>
+                <div class="tiles-wrapper">
+                    <div class="tile-box big-box full-width ">
+                        <div class="tile-image">
+                            <img src="https://dummyimage.com/320x460/" alt="">
+                        </div>
+                        <div class="tile-content">
+                            <div class="tile-texts-wrapper">
+                                <div class="tile-title">ЗА ALUMNI</div>
+                                <div class="tile-text">Kолективна награда „Почетен знак със синя лента"</div>
+                            </div>
+                            <div class="tile-buttons-wrapper">
+                                <div class="tile-button">
+                                    <a href="" >
+                                        <i class="fal fa-arrow-right"></i>
+                                        <span>Повече информация</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="chairman-section">
+            <div class="container">
+                <div class="section-header blue-contrast-header">
+                    <h1>Преседател</h1>
+                </div>
+                <div class="tiles-wrapper">
+                    <div class="tile-box big-box full-width ">
+                        <div class="tile-image">
+                            <img src="https://dummyimage.com/320x460/" alt="">
+                        </div>
+                        <div class="tile-content">
+                            <div class="tile-texts-wrapper">
+                                <div class="tile-title">ЗА ALUMNI</div>
+                                <div class="tile-text">Kолективна награда „Почетен знак със синя лента"</div>
+                            </div>
+                            <div class="tile-buttons-wrapper">
+                                <div class="tile-button">
+                                    <a href="" >
+                                        <i class="fal fa-arrow-right"></i>
+                                        <span>Повече информация</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="contacts-section white-bg-section">
+            <div class="container">
+                <div class="section-header blue-contrast-header">
+                    <h1>Зам. председатели</h1>
+                </div>
+
+                <div class="d-flex flex-wrap">
+                    <div class="contact-wrapper d-flex mb-5">
+                        <div class="contact-image">
+                            <img src="https://www.mu-varna.bg/BG/AboutUs/PublishingImages/administraciq-2015/uo/IMG_4948%20iglika%20shtereva.jpg" alt="">
+                        </div>
+                        <div class="contact-info">
+                            <h5 class="f24">Иглика Павлова Щерева</h5>
+                            <p class="mb-4"> Експерт, прием на студенти и 
+                                здравно осигуряване</p>
+                            <div class="contact-phone d-flex mb-3">
+                                <i class="fal fa-phone mr-3"></i>
+                                <div>
+                                    Телефон:<br>
+                                    +359887766015
+                                </div>
+                            </div>
+                            <div class="contact-email d-flex">
+                                <i class="fal fa-envelope mr-3"></i>
+                                <div>
+                                    E-mail:<br>
+                                    iglika@iglika.com
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contact-wrapper d-flex mb-5">
+                        <div class="contact-image">
+                            <img src="https://www.mu-varna.bg/BG/AboutUs/PublishingImages/administraciq-2015/uo/IMG_4948%20iglika%20shtereva.jpg" alt="">
+                        </div>
+                        <div class="contact-info">
+                            <h5 class="f24">Иглика Павлова Щерева</h5>
+                            <p class="mb-4"> Експерт, прием на студенти и 
+                                здравно осигуряване</p>
+                            <div class="contact-phone d-flex mb-3">
+                                <i class="fal fa-phone mr-3"></i>
+                                <div>
+                                    Телефон:<br>
+                                    +359887766015
+                                </div>
+                            </div>
+                            <div class="contact-email d-flex">
+                                <i class="fal fa-envelope mr-3"></i>
+                                <div>
+                                    E-mail:<br>
+                                    iglika@iglika.com
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="members-section white-bg-section">
+            <div class="container">
+                <div class="text-center blue-contrast-header">
+                    <h1 class="f24">Членове Алумни клуб и приятели към МУ-Варна</h1>
+                </div>
+
+                <div class="members-container">
+                    <div class="members-wrapper d-flex">
+                        <div class="members-image">
+                            <img src="https://www.mu-varna.bg/BG/AboutUs/PublishingImages/administraciq-2015/uo/IMG_4948%20iglika%20shtereva.jpg" alt="">
+                        </div>
+                        <div class="members-info">
+                            Проф. Тодорка Игнатова Костадинова - България
+                        </div>
+                    </div>
+                    <div class="members-wrapper d-flex">
+                        <div class="members-image">
+                            <img src="https://www.mu-varna.bg/BG/AboutUs/PublishingImages/administraciq-2015/uo/IMG_4948%20iglika%20shtereva.jpg" alt="">
+                        </div>
+                        <div class="members-info">
+                            Проф. Тодорка Игнатова Костадинова - България
+                        </div>
+                    </div>
+                    <div class="members-wrapper d-flex">
+                        <div class="members-image">
+                            <img src="https://www.mu-varna.bg/BG/AboutUs/PublishingImages/administraciq-2015/uo/IMG_4948%20iglika%20shtereva.jpg" alt="">
+                        </div>
+                        <div class="members-info">
+                            Проф. Тодорка Игнатова Костадинова - България
+                        </div>
+                    </div>
+                    <div class="members-wrapper d-flex">
+                        <div class="members-image">
+                            <img src="https://www.mu-varna.bg/BG/AboutUs/PublishingImages/administraciq-2015/uo/IMG_4948%20iglika%20shtereva.jpg" alt="">
+                        </div>
+                        <div class="members-info">
+                            Проф. Тодорка Игнатова Костадинова - България
+                        </div>
+                    </div>
+                    <div class="members-wrapper d-flex">
+                        <div class="members-image">
+                            <img src="https://www.mu-varna.bg/BG/AboutUs/PublishingImages/administraciq-2015/uo/IMG_4948%20iglika%20shtereva.jpg" alt="">
+                        </div>
+                        <div class="members-info">
+                            Проф. Тодорка Игнатова Костадинова - България
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="application-form-section blue-contrast-section">
+            <div class="container">
+                <div class="text-center" style="max-width:710px;margin: auto;">
+                    <h1 class="f34 text-white">
+                        Станете част от Алумни клуб <br> към Медицински университет - Варна
+                    </h1>
+                    <a href="" class="alumni-form-button">Application form Alumni club</a>
+                    <div class="mt-5">
+                        <svg width="175" height="175" viewBox="0 0 375 375" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="374.11" height="374.165" fill="white"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M10.667 10.722C10.3 11.088 10 26.163 10 44.222V77.055H43.5H77V43.555V10.055H44.167C26.108 10.055 11.033 10.355 10.667 10.722ZM96 15.055V20.055H91.5H87V24.555V29.055H91.5H96V34.055V39.055H91.5H87V44.055V49.055H96H105V63.055V77.055H110.5H116V63.055V49.055H120.5H125V53.555V58.055H129.5H134V62.555V67.055H129.5H125V81.555V96.055H129.5H134V100.555V105.055H115H96V110.555V116.055H86.5H77V110.555V105.055H82H87V100.555V96.055H101.5H116V91.555V87.055H91.5H67V91.555V96.055H62.5H58V91.555V87.055H34H10V91.555V96.055H15H20V100.555V105.055H29.5H39V100.5V95.945L43.75 96.25L48.5 96.555L48.786 106.305L49.072 116.055H34.536H20V120.555V125.055H24.5H29V129.555V134.055H24.5H20V144.055V154.055H15H10V158.555V163.055H15H20V168.055V173.055H29.5H39V177.555V182.055H29.5H20V187.055V192.055H15H10V196.555V201.055H15H20V196.555V192.055H24.5H29V196.555V201.055H34H39V206.055V211.055H24.5H10V215.555V220.055H19.5H29V225.055V230.055H24.5H20V239.555V249.055H15H10V268.055V287.055H15H20V272.555V258.055H24.5H29V268.055V278.055H39H49V282.555V287.055H63H77V282.555V278.055H67.5H58V273.555V269.055H67.5H77V263.555V258.055H67.5H58V253.555V249.055H53.536H49.072L48.786 258.805L48.5 268.555H44H39.5L39.223 254.305L38.945 240.055H48.473H58V235.055V230.055H53.555H49.11L48.805 225.305L48.5 220.555L43.75 220.25L39 219.945V215.555V211.165L43.75 210.86L48.5 210.555V206.055V201.555L43.75 201.25L39 200.945V191.5V182.055H48.5H58V187.055V192.055H53.5H49V196.555V201.055H53.5H58V206.055V211.055H67.5H77V215.555V220.055H72H67V225.055V230.055H77H87V254.055V278.055H91.5H96V282.555V287.055H91.5H87V297.055V307.055H96H105V311.555V316.055H110.5H116V325.555V335.055H110.5H105V330.612V326.17L100.75 325.862L96.5 325.555L96.195 320.805L95.89 316.055H91.445H87V340.055V364.055H91.5H96V359.055V354.055H100.445H104.89L105.195 358.805L105.5 363.555L110.75 363.857L116 364.16V359.107V354.055H120.5H125V359.055V364.055H139.5H154V354.555V345.055H158.5H163V354.61V364.165L167.75 363.86L172.5 363.555L172.788 354.305L173.075 345.055H177.538H182V349.555V354.055H187H192V359.055V364.055H211H230V359.055V354.055H239.5H249V349.555V345.055H239.5H230V349.555V354.055H225H220V349.555V345.055H215.5H211V340.055V335.055H225.5H240V330.555V326.055H244.5H249V330.555V335.055H253.5H258V340.055V345.055H263.5H269V349.503V353.95L263.75 354.253L258.5 354.555V359.055V363.555H263.5H268.5L268.805 358.805L269.11 354.055H278.055H287V359.11V364.165L291.75 363.86L296.5 363.555L296.788 354.305L297.075 345.055H283.038H269V340.055V335.055H278H287V330.555V326.055H292H297V330.555V335.055H302H307V340.055V345.055H311.5H316V349.555V354.055H311.5H307V359.055V364.055H335.5H364V349.555V335.055H349.5H335V330.555V326.055H340H345V321.055V316.055H349.445H353.89L354.195 320.805L354.5 325.555H359H363.5L363.805 320.805L364.11 316.055H359.055H354V311.555V307.055H359H364V302.055V297.055H349.5H335V292.055V287.055H340H345V282.555V278.055H330.5H316V273.61V269.165L320.75 268.86L325.5 268.555V263.555V258.555L320.75 258.25L316 257.945V253.5V249.055H325.5H335V259.055V269.055H344.5H354V273.555V278.055H359.036H364.072L363.786 268.305L363.5 258.555L358.75 258.25L354 257.945V253.5V249.055H359H364V234.555V220.055H359H354V215.555V211.055H359H364V196.555V182.055H359H354V177.61V173.165L358.75 172.86L363.5 172.555L363.777 158.361L364.054 144.167L359.277 143.861L354.5 143.555L354.195 138.805L353.89 134.055H358.945H364V129.555V125.055H359H354V120.555V116.055H359.052H364.105L363.802 110.805L363.5 105.555L358.75 105.25L354 104.945V96V87.055H349.5H345V91.555V96.055H340H335V91.555V87.055L330.25 87.054L325.5 87.053V101.304V115.555L316.25 115.843L307 116.13V110.593V105.055H311.5H316V96.055V87.055H311.5H307V96.055V105.055H297H287V100.555V96.055H292H297V91.555V87.055H292H287V77.055V67.055H282.5H278V62.555V58.055H268H258V48.555V39.055H263.5H269V34.055V29.055H273.5H278V34.055V39.055H282.5H287V24.555V10.055H282.5H278V15.055V20.055H268H258V29.555V39.055H249H240V34.055V29.055H235H230V24.555V20.055H225H220V15.055V10.055H215.5H211V15.11V20.165L206.25 19.86C201.156 19.533 201.433 19.939 201.099 12.305C201.012 10.32 200.471 10.055 196.5 10.055H192V15.055V20.055H187H182V24.555V29.055H187H192V24.555V20.055H196.5H201V29.555V39.055H196.5H192V44.055V49.055H187H182V44.055V39.055H177.5H173V34.055V29.055H168H163V24.61V20.165L167.75 19.86L172.5 19.555V15.055V10.555L158.25 10.278L144 10V15.028V20.055H149H154V24.555V29.055H158.5H163V34.055V39.055H168H173V44.055V49.055H168H163V53.555V58.055H158.5H154V48.555V39.055H144H134V44.055V49.055H129.5H125V39.055V29.055H129.5H134V24.555V20.055H125H116V24.555V29.055H110.5H105V19.555V10.055H100.5H96V15.055ZM297 43.542V77.055H330.513H364.027L363.763 43.805L363.5 10.555L330.25 10.292L297 10.028V43.542ZM67 43.555V67.055H43.5H20V43.555V20.055H43.5H67V43.555ZM354 43.555V67.055H330.5H307V43.555V20.055H330.5H354V43.555ZM29 43.555V58.055H43.5H58V43.555V29.055H43.5H29V43.555ZM316 43.555V58.055H330.5H345V43.555V29.055H330.5H316V43.555ZM116 44.055V49.055H110.5H105V44.722C105 42.338 105.3 40.088 105.667 39.722C106.033 39.355 108.508 39.055 111.167 39.055H116V44.055ZM220 44.055V49.055H224.945H229.89L230.195 44.305L230.5 39.555L235.25 39.25L240 38.945V44V49.055H244.5H249V53.555V58.055H244.5H240V67.555V77.055H235H230V72.055V67.055H225H220V72.055V77.055H215.5H211V82.055V87.055H220.5H230V91.555V96.055H244H258V91.555V87.055H253.5H249V77.055V67.055H253.5H258V77.055V87.055H263.5H269V91.555V96.055H273.5H278V91.555V87.055H282.5H287V91.555V96.055H282.5H278V100.555V105.055H273.5H269V110.555V116.055H273.5H278V120.555V125.055H287.5H297V129.555V134.055H302H307V129.555V125.055H311.5H316V129.555V134.055H325.5H335V144.055V154.055H344.5H354V163.555V173.055H349.5H345V168.055V163.055H340H335V158.555V154.055H330.5H326V158.555V163.055H321H316V168.055V173.055H325.5H335V182.555V192.055H344.5H354V196.555V201.055H340H326V191.555V182.055H321H316V177.555V173.055H311.5H307V177.555V182.055H302H297V187.055V192.055H302H307V196.555V201.055H311.5H316V206.055V211.055H330.5H345V220.555V230.055H349.5H354V235.055V240.055H340H326V235.055V230.055H330.5H335V225.055V220.055H325.5H316V215.555V211.055H311.5H307V225.555V240.055H311.5H316V244.555V249.055H311.5H307V259.055V269.055H302.052H297.105L296.802 263.805L296.5 258.555L291.75 258.25L287 257.945V253.5V249.055H297H307V244.555V240.055H302H297V230.055V220.055H292H287V230.055V240.055H278H269V235.003V229.95L263.75 230.253L258.5 230.555L258.195 235.305L257.89 240.055H253.445H249V244.555V249.055H253.5H258V253.555V258.055H263.5H269V253.555V249.055H273.5H278V253.555V258.055H273.5H269V263.555V269.055H273.5H278V278.055V287.055H273.5H269V282.555V278.055H263.462H257.925L258.212 287.305L258.5 296.555L268.25 296.841L278 297.127V306.591V316.055H273.5H269V311.555V307.055H263.5H258V316.555V326.055H263.5H269V330.555V335.055H263.5H258V330.555V326.055H253.5H249V321.055V316.055H244.555H240.11L239.805 320.805L239.5 325.555H235H230.5L230.195 320.805L229.89 316.055H224.945H220V306.555V297.055H230H240V292.055V287.055H235H230V282.555V278.055H225H220V282.517V286.98L210.75 287.267L201.5 287.555V292.055V296.555L206.277 296.861L211.054 297.167L210.777 311.361L210.5 325.555H206C201.548 325.555 201.499 325.518 201.372 322.055C201.302 320.13 201.189 317.993 201.122 317.305C201.031 316.371 197.479 316.055 187.055 316.055H173.11L172.805 320.805L172.5 325.555L167.75 325.86L163 326.165V330.61V335.055H158.5H154V325.555V316.055H158.5H163V306.555V297.055H153.5H144V306.555V316.055H134.5H125V311.555V307.055H115H105V302.055V297.055H100.5H96V292.055V287.055H106H116V282.555V278.055H125H134V268.055V258.055H129.5H125V263.555V269.055H115H105V273.555V278.055H100.5H96V259.055V240.055H100.5H105V244.555V249.055H110.5H116V253.555V258.055H120.5H125V253.555V249.055H129.5H134V253.555V258.055H139H144V253.555V249.055H153.5H163V253.555V258.055H158.5H154V263.555V269.055H158.5H163V273.555V278.055H168H173V273.555V269.055H182.5H192V263.555V258.055H201.5H211V253.555V249.055H206H201V239.498V229.94L196.75 230.248L192.5 230.555L192.212 239.805L191.925 249.055H186.962H182V253.555V258.055H177.5H173V253.555V249.055H177.5H182V244.555V240.055H149.055H116.11L115.805 235.305L115.5 230.555L101.25 230.278L87 230V225.028V220.055H91.5H96V206.055V192.055H86.5H77V196.555V201.055H67.5H58V196.555V192.055H67.5H77V187.055V182.055H67.5H58V177.555V173.055H53.5H49V163.555V154.055H53.5H58V149.055V144.055H53.5H49V130.055V116.055H53.5H58V130.055V144.055H62.5H67V139.055V134.055H72H77V129.555V125.055H72H67V120.555V116.055H72H77V120.555V125.055H82H87V129.555V134.055H96H105V129.555V125.055H100.5H96V120.555V116.055H100.5H105V120.555V125.055H110.5H116V129.555V134.055H120.5H125V125.055V116.055H134.5H144V125.055V134.055H149H154V129.555V125.055H158.464H162.928L163.214 115.305L163.5 105.555L168.25 105.25L173 104.945V86V67.055H168H163V72.055V77.055H158.5H154V72.055V67.055H158.5H163V62.555V58.055H168H173V53.555V49.055H177.5H182V53.555V58.055H177.5H173V62.555V67.055H177.5H182V72.055V77.055H187H192V67.555V58.055H206H220V53.593V49.13L210.75 48.843L201.5 48.555L201.195 43.805L200.89 39.055H210.445H220V44.055ZM144 53.555V58.055H139H134V53.555V49.055H139H144V53.555ZM230 53.555V58.055H235H240V53.555V49.055H235H230V53.555ZM87 67.555V77.055H91.5H96V67.555V58.055H91.5H87V67.555ZM144 81.555V96.055H139H134V81.555V67.055H139H144V81.555ZM201.667 67.722C201.3 68.088 201 70.338 201 72.722V77.055H196.5H192V82.055V87.055H196.5H201V91.555V96.055H191.5H182V100.555V105.055H177.5H173V110.555V116.055H177.5H182V120.555V125.055H172.5H163V129.555V134.055H172.5H182V129.555V125.055H191.333C196.467 125.055 200.868 124.853 201.115 124.607C201.361 124.361 201.389 122.336 201.176 120.107L200.79 116.055H191.395H182V110.555V105.055H191.448H200.895L201.198 110.305L201.5 115.555L206.25 115.86L211 116.165V120.61V125.055H215.5H220V129.555V134.055H206H192V139.055V144.055H173H154V149.055V154.055H149H144V158.555V163.055H139H134V158.555V154.055H129.5H125V163.555V173.055H129.5H134V177.555V182.055H115H96V187.055V192.055H100.5H105V206.055V220.055H110.5H116V215.555V211.055H120.5H125V215.555V220.055H129.5H134V225.055V230.055H148.5H163V225.055V220.055H168H173V225.055V230.055H177.5H182V225.055V220.055H177.5H173V215.555V211.055H182.5H192V206.662C192 201.9 192.917 201.055 198.082 201.055H201L201.118 209.805C201.184 214.618 201.184 218.893 201.118 219.305C201.053 219.717 207.525 220.055 215.5 220.055H230V215.555V211.055H220.5H211V206.055V201.055H225.5H240V196.555V192.055H244.5H249V182.555V173.055H239.5H230V168.055V163.055H239.5H249V158.555V154.055H273H297V149.055V144.055H273H249V149.055V154.055H239.5H230V158.555V163.055H225H220V158.555V154.055H215.5H211V158.555V163.055H201.5H192V153.573V144.091L215.75 143.823L239.5 143.555L239.805 138.805L240.11 134.055H244.555H249V119.555V105.055H244.552H240.105L239.802 110.305L239.5 115.555L229.75 115.841L220 116.127V110.591V105.055H225H230V100.555V96.055H225H220V100.555V105.055H210.5H201V100.555V96.055H206H211V91.61V87.165L206.25 86.86L201.5 86.555V82.055V77.555L206.25 77.25L211 76.945V72V67.055H206.667C204.283 67.055 202.033 67.355 201.667 67.722ZM278 72.055V77.055H273.5H269V72.055V67.055H273.5H278V72.055ZM77 100.555V105.055H72H67V100.555V96.055H72H77V100.555ZM258 100.555V105.055H263.5H269V100.555V96.055H263.5H258V100.555ZM354 110.555V116.055H349.5H345V120.555V125.055H349.5H354V129.555V134.055H349.5H345V129.555V125.055H340H335V120.555V116.055H340H345V111.222C345 108.563 345.3 106.088 345.667 105.722C346.033 105.355 348.058 105.055 350.167 105.055H354V110.555ZM258 125.055V134.055H263.5H269V125.055V116.055H263.5H258V125.055ZM240 129.555V134.055H235H230V129.555V125.055H235H240V129.555ZM39 144.055V154.055H34H29V158.555V163.055H24.5H20V158.555V154.055H24.5H29V144.055V134.055H34H39V144.055ZM125 139.055V144.055H129.5H134V139.055V134.055H129.5H125V139.055ZM307 148.537V163.019L282.75 163.287L258.5 163.555V168.055V172.555L268.25 172.841L278 173.127V177.591V182.055H273.5H269V187.055V192.055H263.5H258V201.555V211.055H253.5H249V215.555V220.055H244.5H240V230.11V240.165L235.25 239.86L230.5 239.555L230.195 234.805L229.89 230.055H220.445H211V239.555V249.055H225.5H240V244.555V240.055H244.5H249V230.055V220.055H253.5H258V215.555V211.055H263.5H269V206.004V200.954L278 201.136L287 201.318V206.186V211.055H282.5H278V215.555V220.055H273.5H269V225.055V230.055H273.5H278V225.055V220.055H282.5H287V215.555V211.055H297H307V206.055V201.055H302H297V196.555V192.055H292H287V182.555V173.055H297H307V168.055V163.055H311.5H316V158.555V154.055H321H326V149.055V144.055H321H316V139.055V134.055H311.5H307V148.537ZM67 149.055V154.055H81.5H96V158.555V163.055H91.5H87V168.055V173.055H91.5H96V168.055V163.055H100.445H104.89L105.195 167.805L105.5 172.555H110.5H115.5L115.788 163.305L116.075 154.055H110.538H105V149.055V144.055H86H67V149.055ZM182 158.555V163.055H187H192V168.055V173.055H196.5H201V182.555V192.055H191.5H182V196.555V201.055H177.5H173V206.055V211.055H168H163V215.555V220.055H158.5H154V215.555V211.055H158.5H163V201.555V192.055H168H173V187.055V182.055H182.5H192V177.555V173.055H187H182V168.055V163.055H177.555H173.11L172.805 167.805L172.5 172.555L167.75 172.86L163 173.165V177.61V182.055H153.5H144V172.555V163.055H153.5H163V158.555V154.055H172.5H182V158.555ZM67.195 167.805L67.5 172.555L72.25 172.86L77 173.165V168.11V163.055H71.945H66.89L67.195 167.805ZM220.195 167.805L220.5 172.555L225.25 172.86L230 173.165V177.61V182.055H235H240V187.055V192.055H235H230V187.055V182.055H225H220V187.055V192.055H215.5H211V196.555V201.055H205.926H200.852L201.204 196.805L201.555 192.555L206.277 192.25L211 191.945V177.5V163.055H215.445H219.89L220.195 167.805ZM144 196.555V201.055H135.5C130.825 201.055 126.662 201.168 126.25 201.305C125.838 201.442 125.363 199.418 125.195 196.805L124.89 192.055H134.445H144V196.555ZM144 215.555V220.055H139H134V215.555V211.055H139H144V215.555ZM67 244.555V249.055H72H77V244.555V240.055H72H67V244.555ZM211 268.055V278.055H215.5H220V273.555V269.055H225H230V263.555V258.055H220.5H211V268.055ZM144 273.555V278.055H139H134V282.555V287.055H144H154V278.055V269.055H149H144V273.555ZM192 273.555V278.055H196.5H201V273.555V269.055H196.5H192V273.555ZM240 278.055V287.055H244.5H249V278.055V269.055H244.5H240V278.055ZM173 282.555V287.055H168H163V292.11V297.165L167.75 296.86L172.5 296.555L172.805 291.805L173.11 287.055H177.555H182V292.055V297.055H187H192V292.055V287.055H187H182V282.555V278.055H177.5H173V282.555ZM116 292.055V297.055H120.5H125V292.055V287.055H120.5H116V292.055ZM316 301.555V316.055H301.5H287V301.555V287.055H301.5H316V301.555ZM10 330.555V364.055H43.5H77V330.555V297.055H43.5H10V330.555ZM240 302.055V307.055H244.5H249V302.055V297.055H244.5H240V302.055ZM297 302.055V307.055H302H307V302.055V297.055H302H297V302.055ZM335 302.055V307.055H340H345V311.555V316.055H340H335V321.055V326.055H330.5H326V311.555V297.055H330.5H335V302.055ZM67 330.555V354.055H43.5H20V330.555V307.055H43.5H67V330.555ZM29 330.555V345.055H43.5H58V330.555V316.055H43.5H29V330.555ZM144 330.555V335.055H134.5H125V340.055V345.055H134.5H144V349.555V354.055H134.5H125V349.555V345.055H120.5H116V340.055V335.055H120.5H125V330.555V326.055H134.5H144V330.555ZM201 335.555V345.055H206H211V349.555V354.055H201.5H192V349.555V345.055H187H182V340.055V335.055H177.5H173V330.555V326.055H187H201V335.555ZM316 330.555V335.055H325.5H335V340.055V345.055H344.5H354V349.555V354.055H344.5H335V349.555V345.055H325.5H316V340.055V335.055H311.5H307V330.555V326.055H311.5H316V330.555ZM105 340.055V345.055H100.5H96V340.055V335.055H100.5H105V340.055Z" fill="black"/>
+                            </svg>
+                            
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="map-holder">
+            <div class="map">
+                <a class="map-label" data-placement="bottom" title="" style="display:block !important;">
+                    <span style="font-size: 2rem;">
+                        <span style="color: white;">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </span>
+                    </span>
+                </a>
+                <div class="map-popup">
+                    <div class="popover fade right in" id="contacts">
+                        <div class="popover-content">
+                            <p>МЕДИЦИНСКИ УНИВЕРСИТЕТ
+                                <br />
+                                ПРОФ. Д-Р П. СТОЯНОВ - ВАРНА
+                            </p>
+                            <p>гр. Варна, ул. Марин Дринов 55
+
+                                <br />
+
+                                тел: +35952/677 050 <br />
+
+                                факс: +35952/650 019 <br />
+
+                                e-mail: <a style="color:#007cc3" href="mailto:uni@mu-varna.bg">uni@mu-varna.bg
+
+                                </a>
+                            </p>
+                            <p>
+                                <a style="color:#007cc3" href="/BG/Pages/Contacts.aspx" title="Google Maps">виж карта
+
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+
+            <div class="links-container d-flex justify-content-between">
+                <div class="d-flex flex-column justify-content-center">
+                    <a href="">
+                        <img src="_layouts/15/MUVarna/img/muvarna-logo.png" alt="">
+                    </a>
+                </div>
+    
+                <div class="d-flex flex-column">
+                    <a href="/BG/Admission/Pages/default.aspx">Прием
+                    </a>
+                    <a href="/BG/Students/Pages/FeesAndCredits.aspx">Студенти
+                    </a>
+                    <a href="/BG/Research/Pages/%D0%9F%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8.aspx">Научна дейност
+                    </a>
+                    <a href="/BG/AboutUs/Pages/MedicalUniversityVarna.aspx">За нас
+                    </a>
+                    <a href="http://library.mu-varna.bg/">Библиотека
+                    </a>
+                </div>
+                <div class="d-flex flex-column">
+                    <a href="/BG/Pages/NewsList.aspx">Новини
+                    </a>
+                    <a href="/BG/Students/Pages/u4ebnadejnost.aspx">Учебна дейност
+                    </a>
+                    <a href="/BG/InternationalActivity/Pages/%D0%9C%D0%B5%D0%B6%D0%B4%D1%83%D0%BD%D0%B0%D1%80%D0%BE%D0%B4%D0%BD%D0%BE-%D1%81%D1%8A%D1%82%D1%80%D1%83%D0%B4%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D1%82%D0%B2%D0%BE.aspx">Международна дейност
+                    </a>
+                    <a href="/BG/sdo/Pages/%D0%A1%D0%BF%D0%B5%D1%86%D0%B8%D0%B0%D0%BB%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D0%B8.aspx">СДО
+                    </a>
+                    <a href="/BG/cdo/Pages/default.aspx">ИЦЕДО
+                    </a>
+                </div>
+                <div class="d-flex flex-column">
+                    <a href="/BG/ACRO">ACRO
+                    </a>
+                    <a href="http://press.mu-varna.bg/">Издателска дейност
+                    </a>
+                    <a href="/BG/AlumniClub/alumni-club-mu-varna-new">Alumni Club
+                    </a>
+                    <a href="/BG/Pages/Contacts.aspx">Контакти
+                    </a>
+                    <a href="/BG/AboutUs/Pages/dostyp-do-informaciya.aspx">Достъп до информация
+                    </a>
+                </div>
+                <div class="d-flex flex-column">
+                    <a href="/BG/AboutUs/Pages/Structure.aspx">Управление 
+                    </a>
+                    <a href="/BG/AboutUs/Pages/pravilnici_MU-Varna.aspx">Правилници
+                    </a>
+                    <a href="/BG/AboutUs/Pages/Accreditation.aspx">Акредитация
+                    </a>
+                    <a href="/BG/AboutUs/Pages/normuredba.aspx">Нормативна уредба
+                    </a>
+                    <a href="/BG/AboutUs/Pages/obqvi-mu.aspx">Обяви
+                    </a>
+                </div>
+                <div class="d-flex flex-column">
+                    <a href="/BG/AboutUs/Pages/tyrgove.aspx">Търгове
+                    </a>
+                    <a href="/BG/CustomerProfile/Pages/ProceduresAll.aspx">Профил на купувача
+                    </a>
+                    <a href="/BG/Research/Pages/konkursi.aspx">Конкурси
+                    </a>
+                    <a href="/BG/AboutUs/Pages/godishen-finansov-otchet.aspx">Финансова информация
+                    </a>
+                    <a href="/BG/AboutUs/Pages/signali-za-nerednosti-izmama-i-korupciya.aspx">Подаване на сигнали за корупция
+                    </a>
+                </div>
+    
+            </div>
+            <div class="socials-wrapper d-flex justify-content-center">
+                <a href="https://www.facebook.com/pages/Medical-University-of-Varna/164326093736811" target="blank" title="Facebook">
+                    <i class="fab fa-facebook"></i>
+                    <span>Facebook</span>
+                </a>
+                <a href="https://twitter.com/MUVarna_BG" target="blank" title="Tweet">
+                    <i class="fab fa-twitter"></i>
+                    <span>Twitter</span>
+                </a>
+                <a href="https://www.mu-varna.bg/BG" target="blank" title="Tweet">
+                    <i class="fab fa-linkedin"></i>
+                    <span>Linkedin</span>
+                </a>
+                
+                <a href="http://www.youtube.com/user/Medicinskiuniversite" target="blank" title="YouTube">
+                    <i class="fab fa-youtube"></i>
+                    <span>YouTube</span>
+                </a>
+            </div>
+
+            <p class="copyrights">© 1961-2022 Медицински университет - Варна. 
+            <a href="#">Всички права запазени</a>        
+            <a href="/BG/Pages/SiteMap.aspx">Карта на сайта</a>                                                                                                                                     </p>
+        </div>
+
+        <button class="up-chevron-button" onClick="document.getElementById('top').scrollIntoView({ behavior: 'smooth'});">
+            <i class="fas fa-chevron-up"></i>
+        </button>
+    </footer>
+  </body>
+</html>

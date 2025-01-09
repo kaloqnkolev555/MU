@@ -1,0 +1,75 @@
+.alumni-wrapper .slider {
+    padding: 150px 0;
+}
+.alumni-wrapper .tile-box.big-box.full-width .tile-title {
+    font-size: 24px;
+    line-height: 30px;
+}
+.alumni-wrapper .news-section {
+    padding-bottom: 100px;
+}
+.alumni-wrapper .alumni-header-wrapper {
+    padding: 50px 0;
+    margin-bottom: 40px;
+}
+
+.alumni-wrapper .chairman-section .tile-box {
+    height: 660px;
+    position: relative;
+    background: transparent;
+    margin-bottom: 50px;
+}
+.alumni-wrapper .chairman-section .tile-box.big-box .tile-image {
+    height: 90%;
+}
+.alumni-wrapper .chairman-section .tile-box.big-box.full-width .tile-image {
+    width: 80%;
+}
+.alumni-wrapper .chairman-section .tile-box .tile-content {
+    height: 460px;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    background: var(--white);
+}
+.alumni-wrapper .contacts-section .container {
+    border-bottom: 1px solid #007CC3;
+}
+.alumni-wrapper .members-section .members-container{
+    grid-template-columns: repeat(2, minmax(0, 440px));
+    gap: 1.5rem;
+    display: grid;
+    justify-content: center;
+}
+.alumni-wrapper .members-section {
+    padding: 50px 0;
+}
+.alumni-wrapper .members-section h1 {
+    padding: 0 0 40px;
+}
+.alumni-wrapper .members-section .members-wrapper{
+    
+}
+.alumni-wrapper .members-section .members-image{
+    width: 30px;
+    height: 30px;
+    margin-right: 20px;
+}
+.alumni-wrapper .members-section .members-image img{
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+.alumni-wrapper .application-form-section {
+    padding: 50px 0;
+}
+.alumni-wrapper .application-form-section .alumni-form-button {
+    padding: 18px 53px;
+    background-color: var(--accent-red);
+    color: var(--white);
+    font-size: 32px;
+    margin-top: 40px;
+    display: inline-block;
+}
+

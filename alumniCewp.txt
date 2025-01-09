@@ -1,0 +1,375 @@
+<link rel="stylesheet" href="/BG/SiteAssets/alumni.css" />
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+<link rel="stylesheet" href="/BG/SiteAssets/mainHome.css">
+<script src="/BG/SiteAssets/httpRequestAlumni.js" type="module"></script>
+
+<!-- Maps script -->
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {});
+</script>
+
+<div class="main-wrapper lang-version bg-language">
+
+    <!-- <div id="mainCurrentOutput">
+        <script id="mainCurrent" type="text/x-handlebars-template">
+            <div class="main-current blue-contrast-section {{#unless  mainCurrent}}d-none{{/unless}}"">
+                <div class="container">
+                    <div class="section-header">
+                        <h1>Актуално</h1>
+                    </div>
+                    <div class="tiles-wrapper" >
+                        
+                            {{#each mainCurrent}}
+                            <div class="tile-box big-box full-width {{#if flipped}}flipped{{/if}}">
+                                <div class="tile-image">
+                                    <img src="{{image.Url}}" alt="">
+                                </div>
+                                <div class="tile-content">
+                                    <div class="tile-texts-wrapper">
+                                        <div class="tile-title">{{Title}}</div>
+                                        <div class="tile-text">{{{description}}}</div>
+                                    </div>
+                                    <div class="tile-buttons-wrapper">
+                                        <div class="tile-button">
+                                            <a href="{{link.Url}}" >
+                                                <i class="fal fa-arrow-right"></i>
+                                                <span>{{buttonText}}</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {{/each}}
+                    </div>
+                </div>
+            </div>
+        </script>
+    </div> -->
+
+
+</div>
+
+<div class="alumni-wrapper lang-version">
+    <div class="slider" style="background-image: url('_layouts/15/MUVarna/img/alumni-bg.jpg');">
+        <div class="container slider-title"></div>
+    </div>
+    <div class="alumni-header-wrapper white-bg-section">
+        <div class="container text-center">
+            <p class="title-text f24 color-main-deep-blue text-center mb-3">
+                АЛУМНИ КЛУБ И ПРИЯТЕЛИ КЪМ МЕДИЦИНСКИ УНИВЕРСИТЕТ-ВАРНА
+            </p>
+            <p class="regular-text color-primary-gray-3 f18">
+                Доброволна организация на завършилите университета, по-общо казано, на бившистуденти (възпитаници) <br>
+                на този университет. Алумни клуб и приятели към Медицински универстет Варна -дейности и активности
+            </p>
+        </div>
+    </div>
+    <div class="important-section white-bg-section">
+        <div class="container">
+            <div class="section-header">
+                <h1>Важно</h1>
+                <a href="/BG/">
+                    <i class="fal fa-arrow-right"></i>
+                </a>
+            </div>
+            <div class="tiles-wrapper" id="alumniImportantOutput">
+                <script id="alumniImportant" type="text/x-handlebars-template">
+                    {{#each alumniImportant}}
+                    <div class="tile-box big-box full-width {{#if flipped}}flipped{{/if}}">
+                        <div class="tile-image">
+                            <img src="{{image.Url}}" alt="">
+                        </div>
+                        <div class="tile-content">
+                            <div class="tile-texts-wrapper">
+                                <div class="tile-title">{{Title}}</div>
+                                <div class="tile-text">{{{description}}}</div>
+                            </div>
+                            <div class="tile-buttons-wrapper">
+                                <div class="tile-button">
+                                    <a href="{{link.Url}}" >
+                                        <i class="fal fa-arrow-right"></i>
+                                        <span>{{buttonText}}</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{/each}}
+                </script>
+            </div>
+        </div>
+    </div>
+    <div class="news-section white-bg-section">
+        <div class="container">
+            <div class="section-header">
+                <h1>Новини</h1>
+                <a href="/BG/">
+                    <i class="fal fa-arrow-right"></i>
+                </a>
+            </div>
+            <div class="tiles-wrapper" id="alumniImportantNewsOutput">
+                <script id="alumniImportantNews" type="text/x-handlebars-template">
+                    {{#each alumniImportantNews}}
+                    <div class="tile-box big-box full-width {{#if flipped}}flipped{{/if}}">
+                        <div class="tile-image">
+                            <img src="{{image.Url}}" alt="">
+                        </div>
+                        <div class="tile-content">
+                            <div class="tile-texts-wrapper">
+                                <div class="tile-title">{{Title}}</div>
+                                <div class="tile-text">{{{description}}}</div>
+                            </div>
+                            <div class="tile-buttons-wrapper">
+                                <div class="tile-button">
+                                    <a href="{{link.Url}}" >
+                                        <i class="fal fa-arrow-right"></i>
+                                        <span>{{buttonText}}</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{/each}}
+                </script>
+            </div>
+        </div>
+    </div>
+    <div class="prize-section white-bg-section">
+        <div class="container">
+            <div class="section-header">
+                <h1>награди</h1>
+                <a href="/BG/">
+                    <i class="fal fa-arrow-right"></i>
+                </a>
+            </div>
+            <div class="tiles-wrapper" id="alumniPrizeOutput">
+                <script id="alumniPrize" type="text/x-handlebars-template">
+                    {{#each alumniPrize}}
+                    <div class="tile-box big-box full-width {{#if flipped}}flipped{{/if}}">
+                        <div class="tile-image">
+                            <img src="{{image.Url}}" alt="">
+                        </div>
+                        <div class="tile-content">
+                            <div class="tile-texts-wrapper">
+                                <div class="tile-title">{{Title}}</div>
+                                <div class="tile-text">{{{description}}}</div>
+                            </div>
+                            <div class="tile-buttons-wrapper">
+                                <div class="tile-button">
+                                    <a href="{{link.Url}}" >
+                                        <i class="fal fa-arrow-right"></i>
+                                        <span>{{buttonText}}</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{/each}}
+                </script>
+            </div>
+        </div>
+    </div>
+    <div class="news-section white-bg-section">
+        <div class="container">
+            <div class="section-header">
+                <h1>За нас</h1>
+                <a href="/BG/">
+                    <i class="fal fa-arrow-right"></i>
+                </a>
+            </div>
+            <div class="tiles-wrapper" id="alumniPrizeNewsOutput">
+                <script id="alumniPrizeNews" type="text/x-handlebars-template">
+                    {{#each alumniPrizeNews}}
+                    <div class="tile-box big-box full-width {{#if flipped}}flipped{{/if}}">
+                        <div class="tile-image">
+                            <img src="{{image.Url}}" alt="">
+                        </div>
+                        <div class="tile-content">
+                            <div class="tile-texts-wrapper">
+                                <div class="tile-title">{{Title}}</div>
+                                <div class="tile-text">{{{description}}}</div>
+                            </div>
+                            <div class="tile-buttons-wrapper">
+                                <div class="tile-button">
+                                    <a href="{{link.Url}}" >
+                                        <i class="fal fa-arrow-right"></i>
+                                        <span>{{buttonText}}</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{/each}}
+                </script>
+            </div>
+        </div>
+    </div>
+    <div class="chairman-section">
+        <div class="container">
+            <div class="section-header blue-contrast-header">
+                <h1>Преседател</h1>
+            </div>
+            <div class="tiles-wrapper">
+                <div class="tile-box big-box full-width ">
+                    <div class="tile-image">
+                        <img src="/BG/AlumniClub/PublishingImages/Milkov%20book.jpg" alt="">
+                    </div>
+                    <div class="tile-content">
+                        <div class="tile-texts-wrapper">
+                            <div class="tile-title">Проф. д-р Марио Милков д.м.</div>
+                            <div class="tile-text">
+                                Председател на "Алумни клуб и приятели" МУ-Варна<br>
+                                Завеждащ катедра По Дентално материалознание пропедевтика на протетичната дентална медицина.Президент на Българското дружество по ОСА и хъркане.
+                                Заместник председател на Българкото дружество по оториноларингология, хирургия на глава и шия.
+                                Президент на Международната Черноморска асоцияциа по отология и невроотология.<br><br>
+                                E-mail: <a href= "mailto: alumniclub@mu-varna.bg"> 
+                                    alumniclub@mu-varna.bg
+                                 </a>
+                            </div>
+                        </div>
+                        <div class="tile-buttons-wrapper">
+                            <div class="tile-button">
+                                <a href="" >
+                                    <i class="fal fa-arrow-right"></i>
+                                    <span>Повече информация</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="contacts-section white-bg-section">
+        <div class="container">
+            <div class="section-header blue-contrast-header">
+                <h1>Зам. председатели</h1>
+            </div>
+
+            <div class="d-flex flex-wrap" id="alumniContactsOutput">
+                <script id="alumniContacts" type="text/x-handlebars-template">
+                    {{#each alumniContacts}}
+                    <div class="contact-wrapper d-flex mb-5" >
+                        <div class="contact-image">
+                            <img src="{{picture.Url}}" alt="{{picture.Description}}">
+                        </div>
+                        <div class="contact-info f18">
+                            <h5 class="f24">{{Title}}</h5>
+                            <p class="mb-4">{{job_x002d_position}}</p>
+                            <div class="{{#unless phone}}d-none{{/unless}}">
+                                <div class="contact-phone d-flex mb-3">
+                                    <i class="fal fa-phone mr-3"></i>
+                                    <div>
+                                        Телефон:<br>
+                                        {{phone}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="{{#unless mobile}}d-none{{/unless}}">
+                                <div class="contact-phone d-flex mb-3">
+                                    <i class="fal fa-mobile mr-3"></i>
+                                    <div>
+                                        Мобилен:<br>
+                                        {{mobile}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="{{#unless email}}d-none{{/unless}}">
+                                <div class="contact-email d-flex ">
+                                    <i class="fal fa-envelope mr-3"></i>
+                                    <div>
+                                        E-mail:<br>
+                                        {{email}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{/each}}
+                </script>
+            </div>
+        </div>
+    </div>
+    <div class="members-section white-bg-section">
+        <div class="container">
+            <div class="text-center blue-contrast-header">
+                <h1 class="f24">Членове Алумни клуб и приятели към МУ-Варна</h1>
+            </div>
+
+            <div class="members-container" id="alumniMembersOutput">
+                <script id="alumniMembers" type="text/x-handlebars-template">
+                    {{#each alumniMembers}}
+                        <div class="members-wrapper d-flex">
+                            <div class="members-image">
+                                <img src="{{image.Url}}" alt="{{image.Description}}">
+                            </div>
+                            <div class="members-info">
+                                {{Title}}
+                            </div>
+                        </div>
+                    {{/each}}
+                </script>                
+            </div>
+        </div>
+    </div>
+    <div class="application-form-section blue-contrast-section">
+        <div class="container">
+            <div class="text-center" style="max-width:710px;margin: auto;">
+                <h1 class="f34 text-white">
+                    Станете част от Алумни клуб <br> към Медицински университет - Варна
+                </h1>
+                <a href="" class="alumni-form-button">Application form Alumni club</a>
+                <div class="mt-5">
+                    <svg width="175" height="175" viewBox="0 0 375 375" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="374.11" height="374.165" fill="white"/>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M10.667 10.722C10.3 11.088 10 26.163 10 44.222V77.055H43.5H77V43.555V10.055H44.167C26.108 10.055 11.033 10.355 10.667 10.722ZM96 15.055V20.055H91.5H87V24.555V29.055H91.5H96V34.055V39.055H91.5H87V44.055V49.055H96H105V63.055V77.055H110.5H116V63.055V49.055H120.5H125V53.555V58.055H129.5H134V62.555V67.055H129.5H125V81.555V96.055H129.5H134V100.555V105.055H115H96V110.555V116.055H86.5H77V110.555V105.055H82H87V100.555V96.055H101.5H116V91.555V87.055H91.5H67V91.555V96.055H62.5H58V91.555V87.055H34H10V91.555V96.055H15H20V100.555V105.055H29.5H39V100.5V95.945L43.75 96.25L48.5 96.555L48.786 106.305L49.072 116.055H34.536H20V120.555V125.055H24.5H29V129.555V134.055H24.5H20V144.055V154.055H15H10V158.555V163.055H15H20V168.055V173.055H29.5H39V177.555V182.055H29.5H20V187.055V192.055H15H10V196.555V201.055H15H20V196.555V192.055H24.5H29V196.555V201.055H34H39V206.055V211.055H24.5H10V215.555V220.055H19.5H29V225.055V230.055H24.5H20V239.555V249.055H15H10V268.055V287.055H15H20V272.555V258.055H24.5H29V268.055V278.055H39H49V282.555V287.055H63H77V282.555V278.055H67.5H58V273.555V269.055H67.5H77V263.555V258.055H67.5H58V253.555V249.055H53.536H49.072L48.786 258.805L48.5 268.555H44H39.5L39.223 254.305L38.945 240.055H48.473H58V235.055V230.055H53.555H49.11L48.805 225.305L48.5 220.555L43.75 220.25L39 219.945V215.555V211.165L43.75 210.86L48.5 210.555V206.055V201.555L43.75 201.25L39 200.945V191.5V182.055H48.5H58V187.055V192.055H53.5H49V196.555V201.055H53.5H58V206.055V211.055H67.5H77V215.555V220.055H72H67V225.055V230.055H77H87V254.055V278.055H91.5H96V282.555V287.055H91.5H87V297.055V307.055H96H105V311.555V316.055H110.5H116V325.555V335.055H110.5H105V330.612V326.17L100.75 325.862L96.5 325.555L96.195 320.805L95.89 316.055H91.445H87V340.055V364.055H91.5H96V359.055V354.055H100.445H104.89L105.195 358.805L105.5 363.555L110.75 363.857L116 364.16V359.107V354.055H120.5H125V359.055V364.055H139.5H154V354.555V345.055H158.5H163V354.61V364.165L167.75 363.86L172.5 363.555L172.788 354.305L173.075 345.055H177.538H182V349.555V354.055H187H192V359.055V364.055H211H230V359.055V354.055H239.5H249V349.555V345.055H239.5H230V349.555V354.055H225H220V349.555V345.055H215.5H211V340.055V335.055H225.5H240V330.555V326.055H244.5H249V330.555V335.055H253.5H258V340.055V345.055H263.5H269V349.503V353.95L263.75 354.253L258.5 354.555V359.055V363.555H263.5H268.5L268.805 358.805L269.11 354.055H278.055H287V359.11V364.165L291.75 363.86L296.5 363.555L296.788 354.305L297.075 345.055H283.038H269V340.055V335.055H278H287V330.555V326.055H292H297V330.555V335.055H302H307V340.055V345.055H311.5H316V349.555V354.055H311.5H307V359.055V364.055H335.5H364V349.555V335.055H349.5H335V330.555V326.055H340H345V321.055V316.055H349.445H353.89L354.195 320.805L354.5 325.555H359H363.5L363.805 320.805L364.11 316.055H359.055H354V311.555V307.055H359H364V302.055V297.055H349.5H335V292.055V287.055H340H345V282.555V278.055H330.5H316V273.61V269.165L320.75 268.86L325.5 268.555V263.555V258.555L320.75 258.25L316 257.945V253.5V249.055H325.5H335V259.055V269.055H344.5H354V273.555V278.055H359.036H364.072L363.786 268.305L363.5 258.555L358.75 258.25L354 257.945V253.5V249.055H359H364V234.555V220.055H359H354V215.555V211.055H359H364V196.555V182.055H359H354V177.61V173.165L358.75 172.86L363.5 172.555L363.777 158.361L364.054 144.167L359.277 143.861L354.5 143.555L354.195 138.805L353.89 134.055H358.945H364V129.555V125.055H359H354V120.555V116.055H359.052H364.105L363.802 110.805L363.5 105.555L358.75 105.25L354 104.945V96V87.055H349.5H345V91.555V96.055H340H335V91.555V87.055L330.25 87.054L325.5 87.053V101.304V115.555L316.25 115.843L307 116.13V110.593V105.055H311.5H316V96.055V87.055H311.5H307V96.055V105.055H297H287V100.555V96.055H292H297V91.555V87.055H292H287V77.055V67.055H282.5H278V62.555V58.055H268H258V48.555V39.055H263.5H269V34.055V29.055H273.5H278V34.055V39.055H282.5H287V24.555V10.055H282.5H278V15.055V20.055H268H258V29.555V39.055H249H240V34.055V29.055H235H230V24.555V20.055H225H220V15.055V10.055H215.5H211V15.11V20.165L206.25 19.86C201.156 19.533 201.433 19.939 201.099 12.305C201.012 10.32 200.471 10.055 196.5 10.055H192V15.055V20.055H187H182V24.555V29.055H187H192V24.555V20.055H196.5H201V29.555V39.055H196.5H192V44.055V49.055H187H182V44.055V39.055H177.5H173V34.055V29.055H168H163V24.61V20.165L167.75 19.86L172.5 19.555V15.055V10.555L158.25 10.278L144 10V15.028V20.055H149H154V24.555V29.055H158.5H163V34.055V39.055H168H173V44.055V49.055H168H163V53.555V58.055H158.5H154V48.555V39.055H144H134V44.055V49.055H129.5H125V39.055V29.055H129.5H134V24.555V20.055H125H116V24.555V29.055H110.5H105V19.555V10.055H100.5H96V15.055ZM297 43.542V77.055H330.513H364.027L363.763 43.805L363.5 10.555L330.25 10.292L297 10.028V43.542ZM67 43.555V67.055H43.5H20V43.555V20.055H43.5H67V43.555ZM354 43.555V67.055H330.5H307V43.555V20.055H330.5H354V43.555ZM29 43.555V58.055H43.5H58V43.555V29.055H43.5H29V43.555ZM316 43.555V58.055H330.5H345V43.555V29.055H330.5H316V43.555ZM116 44.055V49.055H110.5H105V44.722C105 42.338 105.3 40.088 105.667 39.722C106.033 39.355 108.508 39.055 111.167 39.055H116V44.055ZM220 44.055V49.055H224.945H229.89L230.195 44.305L230.5 39.555L235.25 39.25L240 38.945V44V49.055H244.5H249V53.555V58.055H244.5H240V67.555V77.055H235H230V72.055V67.055H225H220V72.055V77.055H215.5H211V82.055V87.055H220.5H230V91.555V96.055H244H258V91.555V87.055H253.5H249V77.055V67.055H253.5H258V77.055V87.055H263.5H269V91.555V96.055H273.5H278V91.555V87.055H282.5H287V91.555V96.055H282.5H278V100.555V105.055H273.5H269V110.555V116.055H273.5H278V120.555V125.055H287.5H297V129.555V134.055H302H307V129.555V125.055H311.5H316V129.555V134.055H325.5H335V144.055V154.055H344.5H354V163.555V173.055H349.5H345V168.055V163.055H340H335V158.555V154.055H330.5H326V158.555V163.055H321H316V168.055V173.055H325.5H335V182.555V192.055H344.5H354V196.555V201.055H340H326V191.555V182.055H321H316V177.555V173.055H311.5H307V177.555V182.055H302H297V187.055V192.055H302H307V196.555V201.055H311.5H316V206.055V211.055H330.5H345V220.555V230.055H349.5H354V235.055V240.055H340H326V235.055V230.055H330.5H335V225.055V220.055H325.5H316V215.555V211.055H311.5H307V225.555V240.055H311.5H316V244.555V249.055H311.5H307V259.055V269.055H302.052H297.105L296.802 263.805L296.5 258.555L291.75 258.25L287 257.945V253.5V249.055H297H307V244.555V240.055H302H297V230.055V220.055H292H287V230.055V240.055H278H269V235.003V229.95L263.75 230.253L258.5 230.555L258.195 235.305L257.89 240.055H253.445H249V244.555V249.055H253.5H258V253.555V258.055H263.5H269V253.555V249.055H273.5H278V253.555V258.055H273.5H269V263.555V269.055H273.5H278V278.055V287.055H273.5H269V282.555V278.055H263.462H257.925L258.212 287.305L258.5 296.555L268.25 296.841L278 297.127V306.591V316.055H273.5H269V311.555V307.055H263.5H258V316.555V326.055H263.5H269V330.555V335.055H263.5H258V330.555V326.055H253.5H249V321.055V316.055H244.555H240.11L239.805 320.805L239.5 325.555H235H230.5L230.195 320.805L229.89 316.055H224.945H220V306.555V297.055H230H240V292.055V287.055H235H230V282.555V278.055H225H220V282.517V286.98L210.75 287.267L201.5 287.555V292.055V296.555L206.277 296.861L211.054 297.167L210.777 311.361L210.5 325.555H206C201.548 325.555 201.499 325.518 201.372 322.055C201.302 320.13 201.189 317.993 201.122 317.305C201.031 316.371 197.479 316.055 187.055 316.055H173.11L172.805 320.805L172.5 325.555L167.75 325.86L163 326.165V330.61V335.055H158.5H154V325.555V316.055H158.5H163V306.555V297.055H153.5H144V306.555V316.055H134.5H125V311.555V307.055H115H105V302.055V297.055H100.5H96V292.055V287.055H106H116V282.555V278.055H125H134V268.055V258.055H129.5H125V263.555V269.055H115H105V273.555V278.055H100.5H96V259.055V240.055H100.5H105V244.555V249.055H110.5H116V253.555V258.055H120.5H125V253.555V249.055H129.5H134V253.555V258.055H139H144V253.555V249.055H153.5H163V253.555V258.055H158.5H154V263.555V269.055H158.5H163V273.555V278.055H168H173V273.555V269.055H182.5H192V263.555V258.055H201.5H211V253.555V249.055H206H201V239.498V229.94L196.75 230.248L192.5 230.555L192.212 239.805L191.925 249.055H186.962H182V253.555V258.055H177.5H173V253.555V249.055H177.5H182V244.555V240.055H149.055H116.11L115.805 235.305L115.5 230.555L101.25 230.278L87 230V225.028V220.055H91.5H96V206.055V192.055H86.5H77V196.555V201.055H67.5H58V196.555V192.055H67.5H77V187.055V182.055H67.5H58V177.555V173.055H53.5H49V163.555V154.055H53.5H58V149.055V144.055H53.5H49V130.055V116.055H53.5H58V130.055V144.055H62.5H67V139.055V134.055H72H77V129.555V125.055H72H67V120.555V116.055H72H77V120.555V125.055H82H87V129.555V134.055H96H105V129.555V125.055H100.5H96V120.555V116.055H100.5H105V120.555V125.055H110.5H116V129.555V134.055H120.5H125V125.055V116.055H134.5H144V125.055V134.055H149H154V129.555V125.055H158.464H162.928L163.214 115.305L163.5 105.555L168.25 105.25L173 104.945V86V67.055H168H163V72.055V77.055H158.5H154V72.055V67.055H158.5H163V62.555V58.055H168H173V53.555V49.055H177.5H182V53.555V58.055H177.5H173V62.555V67.055H177.5H182V72.055V77.055H187H192V67.555V58.055H206H220V53.593V49.13L210.75 48.843L201.5 48.555L201.195 43.805L200.89 39.055H210.445H220V44.055ZM144 53.555V58.055H139H134V53.555V49.055H139H144V53.555ZM230 53.555V58.055H235H240V53.555V49.055H235H230V53.555ZM87 67.555V77.055H91.5H96V67.555V58.055H91.5H87V67.555ZM144 81.555V96.055H139H134V81.555V67.055H139H144V81.555ZM201.667 67.722C201.3 68.088 201 70.338 201 72.722V77.055H196.5H192V82.055V87.055H196.5H201V91.555V96.055H191.5H182V100.555V105.055H177.5H173V110.555V116.055H177.5H182V120.555V125.055H172.5H163V129.555V134.055H172.5H182V129.555V125.055H191.333C196.467 125.055 200.868 124.853 201.115 124.607C201.361 124.361 201.389 122.336 201.176 120.107L200.79 116.055H191.395H182V110.555V105.055H191.448H200.895L201.198 110.305L201.5 115.555L206.25 115.86L211 116.165V120.61V125.055H215.5H220V129.555V134.055H206H192V139.055V144.055H173H154V149.055V154.055H149H144V158.555V163.055H139H134V158.555V154.055H129.5H125V163.555V173.055H129.5H134V177.555V182.055H115H96V187.055V192.055H100.5H105V206.055V220.055H110.5H116V215.555V211.055H120.5H125V215.555V220.055H129.5H134V225.055V230.055H148.5H163V225.055V220.055H168H173V225.055V230.055H177.5H182V225.055V220.055H177.5H173V215.555V211.055H182.5H192V206.662C192 201.9 192.917 201.055 198.082 201.055H201L201.118 209.805C201.184 214.618 201.184 218.893 201.118 219.305C201.053 219.717 207.525 220.055 215.5 220.055H230V215.555V211.055H220.5H211V206.055V201.055H225.5H240V196.555V192.055H244.5H249V182.555V173.055H239.5H230V168.055V163.055H239.5H249V158.555V154.055H273H297V149.055V144.055H273H249V149.055V154.055H239.5H230V158.555V163.055H225H220V158.555V154.055H215.5H211V158.555V163.055H201.5H192V153.573V144.091L215.75 143.823L239.5 143.555L239.805 138.805L240.11 134.055H244.555H249V119.555V105.055H244.552H240.105L239.802 110.305L239.5 115.555L229.75 115.841L220 116.127V110.591V105.055H225H230V100.555V96.055H225H220V100.555V105.055H210.5H201V100.555V96.055H206H211V91.61V87.165L206.25 86.86L201.5 86.555V82.055V77.555L206.25 77.25L211 76.945V72V67.055H206.667C204.283 67.055 202.033 67.355 201.667 67.722ZM278 72.055V77.055H273.5H269V72.055V67.055H273.5H278V72.055ZM77 100.555V105.055H72H67V100.555V96.055H72H77V100.555ZM258 100.555V105.055H263.5H269V100.555V96.055H263.5H258V100.555ZM354 110.555V116.055H349.5H345V120.555V125.055H349.5H354V129.555V134.055H349.5H345V129.555V125.055H340H335V120.555V116.055H340H345V111.222C345 108.563 345.3 106.088 345.667 105.722C346.033 105.355 348.058 105.055 350.167 105.055H354V110.555ZM258 125.055V134.055H263.5H269V125.055V116.055H263.5H258V125.055ZM240 129.555V134.055H235H230V129.555V125.055H235H240V129.555ZM39 144.055V154.055H34H29V158.555V163.055H24.5H20V158.555V154.055H24.5H29V144.055V134.055H34H39V144.055ZM125 139.055V144.055H129.5H134V139.055V134.055H129.5H125V139.055ZM307 148.537V163.019L282.75 163.287L258.5 163.555V168.055V172.555L268.25 172.841L278 173.127V177.591V182.055H273.5H269V187.055V192.055H263.5H258V201.555V211.055H253.5H249V215.555V220.055H244.5H240V230.11V240.165L235.25 239.86L230.5 239.555L230.195 234.805L229.89 230.055H220.445H211V239.555V249.055H225.5H240V244.555V240.055H244.5H249V230.055V220.055H253.5H258V215.555V211.055H263.5H269V206.004V200.954L278 201.136L287 201.318V206.186V211.055H282.5H278V215.555V220.055H273.5H269V225.055V230.055H273.5H278V225.055V220.055H282.5H287V215.555V211.055H297H307V206.055V201.055H302H297V196.555V192.055H292H287V182.555V173.055H297H307V168.055V163.055H311.5H316V158.555V154.055H321H326V149.055V144.055H321H316V139.055V134.055H311.5H307V148.537ZM67 149.055V154.055H81.5H96V158.555V163.055H91.5H87V168.055V173.055H91.5H96V168.055V163.055H100.445H104.89L105.195 167.805L105.5 172.555H110.5H115.5L115.788 163.305L116.075 154.055H110.538H105V149.055V144.055H86H67V149.055ZM182 158.555V163.055H187H192V168.055V173.055H196.5H201V182.555V192.055H191.5H182V196.555V201.055H177.5H173V206.055V211.055H168H163V215.555V220.055H158.5H154V215.555V211.055H158.5H163V201.555V192.055H168H173V187.055V182.055H182.5H192V177.555V173.055H187H182V168.055V163.055H177.555H173.11L172.805 167.805L172.5 172.555L167.75 172.86L163 173.165V177.61V182.055H153.5H144V172.555V163.055H153.5H163V158.555V154.055H172.5H182V158.555ZM67.195 167.805L67.5 172.555L72.25 172.86L77 173.165V168.11V163.055H71.945H66.89L67.195 167.805ZM220.195 167.805L220.5 172.555L225.25 172.86L230 173.165V177.61V182.055H235H240V187.055V192.055H235H230V187.055V182.055H225H220V187.055V192.055H215.5H211V196.555V201.055H205.926H200.852L201.204 196.805L201.555 192.555L206.277 192.25L211 191.945V177.5V163.055H215.445H219.89L220.195 167.805ZM144 196.555V201.055H135.5C130.825 201.055 126.662 201.168 126.25 201.305C125.838 201.442 125.363 199.418 125.195 196.805L124.89 192.055H134.445H144V196.555ZM144 215.555V220.055H139H134V215.555V211.055H139H144V215.555ZM67 244.555V249.055H72H77V244.555V240.055H72H67V244.555ZM211 268.055V278.055H215.5H220V273.555V269.055H225H230V263.555V258.055H220.5H211V268.055ZM144 273.555V278.055H139H134V282.555V287.055H144H154V278.055V269.055H149H144V273.555ZM192 273.555V278.055H196.5H201V273.555V269.055H196.5H192V273.555ZM240 278.055V287.055H244.5H249V278.055V269.055H244.5H240V278.055ZM173 282.555V287.055H168H163V292.11V297.165L167.75 296.86L172.5 296.555L172.805 291.805L173.11 287.055H177.555H182V292.055V297.055H187H192V292.055V287.055H187H182V282.555V278.055H177.5H173V282.555ZM116 292.055V297.055H120.5H125V292.055V287.055H120.5H116V292.055ZM316 301.555V316.055H301.5H287V301.555V287.055H301.5H316V301.555ZM10 330.555V364.055H43.5H77V330.555V297.055H43.5H10V330.555ZM240 302.055V307.055H244.5H249V302.055V297.055H244.5H240V302.055ZM297 302.055V307.055H302H307V302.055V297.055H302H297V302.055ZM335 302.055V307.055H340H345V311.555V316.055H340H335V321.055V326.055H330.5H326V311.555V297.055H330.5H335V302.055ZM67 330.555V354.055H43.5H20V330.555V307.055H43.5H67V330.555ZM29 330.555V345.055H43.5H58V330.555V316.055H43.5H29V330.555ZM144 330.555V335.055H134.5H125V340.055V345.055H134.5H144V349.555V354.055H134.5H125V349.555V345.055H120.5H116V340.055V335.055H120.5H125V330.555V326.055H134.5H144V330.555ZM201 335.555V345.055H206H211V349.555V354.055H201.5H192V349.555V345.055H187H182V340.055V335.055H177.5H173V330.555V326.055H187H201V335.555ZM316 330.555V335.055H325.5H335V340.055V345.055H344.5H354V349.555V354.055H344.5H335V349.555V345.055H325.5H316V340.055V335.055H311.5H307V330.555V326.055H311.5H316V330.555ZM105 340.055V345.055H100.5H96V340.055V335.055H100.5H105V340.055Z" fill="black"/>
+                        </svg>
+                        
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main-gallery photos mb-4">
+        <div class="container">
+            <div class="section-header">
+                <h1>Галерия</h1>
+                <!-- <a href="/BG/AlumniClub/Pages/Gallery.aspx">
+                    <i class="fal fa-arrow-right"></i>
+                </a> -->
+            </div>
+            <div class="gallery-viewport" >
+                <div class="overview d-flex mb-5" id="mainPhotoGalleryOutput">
+                    <script id="mainPhotoGallery" type="text/x-handlebars-template">
+                        {{#each mainPhotoGallery}}
+                            <div class="gallery-thumb">
+                                <a href="/BG/AlumniClub/Pages/Gallery.aspx?AlbumID={{UniqueId}}">
+                                    <img class="mb-3" data-photo-url="{{UniqueId}}"  />
+                                    <div class="gallery-text f14 regular-text">{{FileLeafRef}}</div>
+                                </a>
+                            </div>
+                        {{/each}}
+                    </script>
+                </div>
+
+                <div class="gallery-contorls">
+                    <div class="gallery-paginator"></div>
+
+                    <div class="gallery-buttons-wrapper d-flex">
+                        <button class="gallery-button prev" type="button"> <i class="fal fa-chevron-left"></i></button>
+                        <button class="gallery-button next mr-2" type="button"> <i class="fal fa-chevron-right"></i></button>
+                        <div class="tile-buttons-wrapper">
+                            <div class="tile-button">
+                                <a href="/BG/Pages/Gallery.aspx" target="_blank" class="d-flex align-items-center">
+                                    <i class="fal fa-arrow-right"></i>
+                                    <span class="pl-2 text-nowrap">Виж всички галерии</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

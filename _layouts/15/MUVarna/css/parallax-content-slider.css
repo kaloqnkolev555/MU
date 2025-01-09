@@ -1,0 +1,162 @@
+.da-slider {
+	background: rgb(117, 167, 240); height: 300px; overflow: hidden; position: relative; box-shadow: 0px 1px 1px rgba(0,0,0,0.2), 0px -2px 1px #fff;
+}
+.da-slide {
+	left: 0px; top: 0px; width: 100%; height: 100%; text-align: left; position: absolute;
+}
+.da-slide-current {
+	z-index: 10;
+}
+.da-slider-fb .da-slide {
+	left: 100%;
+}
+.da-slider-fb .da-slide-current.da-slide {
+	left: 0px;
+}
+.cover1 {
+	left: 50%; top: 0px; height: 300px; position: absolute; opacity: 0; box-shadow: 0px 0px 13px rgba(0,0,0,0.1); -webkit-box-shadow: 0 0 13px rgba(0, 0, 0, 0.1); -moz-box-shadow: 0 0 13px rgba(0, 0, 0, 0.1);
+}
+.cover2 {
+	left: 50%; top: 0px; height: 300px; position: absolute; opacity: 0; box-shadow: 0px 0px 13px rgba(0,0,0,0.1); -webkit-box-shadow: 0 0 13px rgba(0, 0, 0, 0.1); -moz-box-shadow: 0 0 13px rgba(0, 0, 0, 0.1);
+}
+.cover3 {
+	left: 50%; top: 0px; height: 300px; position: absolute; opacity: 0; box-shadow: 0px 0px 13px rgba(0,0,0,0.1); -webkit-box-shadow: 0 0 13px rgba(0, 0, 0, 0.1); -moz-box-shadow: 0 0 13px rgba(0, 0, 0, 0.1);
+}
+.cover4 {
+	left: 50%; top: 0px; height: 300px; position: absolute; opacity: 0; box-shadow: 0px 0px 13px rgba(0,0,0,0.1); -webkit-box-shadow: 0 0 13px rgba(0, 0, 0, 0.1); -moz-box-shadow: 0 0 13px rgba(0, 0, 0, 0.1);
+}
+.cover5 {
+	left: 50%; top: 0px; height: 300px; position: absolute; opacity: 0; box-shadow: 0px 0px 13px rgba(0,0,0,0.1); -webkit-box-shadow: 0 0 13px rgba(0, 0, 0, 0.1); -moz-box-shadow: 0 0 13px rgba(0, 0, 0, 0.1);
+}
+.da-slide-current .cover1 {
+	opacity: 1;
+}
+.da-slide-current .cover2 {
+	opacity: 1;
+}
+.da-slide-current .cover3 {
+	opacity: 1;
+}
+.da-slide-current .cover4 {
+	opacity: 1;
+}
+.da-slide-current .cover5 {
+	opacity: 1;
+}
+.da-slide-fromleft {
+	opacity: 1;
+}
+.da-slide-fromright {
+	opacity: 1;
+}
+.cover1 {
+	width: 1120px; z-index: 1; background-color: rgb(23, 109, 228);
+}
+.da-slide-current .cover1 {
+	margin-left: -560px;
+}
+.cover2 {
+	width: 1060px; z-index: 2; background-color: rgb(19, 87, 184);
+}
+.da-slide-current .cover2 {
+	margin-left: -530px;
+}
+.cover3 {
+	width: 1020px; z-index: 3; background-color: rgb(15, 68, 144);
+}
+.da-slide-current .cover3 {
+	margin-left: -510px;
+}
+.cover4 {
+	width: 980px; z-index: 4; background-color: rgb(10, 46, 98);
+}
+.da-slide-current .cover4 {
+	margin-left: -490px;
+}
+.cover5 {
+	width: 940px; z-index: 5; background-color: rgb(41, 60, 154);
+}
+.da-slide-current .cover5 {
+	margin-left: -470px;
+}
+.da-slide .relative {
+	width: 940px; height: 300px; overflow: hidden; display: block; position: relative; z-index: 11; opacity: 1;
+}
+.da-slide-content {
+	background: radial-gradient(at center, rgb(22, 99, 177) 0%, rgb(41, 60, 152) 100%); padding: 30px 20px 40px; left: 0px; top: 0px; width: 280px; height: 230px; color: rgb(255, 255, 255); line-height: 16px; overflow: hidden; font-size: 12px; position: absolute;
+}
+.da-slide-content a {
+	color: rgb(117, 167, 240);
+}
+.da-slide h2 {
+	color: rgb(255, 255, 255); line-height: 110%; font-size: 32px; font-weight: normal; z-index: 11; text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
+}
+.da-slide h2 a {
+	color: rgb(255, 255, 255); text-decoration: none;
+}
+.da-img {
+	top: 0px; height: 300px; text-align: right; right: 0px; position: absolute; min-width: 620px;
+}
+.da-slide .da-img iframe {
+	display: none;
+}
+.lt-ie9 .da-slide .da-img iframe {
+	display: block;
+}
+.da-slide-current .da-img iframe {
+	display: block;
+}
+.da-dots {
+	left: 50%; width: 100%; bottom: 20px; margin-left: -450px; position: absolute; z-index: 30; -moz-user-select: none; -webkit-user-select: none;
+}
+.da-dots span {
+	margin: 5px; border-radius: 50%; border: 1px solid rgba(0, 0, 0, 0.4); width: 14px; height: 14px; display: inline-block; position: relative; cursor: pointer; box-shadow: inset 1px 1px 1px rgba(0,0,0,0.1), 1px 1px 1px rgba(255,255,255,0.1); background-color: rgb(255, 255, 255);
+}
+.da-dots span.da-dots-current {
+	background: rgb(21, 110, 226);
+}
+.da-arrows {
+	-moz-user-select: none; -webkit-user-select: none;
+}
+.da-arrows span {
+	background: rgb(24, 107, 225); border-radius: 50%; transition:opacity 0.4s ease-in-out 0.2s; top: 50%; width: 30px; height: 30px; margin-top: -15px; position: absolute; z-index: 20; cursor: pointer; opacity: 0; box-shadow: inset 1px 1px 1px rgba(0,0,0,0.1), 1px 1px 1px rgba(255,255,255,0.1); -webkit-transition: opacity 0.4s ease-in-out 0.2s; -moz-transition: opacity 0.4s ease-in-out 0.2s; -o-transition: opacity 0.4s ease-in-out 0.2s;
+}
+.da-slider:hover .da-arrows span {
+	opacity: 1;
+}
+.da-arrows span::after {
+	background: url("../img/arrows2.png") no-repeat left top; border-radius: 50%; left: 5px; top: 5px; width: 20px; height: 20px; position: absolute; content: ""; box-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+.da-arrows span:hover::after {
+	box-shadow: 1px 1px 4px rgba(0,0,0,0.3);
+}
+.da-arrows span:active::after {
+	box-shadow: 1px 1px 1px rgba(255,255,255,0.1);
+}
+.da-arrows span.da-arrows-next::after {
+	background-position: right top;
+}
+.da-arrows span.da-arrows-prev {
+	left: 15px;
+}
+.da-arrows span.da-arrows-next {
+	right: 15px;
+}
+.no-js .da-slide {
+	position: relative;
+}
+.no-js .da-slide-content {
+	left: 10%; position: absolute; opacity: 1;
+}
+.no-js .da-slide .da-img {
+	left: 10%; position: absolute; opacity: 1;
+}
+.no-js .da-slide .da-img {
+	left: 60%;
+}
+.no-js .da-dots {
+	display: none;
+}
+.no-js .da-arrows {
+	display: none;
+}
