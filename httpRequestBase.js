@@ -65,30 +65,44 @@ export function ajax(listName,scriptId,selectFields,modifySiteUrl) {
         }
     })
 }
-function customCarousel(carouselList,items,prevBtn,nextBtn,paginationDotsContainer,itemsPerPage) {
+let _itemsPerPage=1;
+function updateItemsPerPage(itemsPerPage) {
+    if ($(window).width() < 768) {
+        _itemsPerPage = 1;
+    } else {
+        _itemsPerPage = itemsPerPage; // Reset to default value if screen size is above 768
+    }
+    return _itemsPerPage;
+}
+function customCarousel(carouselList, items, prevBtn, nextBtn, paginationDotsContainer, itemsPerPage) {
+    let _itemsPerPage = updateItemsPerPage(itemsPerPage);
     let currentIndex = 0;
     const totalItems = items.length;
     // const itemsPerPage = 4;  // Number of items to show per page
-    const totalPages = Math.ceil(totalItems / itemsPerPage); // Total pages
+    const totalPages = Math.ceil(totalItems / _itemsPerPage); // Total pages
     let autoRotate = false; // Set to true for automatic rotation
     let autoRotateInterval;
     let isAutoRotating = true; // Track if auto-rotation is running
 
+
+    $(window).resize(() => {
+        _itemsPerPage = updateItemsPerPage(itemsPerPage);
+    });
     // Function to update the carousel position
     function updateCarousel() {
-        let translateXValue = -currentIndex * (100 / itemsPerPage); // Move by percentage of the visible items
+        let translateXValue = -currentIndex * (100 / _itemsPerPage); // Move by percentage of the visible items
         carouselList.style.transform = `translateX(${translateXValue}%)`;
 
         // Update pagination dots
         document.querySelectorAll('.' + paginationDotsContainer.className + '-main-dot').forEach((dot, index) => {
             dot.classList.toggle('active', index === currentIndex);
         });
-        
+
         // Disable buttons if at the start or end
         prevBtn.disabled = currentIndex === 0;
-        nextBtn.disabled = currentIndex === totalItems - itemsPerPage;
+        nextBtn.disabled = currentIndex === totalItems - _itemsPerPage;
     }
-    
+
     // Create pagination dots
     function createPaginationDots() {
         for (let i = 0; i < totalItems; i++) {
@@ -112,11 +126,11 @@ function customCarousel(carouselList,items,prevBtn,nextBtn,paginationDotsContain
         stopAutoRotate(); // Clear any existing interval first
         isAutoRotating = true; // Set to True if you want auto rotate the carousel
         autoRotateInterval = setInterval(() => {
-            // itemsPerPage == 1 means that one item fill 100% of the carousel container
-            if(itemsPerPage == 1) {
+            // _itemsPerPage == 1 means that one item fill 100% of the carousel container
+            if (_itemsPerPage == 1) {
                 currentIndex = (currentIndex + 1) % totalItems;
             } else {
-                if(currentIndex == totalItems-(itemsPerPage)) {
+                if (currentIndex == totalItems - (_itemsPerPage)) {
                     currentIndex = 0;
                 } else {
                     currentIndex = (currentIndex + 1) % totalItems;
@@ -152,7 +166,7 @@ function customCarousel(carouselList,items,prevBtn,nextBtn,paginationDotsContain
         }
     });
 
-            
+
     const swipeThreshold = 50; // Minimum swipe distance in pixels
     let touchStartX = 0;
     let touchStartY = 0;
@@ -175,10 +189,10 @@ function customCarousel(carouselList,items,prevBtn,nextBtn,paginationDotsContain
         if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > swipeThreshold) {
             if (diffX > 0) {
                 if (currentIndex > 0) {
-                currentIndex--;
-                updateCarousel();
-                resetAutoRotate();  // Restart auto-rotation after manual action
-            }
+                    currentIndex--;
+                    updateCarousel();
+                    resetAutoRotate();  // Restart auto-rotation after manual action
+                }
             } else {
                 if (currentIndex < totalItems - 1) {
                     currentIndex++;
@@ -198,15 +212,15 @@ function customCarousel(carouselList,items,prevBtn,nextBtn,paginationDotsContain
 
 
     nextBtn.addEventListener('click', () => {
-        if(itemsPerPage == 1) {
-        if (currentIndex < totalItems - 1) {
-            currentIndex++;
-            updateCarousel();
-            resetAutoRotate();  // Restart auto-rotation after manual action
-        }
+        if (_itemsPerPage == 1) {
+            if (currentIndex < totalItems - 1) {
+                currentIndex++;
+                updateCarousel();
+                resetAutoRotate();  // Restart auto-rotation after manual action
+            }
         } else {
-            if(currentIndex == totalItems - itemsPerPage) {
-                // if (currentIndex < totalItems - itemsPerPage) {
+            if (currentIndex == totalItems - _itemsPerPage) {
+                // if (currentIndex < totalItems - _itemsPerPage) {
                 //     currentIndex++;
                 //     updateCarousel();
                 //     resetAutoRotate();  // Restart auto-rotation after manual action
@@ -223,9 +237,10 @@ function customCarousel(carouselList,items,prevBtn,nextBtn,paginationDotsContain
     });
 
     // Initialize carousel state
-    createPaginationDots();
+    
     updateCarousel();
-
+    createPaginationDots();
+    
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -237,11 +252,11 @@ function customCarousel(carouselList,items,prevBtn,nextBtn,paginationDotsContain
     observer.observe(carouselList);
     // Start automatic rotation if enabled
     if (autoRotate) {
-        startAutoRotate();
         
+
         // Pause rotation on mouse hover over the entire carousel and resume on mouse leave
-        // document.querySelector('.main-carousel').addEventListener('mouseenter', stopAutoRotate);
-        // document.querySelector('.main-carousel').addEventListener('mouseleave', resetAutoRotate);
+        document.querySelector('.main-carousel').addEventListener('mouseenter', stopAutoRotate);
+        document.querySelector('.main-carousel').addEventListener('mouseleave', resetAutoRotate);
     }
 }
 // After the template is rendered, find all images and set their src attributes

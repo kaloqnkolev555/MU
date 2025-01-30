@@ -85,7 +85,10 @@ body.contrast-theme-on{
 }
 body {
 	background-color: var(--white);
+	-webkit-text-size-adjust: none;
+	overflow-x: hidden;
 }
+
 div.article, div.welcome {
     padding: 0 0px;
 }
@@ -464,6 +467,9 @@ body .navbar {
 	}
 	.hamburger-menu {
 		display: none;
+		.burger-title {
+			margin-left: 15px;
+		}
 	}
 }
 .nav-collapse > ul > li > a {
@@ -523,7 +529,7 @@ header .useful-links {
 header .slogan-bg {
 	margin-left: 20px;
 	color: var(--main-deep-blue);
-	font-size: 24px;
+	font-size: 1.5rem;
 	font-family: "Merriweather", serif;
 	font-weight: 400;
 	font-style: normal;
@@ -535,7 +541,7 @@ header .slogan-bg:hover {
 	text-decoration: none;
 }
 header .slogan-bg .strong {
-	font-size: 30px;
+	font-size: 1.9rem;
 	font-weight: 700;
 	font-style: normal;
 }
@@ -1503,19 +1509,24 @@ article p.muted {
 	max-height: calc(100% - 40px);
     overflow: hidden;
 }
-.tile-content .tile-title {
-    font-size: 24px;
-    font-family: 'Merriweather';
-    text-overflow: ellipsis;
-    overflow: hidden;
-    color: var(--main-deep-blue);
-}
-.tile-content .tile-text {
-    color: var(--primary-gray-3);
-    margin-top: 10px;
-	line-height: 25px;
-	font-size: 18px;
-    font-weight: 300;
+.tile-content {
+	.tile-title {
+		font-size: 24px;
+		font-family: 'Merriweather';
+		text-overflow: ellipsis;
+		overflow: hidden;
+		color: var(--main-deep-blue);
+		a {
+			color:inherit;
+		}
+	}
+	.tile-text {
+		color: var(--primary-gray-3);
+		margin-top: 10px;
+		line-height: 25px;
+		font-size: 18px;
+		font-weight: 300;
+	}
 }
 .tile-buttons-wrapper .tile-button i {
 	background: var(--main-deep-blue);
@@ -2028,9 +2039,16 @@ article p.muted {
     }
 }
 @media (max-width: 1200px) {
-    .slogan-bg, .header-logo {
-        zoom:0.6;
-    }
+	header {
+		.slogan-bg {
+			font-size: 0.7rem;
+			.strong {
+				font-size: 0.8rem;
+				font-weight: 900;
+			}
+		}
+
+	}
 	.menu-searchbox-wrapper {
 		.menu {
 			display: none;
@@ -2039,21 +2057,33 @@ article p.muted {
 			min-width: 400px;
 		}
 	}
+
+	header .useful-links-wrapper, header .useful-links-menu .links-list {
+		width: 100%;
+	}
 	.useful-links {
 		span {
 			display: none;
 		}
 	}
 	body .navbar {
-		align-items: start;
+		/* align-items: start; */
 		.language {
-			display: none;
+			font-size: 18px;
+            margin: 0 20px 0 auto;
+            padding: 0;
+		}
+		.hr-header-logo {
+			img {
+				margin-left: 0;
+			}
 		}
 		.nav-collapse {
 			display: none;
 			position: absolute;
 			right: 0;
-            z-index: 1;
+			top: 0;
+            z-index: 2;
             background: var(--accent-blue);
             width: 360px;
             padding: 20px;
@@ -2062,6 +2092,26 @@ article p.muted {
                 border-bottom: 1px solid color-mix(in srgb, var(--primary-gray-9) 50%, transparent);
 				padding-bottom: 20px;
                 margin-bottom: 20px;
+				.mobileMenuControls {
+					display: flex;
+					flex-direction: row-reverse;
+					justify-content: space-between;
+					align-items: center;
+					margin: 0px 0 15px;
+					border-bottom: 1px solid #ffffff30;
+					i {
+						color: white;
+						padding: 15px;
+						cursor: pointer;
+						font-size: 16px;
+					}
+					.contrast-theme {
+						display: block;
+						padding: 10px 10px;
+						border-right: 1px solid #ffffff30;
+						border-left: unset;
+					}
+				}
 			}
 			.nav {
 				display: block;
@@ -2080,11 +2130,12 @@ article p.muted {
 			}
 			.language {
 				display: block;
-				padding: 10px;
+				padding: 20px;
+				font-size: 18px;
+				margin: inherit;
 			}
 		}
 		.hamburger-menu {
-			margin-left: auto;
 			color: var(--white);
 			padding: 0 20px;
 			height: 100%;
@@ -2096,15 +2147,59 @@ article p.muted {
 			display: none;
 		}
 	}
+	footer {
+		.map-holder {
+			display: none;
+		}
+		.footer-logo {
+			position: absolute;
+    		top: -140px;
+		}
+		.links-container {
+			margin: 10rem 0 2.5rem 0;
+			justify-content: initial !important;
+			.flex-column {
+				display: none !important;
+			}
+			.flex-column:first-child, .flex-column:last-child, .flex-column:nth-last-child(2) {
+				display: flex !important;
+				margin-right: 30px;
+			}
+		}
+		.socials-wrapper {
+			padding: 20px 30px 0;
+			a {
+				padding: 0 0 30px;
+			}
+		}
+	}
 }
 
 @media (max-width: 768px) {
+	.ms-webpart-chrome-vertical, div.ms-webpart-cell-vertical-inline-table {
+        display: block !important;
+    }
+	.container {
+		padding: 0 30px;
+	}
+	header {
+		.slogan-bg {
+			font-size: 0.8rem;
+			.strong {
+				font-size: 0.9rem;
+				font-weight: 900;
+			}
+		}
+		& a svg {
+			width: 60px;
+		}
+	}
 	.slogan-wrapper {
 		margin: 10px 0;
 	}
-    .slogan-bg, .header-logo {
+    /* .slogan-bg, .header-logo {
         zoom: 0.47;
-    }
+    } */
 	.menu-searchbox-wrapper {
 		margin-left: unset;
 		height: auto;
@@ -2134,5 +2229,122 @@ article p.muted {
             width: 100%;
 		}
 	}
+	.section-header {
+		margin-bottom: 0;
+		padding-top: 10px;
+		h1 {
+			font-size: 24px;
+		}
+	}
+	.tiles-box-wrapper {
+		flex-direction: column;
+	}
+	.tile-box {
+		max-width: none;
+		margin-right: initial;
+		margin-bottom: 50px;
+		height: 620px;
+		&.big-box {
+			flex-direction: column;
+			.tile-image {
+				height: 300px;
+			}
+			.tile-text {
+				font-size: 14px;
+			}
+			&.flipped {
+				flex-direction: column;
+				.tile-image {
+					margin-left: -30px;
+				}
+			}
+			&.full-width {
+				.tile-image {
+					width: calc(100% + 30px);
+				}
+				.tile-content {
+					padding: 20px 0;
+					max-width:initial;
+					.tile-title {
+						font-size: 34px;
+						line-height: 48px;
+					}
+					.tile-buttons-wrapper {
+						.tile-button i {
+							width: 40px;
+							height: 40px;
+							font-size: 14px;
+						}
+					}
+				}
+			}
+		}
+		.tile-text {
+			font-size: 14px;
+		}
+		.tile-image {
+			width: calc(100% + 30px);
+		}
+	}
+	.tile-buttons-wrapper {
+		.tile-button i {
+			width: 40px;
+			height: 40px;
+			font-size: 14px;
+		}
+	}
+	.blue-contrast-section {
+		padding-bottom: 30px;
+	}
+	/* .main-gallery class is used one several pages */
+	body {
+		.main-gallery {
+			&.videos {
+				.container {
+					display: flex;
+					flex-direction: column;
+				}
+				.section-header {
+					/* justify-content: center; */
+					padding: 20px 0;
+					.mutvLogo {
+						display: none;
+					}
+					.videos-page-link {
+						display: block;
+					}
+				}
+				.gallery-viewport {
+					padding: 10px 0 30px 0;
+				}
+				.gallery-buttons-wrapper {
+					display: none !important;
+				}
+				.gallery-thumb {
+					min-width: 100%;
+				}
+			}
+			&.photos {
+				.gallery-contorls {
+					justify-content: start;
+					.gallery-button {
+						display: none;
+					}
+				}
+			}
+			.gallery-thumb {
+				min-width: 100%;
+			}
+		}
+
+	}
+	.slider {
+		.slider-title {
+			font-size: 36px;
+			line-height:  36px;
+		}
+	}
+
+
 
 }

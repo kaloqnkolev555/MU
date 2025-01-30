@@ -1,4 +1,7 @@
 
+<script>
+window.document.head.innerHTML += '<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">'
+</script>
 <link rel="stylesheet" href="/BG/admission/SiteAssets/admissions.css" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
@@ -241,25 +244,29 @@
                 <div class="tiles-box-wrapper" id="admEventsOutput">
                     <script id="admEvents" type="text/x-handlebars-template">
                         {{#each admEvents}}
-                            <div class="tile-box {{#if bigTile}}big-box{{/if}}">
-                                <div class="tile-image">
-                                    <img src="{{this.picture.Url}}" alt="">
-                                </div>
-                                <div class="tile-content">
-                                    <div class="tile-texts-wrapper">
-                                        <div class="tile-title">{{Title}}</div>
-                                        <div class="tile-text">{{description}}</div>
+                        <div class="tile-box {{#if bigTile}}big-box{{/if}}">
+                            <a href="{{link.Url}}" class="tile-image">
+                                <img src="{{picture.Url}}" alt="">
+                            </a>
+                            <div class="tile-content">
+                                <div class="tile-texts-wrapper">
+                                    <div class="tile-title">
+                                        <a href="{{link.Url}}">
+                                            {{Title}}
+                                        </a>
                                     </div>
-                                    <div class="tile-buttons-wrapper">
-                                        <div class="tile-button">
-                                            <a href="{{link.Url}}">
-                                                <i class="fal fa-arrow-right"></i>
-                                                <span>{{button}}</span>
-                                            </a>
-                                        </div>
+                                    <div class="tile-text">{{description}}</div>
+                                </div>
+                                <div class="tile-buttons-wrapper">
+                                    <div class="tile-button">
+                                        <a href="{{link.Url}}">
+                                            <i class="fal fa-arrow-right"></i>
+                                            <span>{{button}}</span>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
+                        </div>
                         {{/each}}
                     </script>
                 </div>
@@ -267,28 +274,30 @@
             </div>
         </div>
         <div class="adm-choose">
-            <div class="adm-choose-header d-flex flex-column align-items-center">
-                <!-- <img class="mb-3" src="https://dummyimage.com/165x50/" alt=""> -->
-                <h3 class="mb-3 text-center">Когато цифрите и фактите говорят</h3>
-                <p class="regular-text f16 color-primary-gray-3 text-center" style="width: 510px;">
-                    Първият и единствен университет в страната, въвел през 2008 г. 
-                    EFQM® модел за Business Excellence на Европейската фондация за
-                    управление на качеството.
-                </p>
-                <p class="regular-text f18 color-main-deep-blue text-center" >
-                    Тук се обучават студенти от 52 държави от целия свят.
-                </p>
-                <div class="tile-buttons-wrapper">
-                    <div class="tile-button">
-                        <a href="https://www.mu-varna.bg/BG/Admission/Pages/uni-cifri.aspx">
-                            <i class="fal fa-arrow-right"></i>
-                            <!-- <span>Полезни връзки</span> -->
-                        </a>
+            <div class="adm-choose-header ">
+                <div class="container d-flex flex-column align-items-center">
+                    <!-- <img class="mb-3" src="https://dummyimage.com/165x50/" alt=""> -->
+                    <h3 class="mb-3 text-center">Когато цифрите и фактите говорят</h3>
+                    <p class="regular-text f16 color-primary-gray-3 text-center" style="max-width: 510px;">
+                        Първият и единствен университет в страната, въвел през 2008 г. 
+                        EFQM® модел за Business Excellence на Европейската фондация за
+                        управление на качеството.
+                    </p>
+                    <p class="regular-text f18 color-main-deep-blue text-center" >
+                        Тук се обучават студенти от 52 държави от целия свят.
+                    </p>
+                    <div class="tile-buttons-wrapper">
+                        <div class="tile-button">
+                            <a href="https://www.mu-varna.bg/BG/Admission/Pages/uni-cifri.aspx">
+                                <i class="fal fa-arrow-right"></i>
+                                <!-- <span>Полезни връзки</span> -->
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="adm-choose-content d-flex flex-column align-items-center">
-                <div>
+                <div class="container">
                     <h1 class="mb-3 text-center">Защо да изберете МУ-Варна?</h1>
                     <p class="regular-text f24 color-main-deep-blue text-center mb-5" >
                         Академични традиции, технологични иновации и активен студентски живот, всичко в едно.
@@ -311,6 +320,9 @@
             <div class="container">
                 <div class="section-header">
                     <h1>Галерия</h1>
+                    <a href="/BG/Admission/Pages/Gallery.aspx">
+                        <i class="fal fa-arrow-right"></i>
+                    </a>
                 </div>
                 <div class="gallery-viewport" >
                     <div class="overview d-flex mb-5" id="mainPhotoGalleryOutput">
@@ -410,7 +422,7 @@
                 <div class="section-header">
                     <h1>Контакти</h1>
                 </div>
-                <div class="map-info-wrapper d-flex justify-content-between">
+                <div class="map-info-wrapper">
                     <div class="map-info f18 color-primary-gray-3 regular-text">
                         <div class="d-flex mb-3">
                             <i class="fal fa-clock mr-3 pt-2"></i>

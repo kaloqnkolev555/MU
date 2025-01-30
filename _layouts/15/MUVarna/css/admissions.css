@@ -179,12 +179,12 @@
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 1.5rem;
     display: grid;
-    width: 900px;
+    max-width: 900px;
 }
 .adm-choose .choose-icon-column {
     padding: 20px;
 }
-.adm-choose .choose-icon-column img {
+.adm-choose .choose-icon-column svg {
     width: 70px;
     margin: 20px auto;
     display: block;
@@ -290,10 +290,7 @@
     padding: 35px 0;
     background-color: var(--ultra-light-blue);
 }
-.section-header {
-    margin-bottom: 35px;
-    padding-top: 35px;
-}
+
 .section-header h1 {
     text-transform: uppercase;
     font-family: 'Merriweather';
@@ -317,7 +314,12 @@
 .adm-faq .faq-button i {
     padding: 22px 23px;
 }
-
+.contacts-section {
+    .map-info-wrapper {
+        display: flex;
+        justify-content: space-between;
+    }
+}
 /* This is dupicate from mainHome is should be moved globally */
 .main-gallery {
 	background-color: var(--white);
@@ -330,7 +332,7 @@
 }
 .main-gallery .gallery-viewport {
 	overflow: hidden;
-	padding: 45px 0;
+    padding-bottom: 45px;
 }
 .main-gallery .gallery-thumb {
 	min-width: 25%;
@@ -417,3 +419,119 @@
     background-color: #007bff; /* Active dot color */
 }
 
+@media (max-width: 768px) {
+    .sm-flex-column {
+        flex-direction: column;
+    }
+    .sm-mr-0 {
+        margin-right: 0 !important;
+    }
+    .sm-f18 {
+        font-size: 18px;
+    }
+    
+.admissions-wrapper {
+    .adm-events .tiles-box-wrapper {
+        width: auto;
+    }
+    .adm-navigation .link-wrapper {
+        border-right: 0;
+    }
+    .tile-box {
+        margin-bottom: 20px;
+        .tile-image {
+            width: 100%;
+        }
+    }
+    .adm-choose-header {
+        padding: 40px 0;
+        h3 {
+            font-size: 24px;
+            line-height: 33px;
+        }
+    }
+    .adm-choose-content {
+        padding: 40px 0;
+        h1 {
+            font-size: 24px;
+            line-height: 33px;
+        }
+        p.regular-text {
+            font-size: 18px;
+            line-height: 25px;
+        }
+    }
+    .adm-faq {
+        .regular-text.f24 {
+            font-size: 20px;
+        }
+    }
+    .main-gallery {
+        &.videos {
+            .gallery-thumb {
+                min-width: calc(100% - 14px);
+            }
+        }
+    }
+    .flex-item {
+        width: 100%;
+        height: 225px;
+    }
+    .contacts-section {
+        .map-info-wrapper {
+            flex-direction: column;
+        }
+        .map-holder {
+            margin-top: 40px;
+        }
+        #google_map {
+            width: 100%;
+            height: 380px;
+        }
+        .contact-wrapper {
+            width: 100%;
+            .contact-image {
+                width: 50px;
+                height: 50px;
+            }
+        }
+        .contact-info  {
+            padding: 0px 20px;
+            width: 100%;
+            h5 {
+                font-size: 20px;
+                margin-top: 0;
+            }
+        }
+    }
+    .big-accent-buttons-wrapper {
+        width: 100%;
+        margin-bottom: 40px;
+        .bab-section {
+            flex-direction: column;
+            padding: 30px 20px 20px 30px;
+            text-wrap: wrap;
+            a {
+                margin-top: 20px;
+            }
+        }
+    }
+    .adm-what-can-study {
+        a.bab-small-button {
+            margin-right: 0 !important;
+            margin-bottom: 10px;
+        }
+    }
+    .adm-how-to-apply {
+        .faq-button {
+            margin: auto;
+        }
+        .bab-small-button {
+            margin-top: 20px;
+        }
+    }
+    .adm-choose .choose-icons-wrapper {
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+}
+}

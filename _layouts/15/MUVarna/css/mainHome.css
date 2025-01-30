@@ -142,27 +142,28 @@ div.article, div.welcome {
 }
 .main-languages {
 	background-color: var(--main-deep-blue);
+    .languages-wrapper {
+        justify-content: space-evenly;
+        .language-flag {
+            /* aspect-ratio: 3 / 2; */
+            width: 40px;
+            height: 30px;
+        }
+        .language-flag.bg {
+            background: linear-gradient(to bottom, #fff calc(100% / 3), #00966e calc(100% / 3) calc(100% / 1.5), #d62612 calc(100% / 1.5));
+        }
+        .language-flag.de {
+            background: linear-gradient(to bottom, #000 calc(100% / 3), #d00 calc(100% / 3) calc(100% / 1.5), #fc0 calc(100% / 1.5));
+        }
+        .language-flag.gb {
+            background-color: #012169;
+            position: relative;
+            overflow: hidden;
+        }
+    }
+
 }
 
-.main-languages .languages-wrapper {
-	justify-content: space-evenly;
-}
-.main-languages .languages-wrapper .language-flag {
-	/* aspect-ratio: 3 / 2; */
-	width: 40px;
-    height: 30px;
-}
-.main-languages .languages-wrapper .language-flag.bg {
-	background: linear-gradient(to bottom, #fff calc(100% / 3), #00966e calc(100% / 3) calc(100% / 1.5), #d62612 calc(100% / 1.5));
-}
-.main-languages .languages-wrapper .language-flag.de {
-	background: linear-gradient(to bottom, #000 calc(100% / 3), #d00 calc(100% / 3) calc(100% / 1.5), #fc0 calc(100% / 1.5));
-}
-.main-languages .languages-wrapper .language-flag.gb {
-	background-color: #012169;
-	position: relative;
-    overflow: hidden;
-}
 .language-flag.gb .rect1,.language-flag.gb .rect2 {
     transform: translate(-50%, -50%) rotate(30.964deg);
 	height: 20%;
@@ -412,6 +413,9 @@ div.article, div.welcome {
 }
 .main-gallery {
 	background-color: var(--white);
+    .videos-page-link {
+        display: none;
+    }
 }
 .main-gallery .overview {
 	transition: transform 0.3s ease-in-out;
@@ -849,5 +853,111 @@ div.article, div.welcome {
         max-width: 600px;
         font-size: 16px;
         margin: 0 auto 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-languages {
+		.languages-wrapper {
+			flex-direction: column;
+			align-items: start !important;
+			padding: 0 30px;
+			.language-flag {
+				width: 20px;
+				height: 15px;
+			}
+			.title-text {
+				font-size: 18px;
+			}
+			& > * {
+				&:not(:last-child) {
+					padding-bottom: 30px;
+				}
+
+			}
+		}
+	}
+    .main-important {
+        padding: 0 0 30px;
+        .important-box-wrapper {
+            font-size: 12px;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            .important-box {
+                padding: 10px;
+                min-height: 190px;
+                .important-text {
+                    -webkit-line-clamp: 7;
+                }
+            }
+        }
+    }
+    #mainNewsOutput {
+        display: none;
+    }
+    .internet-news-wrapper {
+        grid-template-columns: repeat(1, 1fr);
+        a.internet-news-item {
+            &:nth-last-child(3), &:nth-last-child(2), &:last-child {
+                display: none;
+            }
+        }
+    }
+    .main-sponsors {
+        .sponsors-wrapper {
+            justify-content: space-evenly !important;
+            .sponsor-image {
+                margin: 0 3px;
+            }
+        }
+    }
+    .ms-webpart-chrome-vertical, div.ms-webpart-cell-vertical-inline-table {
+        display: block !important;
+    }
+    .main-learn-bases {
+        .blue-contrast-section {
+            padding: 10px 0;
+        }
+        .tile-box {
+            &.big-box {
+                flex-direction: column-reverse;
+                .tile-image {
+                    margin: 30px 0;
+                }
+            }
+        }
+    }
+	.main-admission {
+		padding-bottom: 10px;
+	}
+    .bg-white.mb-4 {
+        a img {
+            height: 60px;
+        }
+    }
+
+    .main-events {
+        .section-header {
+            .calendar-trigger-button {
+                display: none;
+            }
+        }
+        .tiles-wrapper.grid {
+            grid-template-columns: repeat(1, minmax(0, 1fr));
+        }
+    }
+    .main-carousel {
+        .main-carousel-item {
+            flex-direction: column;
+            .carousel-title, .carousel-text {
+                width: 100%;
+            }
+        }
+        .tile-buttons-wrapper {
+            display: none !important;
+        }
+        .carousel-controls {
+            justify-content: center;
+            padding: 20px;
+        }
     }
 }

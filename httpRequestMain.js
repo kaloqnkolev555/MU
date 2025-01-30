@@ -1,20 +1,48 @@
+window.document.head.innerHTML += '<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">'
 document.addEventListener("DOMContentLoaded", () => {
-    document.head.innerHTML += '<meta name="viewport" content="width=device-width, initial-scale=1.0">'
     siteUrl = langVersion + siteUrl
 
-      
+    // https://intd.mu-varna.bg/BG/_api/web/lists/getbytitle(%27NavigationNodes%27)/items?$select=Title,Url,Parent/Id,Parent/Title&$expand=Parent
+    listName = 'NavigationNodes'
+    selectFields = '$select=Title,Url,Parent/Id,Parent/Title&$expand=Parent'
+    $.ajax({
+        url: siteUrl + "/_api/web/lists/getbytitle('" + listName + "')/items?" + selectFields,
+        method: "GET",
+        headers: {
+            "Accept": "application/json; odata=verbose"
+        },
+        success: function (data) {
+            const mainAdmission = data.d.results;
+
+
+        }
+    })
+
+    function updateItemsPerPage(itemsPerPage) {
+        if ($(window).width() < 768) {
+            _itemsPerPage = 1;
+        } else {
+            _itemsPerPage = itemsPerPage; // Reset to default value if screen size is above 768
+        }
+        return _itemsPerPage;
+    }
     function customCarousel(carouselList, items, prevBtn, nextBtn, paginationDotsContainer, itemsPerPage) {
+        let _itemsPerPage = updateItemsPerPage(itemsPerPage);
         let currentIndex = 0;
         const totalItems = items.length;
         // const itemsPerPage = 4;  // Number of items to show per page
-        const totalPages = Math.ceil(totalItems / itemsPerPage); // Total pages
+        const totalPages = Math.ceil(totalItems / _itemsPerPage); // Total pages
         let autoRotate = false; // Set to true for automatic rotation
         let autoRotateInterval;
         let isAutoRotating = true; // Track if auto-rotation is running
 
+
+        $(window).resize(() => {
+            _itemsPerPage = updateItemsPerPage(itemsPerPage);
+        });
         // Function to update the carousel position
         function updateCarousel() {
-            let translateXValue = -currentIndex * (100 / itemsPerPage); // Move by percentage of the visible items
+            let translateXValue = -currentIndex * (100 / _itemsPerPage); // Move by percentage of the visible items
             carouselList.style.transform = `translateX(${translateXValue}%)`;
 
             // Update pagination dots
@@ -24,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             // Disable buttons if at the start or end
             prevBtn.disabled = currentIndex === 0;
-            nextBtn.disabled = currentIndex === totalItems - itemsPerPage;
+            nextBtn.disabled = currentIndex === totalItems - _itemsPerPage;
         }
 
         // Create pagination dots
@@ -50,11 +78,11 @@ document.addEventListener("DOMContentLoaded", () => {
             stopAutoRotate(); // Clear any existing interval first
             isAutoRotating = true; // Set to True if you want auto rotate the carousel
             autoRotateInterval = setInterval(() => {
-                // itemsPerPage == 1 means that one item fill 100% of the carousel container
-                if (itemsPerPage == 1) {
+                // _itemsPerPage == 1 means that one item fill 100% of the carousel container
+                if (_itemsPerPage == 1) {
                     currentIndex = (currentIndex + 1) % totalItems;
                 } else {
-                    if (currentIndex == totalItems - (itemsPerPage)) {
+                    if (currentIndex == totalItems - (_itemsPerPage)) {
                         currentIndex = 0;
                     } else {
                         currentIndex = (currentIndex + 1) % totalItems;
@@ -136,15 +164,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
         nextBtn.addEventListener('click', () => {
-            if (itemsPerPage == 1) {
+            if (_itemsPerPage == 1) {
                 if (currentIndex < totalItems - 1) {
                     currentIndex++;
                     updateCarousel();
                     resetAutoRotate();  // Restart auto-rotation after manual action
                 }
             } else {
-                if (currentIndex == totalItems - itemsPerPage) {
-                    // if (currentIndex < totalItems - itemsPerPage) {
+                if (currentIndex == totalItems - _itemsPerPage) {
+                    // if (currentIndex < totalItems - _itemsPerPage) {
                     //     currentIndex++;
                     //     updateCarousel();
                     //     resetAutoRotate();  // Restart auto-rotation after manual action
@@ -304,7 +332,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     // Compile Handlebars template
-    const source = document.getElementById('calendar-template').innerHTML;
+    const source = document.getElementById('calendar-template')?.innerHTML || '';
     const template = Handlebars.compile(source);
 
     function getLocalizedWeekDays() {
@@ -521,7 +549,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let currentYear = new Date().getFullYear();
     let eventCalendarData = []
     // Add event listeners for month navigation buttons
-    document.getElementById('prev-month').addEventListener('click', function () {
+    document.getElementById('prev-month')?.addEventListener('click', function () {
         if (currentMonth === 0) {
             currentMonth = 11;
             currentYear -= 1;
@@ -531,7 +559,7 @@ document.addEventListener("DOMContentLoaded", () => {
         renderCalendar(currentMonth, currentYear, eventCalendarData);
     });
 
-    document.getElementById('next-month').addEventListener('click', function () {
+    document.getElementById('next-month')?.addEventListener('click', function () {
         if (currentMonth === 11) {
             currentMonth = 0;
             currentYear += 1;
@@ -542,7 +570,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // Add event listener for year dropdown change
-    document.getElementById('year-select').addEventListener('change', function () {
+    document.getElementById('year-select')?.addEventListener('change', function () {
         currentYear = parseInt(this.value, 10);
         renderCalendar(currentMonth, currentYear, eventCalendarData);
     });
@@ -560,8 +588,10 @@ document.addEventListener("DOMContentLoaded", () => {
     // Initial rendering of the year dropdown and calendar
     const startYear = 2020;
     const endYear = 2030;
-    renderYearDropdown(startYear, endYear);
-    renderCalendar(currentMonth, currentYear, eventCalendarData);
+    if(document.getElementById('calendar-template')) {
+        renderYearDropdown(startYear, endYear);
+        renderCalendar(currentMonth, currentYear, eventCalendarData);
+    }
 
 
     function ajax(listName, scriptId, selectFields) {
@@ -631,8 +661,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     let _context = { ['mainEvents']: getUpcomingEvents(data.d.results) };
                     // Inject the rendered HTML into the DOM
                     document.getElementById('mainEvents' + 'Output').innerHTML = _template(_context);
-
-                    getCalendarEvents(data.d.results);
+                    if(document.getElementById('calendar-template')) {
+                        getCalendarEvents(data.d.results);
+                    }
                 }
 
 

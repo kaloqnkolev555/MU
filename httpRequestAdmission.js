@@ -1,4 +1,6 @@
+// window.document.head.innerHTML += '<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">'
 import { ajax } from '/BG/SiteAssets/httpRequestBase.js';
+
 document.addEventListener("DOMContentLoaded", () => {
     // siteUrl = langVersion + siteUrl
 

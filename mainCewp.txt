@@ -445,6 +445,9 @@
                     </div>
                     <div class="half-circle right"></div>
                 </a>
+                <a href="http://mu-vi.tv/Pages/HomePage.aspx" class="videos-page-link">
+                    <i class="fal fa-arrow-right"></i>
+                </a>
             </div>
             <!-- <div class="section-header">
                 <h1>MU-Vi.tv</h1> -->
