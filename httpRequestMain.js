@@ -707,18 +707,30 @@ document.addEventListener("DOMContentLoaded", () => {
     if (langVersion == "/EN") {
         listName = "Pages";
     }
-    selectFields = "$select=ID,Title,FileRef,MyImagesFolder";
-    filter = "&$filter=ContentType eq 'InternetNews'";
-    sort = "&$orderby=Created%20desc"
+    const now = new Date();
+    const formattedDate = now.toISOString();
+
+    selectFields = "$select=ID,Title,FileRef,MyImagesFolder,MyPublishDate"; //if this (MyPublishDate) select is added it changes the position of items if they have same date 
+    filter = "&$filter=ContentType eq 'InternetNews' and MyPublishDate ne null";
+    sort = "&$orderby=MyPublishDate desc" //If want to order them by ID aswell >   , ID desc
     itemsToShow = "&$top=4"
     // https://www.mu-varna.bg/BG/_api/web/Lists/getbytitle(%27Страници%27)/items?$select=ID,Title,FileRef?$filter=ContentType eq 'InternetNews'
     // $select=ID,Title,FileRef,MyImagesFolder&$filter=ContentType%20eq%20%27InternetNews%27&$orderby=Created%20desc
     ajax(listName, 'internetNews', selectFields + filter + sort + itemsToShow);
 
+
+    // $select=ID,Title,MyPageContent,FileRef,EventStartDate&
+    // $filter=ContentType%20eq%20%27Events%27%20and%20EventStartDate%20gt%20<current_date>&
+    // $orderby=EventStartDate%20asc&$top=20
+    
+    // const now = new Date();
+    // const formattedDate = now.toISOString();
+    
+    current_date = '%27'+ formattedDate +'%27';
     selectFields = "$select=ID,Title,MyPageContent,FileRef,EventStartDate";
-    filter = "&$filter=ContentType eq 'Events'";
-    sort = "&$orderby=EventStartDate%20desc"
-    itemsToShow = "&$top=20"
+    filter = "&$filter=ContentType eq 'Events' and EventStartDate gt" + current_date;
+    sort = "&$orderby=EventStartDate%20asc"
+    itemsToShow = "&$top=30"
     ajax(listName, 'calendarEvents', selectFields + filter + sort + itemsToShow);
 
 
@@ -768,7 +780,9 @@ document.addEventListener("DOMContentLoaded", () => {
      
     //Todo these should be removed from here and request base should be imported in mainCewp
     function insertItem(reqBody) {
-        const restendpoint = _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/getByTitle('Subscriptions')/items";
+        // _spPageContextInfo.webAbsoluteUrl
+        // _spPageContextInfo.siteAbsoluteUrl
+        const restendpoint = _spPageContextInfo.siteAbsoluteUrl + "/BG/_api/web/lists/getByTitle('Subscriptions')/items";
         const body = {
             __metadata: { type: "SP.Data.SubscriptionsListItem" },
             ...reqBody

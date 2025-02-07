@@ -434,10 +434,16 @@
     .adm-events .tiles-box-wrapper {
         width: auto;
     }
-    .adm-navigation .link-wrapper {
-        border-right: 0;
+    .adm-navigation {
+        .row {
+            margin:0;
+        }
+        .link-wrapper {
+            border-right: 0;
+        }
     }
     .tile-box {
+        width: 100%;
         margin-bottom: 20px;
         .tile-image {
             width: 100%;
@@ -484,7 +490,7 @@
         .map-holder {
             margin-top: 40px;
         }
-        #google_map {
+        #google_map,.map-holder iframe {
             width: 100%;
             height: 380px;
         }

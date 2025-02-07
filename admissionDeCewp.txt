@@ -5,134 +5,6 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
 <script src="/BG/admission/SiteAssets/httpRequestAdmission.js" type="module"></script>
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA_c2okRZHx0Hr6Zk0NFGTc5foG-sNj89I&sensor=false"></script>
-<!-- Maps script -->
-<script type="text/javascript">
-    var markersArray = [];
-    var map;
-    var glLclInfo;
-
-    window.onload = function () {
-        initialize();
-    }
-
-    function initialize() //function initializes Google map
-    {
-        var oload = "btn0"
-
-        var Jcs_getLocalName = "МEDICAL UNIVERSITY - VARNA"
-        var Jcs_getLocalLng = "43.2119"
-        var Jcs_getLocalLat = "27.9215"
-        var Jcs_getLocalInfo = " Prof. Dr. Paraskev Stoyanov​ Bulgaria Varna 9002 55 Marin Drinov str."
-        var Jcs_getLocalGooglePlusID = "114685766454318521037" //for reviews
-        //&nbsp;
-        glLclInfo = Jcs_getLocalInfo
-
-        Jcs_getLocalInfo = Jcs_getLocalInfo.replace(/\s/g, "&nbsp;"); //zamestva vsi4ki whitespaces sys koda im.... (za directions link-a)
-
-
-
-        var mapCenter = new google.maps.LatLng(Jcs_getLocalLng, Jcs_getLocalLat);
-
-        var googleMapOptions =
-    {
-        center: mapCenter,
-        zoom: 17,
-        panControl: true,
-        zoomControl: true,
-        zoomControlOptions: {
-            style: google.maps.ZoomControlStyle.SMALL
-        },
-        scaleControl: true,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
-        map = new google.maps.Map(document.getElementById("google_map"), googleMapOptions);
-
-        var marker = new google.maps.Marker({
-            position: mapCenter,
-            map: map,
-            dragable: true,
-            title: Jcs_getLocalName
-        });
-        //infowindow rdy
-        var infowindow = new google.maps.InfoWindow({ content: "<b>"+Jcs_getLocalName + "</b><br />" + Jcs_getLocalInfo + "<br />" + "<br /><a href=" + "https://plus.google.com/" + Jcs_getLocalGooglePlusID + "/about" + ">" + "Reviews" + "</a>" + "&nbsp;&nbsp;&nbsp;&nbsp;" + "<a href=" + "http://maps.google.com/maps?saddr=" + "" + "&daddr=" + Jcs_getLocalInfo + ">" + "Directions" + "</a>" + "&nbsp;&nbsp;&nbsp;&nbsp;" + "<a href=" + "http://maps.google.com/maps?q=" + Jcs_getLocalInfo + ">Search Nearby" + "</a>" });
-        infowindow.open(map, marker);
-        google.maps.event.addListener(marker, "click", function (e) {
-            infowindow.open(map, marker);
-        });
-
-        markersArray.push(marker);
-
-
-    }
-    //Id, lng, lat, name, info, adress
-    function updateMarkerPosition(Id, newLng, newLat, name, cmpInfo, gPlusID) {
-
-        var Jcs_getLocalName = name
-        var Jcs_getLocalLng = newLng
-        var Jcs_getLocalLat = newLat
-        //var Jcs_getLocalCAC = cac
-        //var Jcs_getLocalSA = sa
-        //var Jcs_getLocalPhoneFax = phonefax
-        //var Jcs_getLocalEmailContact = emailcontacts //rdy
-        var Jcs_getLocalInfo = cmpInfo
-        var Jcs_getLocalGooglePlusID = gPlusID
-        glLclInfo = Jcs_getLocalInfo
-        Jcs_getLocalInfo = Jcs_getLocalInfo.replace(/\s/g, "&nbsp;");
-
-        HideMarkers();
-
-        var n_myLatlng = new google.maps.LatLng(Jcs_getLocalLng, Jcs_getLocalLat);
-        var marker = new google.maps.Marker({
-            position: n_myLatlng,
-            map: map,
-            dragable: true,
-            title: Jcs_getLocalName
-        });
-        //infowindow /rdy
-        var infowindow = new google.maps.InfoWindow({ content: "<b>"+ Jcs_getLocalName + "</b><br />" + Jcs_getLocalInfo + "<br />" + "<br /><a href=" + "https://plus.google.com/" + Jcs_getLocalGooglePlusID + "/about" + ">" + "Reviews" + "</a>" + "&nbsp;&nbsp;&nbsp;&nbsp;<a href=" + "http://maps.google.com/maps?saddr=" + "" + "&daddr=" + Jcs_getLocalInfo + ">" + "Directions" + "</a>" + "&nbsp;&nbsp;&nbsp;&nbsp;" + "<a href=" + "http://maps.google.com/maps?q=" + Jcs_getLocalInfo + ">Search Nearby" + "</a>" });
-        infowindow.open(map, marker);
-        google.maps.event.addListener(marker, "click", function (e) {
-            infowindow.open(map, marker);
-        });
-        // add marker in array
-        markersArray.push(marker);
-        //slide animation... 
-        window.setTimeout(function () {
-            map.panTo(n_myLatlng)
-        }, 500);
-    }
-
-    function linkButton(id) {
-        var queryInfo = glLclInfo;
-        var hreff = "http://maps.google.com/maps?q=" + queryInfo
-        var nhref = document.getElementById(id);
-        nhref.setAttribute('href', hreff);
-    }
-
-    function HideMarkers() {
-        if (markersArray) {
-            for (i in markersArray) {
-                markersArray[i].setMap(null);
-            }
-        }
-    }
-    function showMarkersInArray() {
-        if (markersArray) {
-            for (i in markersArray) {
-                markersArray[i].setMap(map);
-            }
-        }
-    }
-    function deleteMarkers() {
-        if (markersArray) {
-            for (i in markersArray) {
-                markersArray[i].setMap(null);
-            }
-            markersArray.length = 0;
-        }
-    }
-</script>
 
 <div class="admissions-wrapper lang-version de-language" >
     <div class="slider">
@@ -564,8 +436,16 @@
                     </div>
                 </div>
                 <div class="map-holder">
-                    <div id="google_map"></div>
-                    <a id="bigMapLink" runat="server" target="_blank" onclick="javascript:linkButton(this.id)">Bigger map</a>
+                    <iframe src="https://www.google.com/maps?q=43.212159,27.918655(Medical+University+Varna)&hl=bg&z=17&output=embed" 
+                        width="720" 
+                        height="600" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                    <!-- <div id="google_map"></div> -->
+                    <!-- <a id="bigMapLink" runat="server" target="_blank" onclick="javascript:linkButton(this.id)">Виж по-голяма карта</a> -->
                 </div>
             </div>
             <div class="d-flex flex-wrap" id="admContactsOutput">

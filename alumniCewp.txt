@@ -1,17 +1,13 @@
+<!-- <script>
+    window.document.head.innerHTML += '<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">'
+</script> -->
 <link rel="stylesheet" href="/BG/SiteAssets/alumni.css" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
 <link rel="stylesheet" href="/BG/SiteAssets/mainHome.css">
 <script src="/BG/SiteAssets/httpRequestAlumni.js" type="module"></script>
 
-<!-- Maps script -->
-
-<script>
-    document.addEventListener('DOMContentLoaded', () => {});
-</script>
-
 <div class="main-wrapper lang-version bg-language">
-
     <!-- <div id="mainCurrentOutput">
         <script id="mainCurrent" type="text/x-handlebars-template">
             <div class="main-current blue-contrast-section {{#unless  mainCurrent}}d-none{{/unless}}"">
@@ -47,8 +43,6 @@
             </div>
         </script>
     </div> -->
-
-
 </div>
 
 <div class="alumni-wrapper lang-version">
@@ -317,10 +311,10 @@
     <div class="application-form-section blue-contrast-section">
         <div class="container">
             <div class="text-center" style="max-width:710px;margin: auto;">
-                <h1 class="f34 text-white">
+                <h1 class="f34 sm-f24 text-white">
                     Станете част от Алумни клуб <br> към Медицински университет - Варна
                 </h1>
-                <a href="" class="alumni-form-button">Application form Alumni club</a>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdaXV3bJgEc9ro3LpRYHBjSXc2m1cFrl7ce6_horai8TnPw_A/viewform?pli=1&pli=1" class="alumni-form-button">Application form Alumni club</a>
                 <div class="mt-5">
                     <svg width="175" height="175" viewBox="0 0 375 375" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <rect width="374.11" height="374.165" fill="white"/>
