@@ -353,9 +353,6 @@ img[align='left'] {
 img[align='right'] {
 	margin: 0px 0px 5px 10px;
 }
-.inner-header h2 {
-	margin: 0px; padding: 32px 0.5em 0px; width: 400px; color: var(--white); line-height: 38px; letter-spacing: 1px; font-size: 42px; font-weight: normal; text-shadow: 2px 2px 1px rgba(0,0,0,0.4);
-}
 .inner-header h2.short-title {
 	padding-top: 48px;
 }
@@ -366,7 +363,22 @@ article p.muted {
 	color: rgb(153, 153, 153); margin-top: 5px; float: right; background-color: var(--white);
 }
 .admission .inner-header {
-	background: url("../img/inner-header-admission.jpg") repeat-y top rgb(90, 8, 0);
+	background-image: url(../img/admission-background.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+	height: 280px;
+	.container {
+		height: auto;
+	}
+	h2 {
+		font-family: 'Merriweather';
+		font-size: 64px;
+		line-height: normal;
+		padding: 0;
+	}
 }
 .admission .span12 .style1 .box-title {
 	background-color: rgb(90, 8, 0);
@@ -1805,7 +1817,6 @@ article p.muted {
         width: 80px;
         height: 60px;
         object-fit: cover;
-        margin-left: 8px;
     }
 }
 .close-btn {
@@ -2043,6 +2054,12 @@ article p.muted {
         margin: 0 auto 20px;
     }
 }
+#footerLinksMenuOutput {
+	display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    padding-left: 70px;
+}
 @media (max-width: 1200px) {
 	header {
 		.slogan-bg {
@@ -2163,12 +2180,16 @@ article p.muted {
 		.links-container {
 			margin: 10rem 0 2.5rem 0;
 			justify-content: initial !important;
-			.flex-column {
-				display: none !important;
-			}
-			.flex-column:first-child, .flex-column:last-child, .flex-column:nth-last-child(2) {
-				display: flex !important;
-				margin-right: 30px;
+			#footerLinksMenuOutput {
+				padding: 0;
+				.flex-column {
+					display: none !important;
+				}
+				/* .flex-column:first-child,  */
+				.flex-column:last-child, .flex-column:nth-last-child(2) {
+					display: flex !important;
+					margin-right: 30px;
+				}
 			}
 		}
 		.socials-wrapper {

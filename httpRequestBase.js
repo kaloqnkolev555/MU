@@ -1,6 +1,7 @@
 let _siteUrl;
 let siteUrl = _spPageContextInfo.webAbsoluteUrl
-export function ajax(listName,scriptId,selectFields,modifySiteUrl) {
+export function ajax(listName,scriptId,selectFields,modifySiteUrl,templateAsString) {
+    let _templateAsString = templateAsString
     if(modifySiteUrl) {
         _siteUrl = modifySiteUrl
     } else {
@@ -16,9 +17,13 @@ export function ajax(listName,scriptId,selectFields,modifySiteUrl) {
         success: function (data) {
             // mainAdmission = data.d.results
             // Compile the Handlebars template
-            const source = document.getElementById(scriptId).innerHTML;
-            const template = Handlebars.compile(source);
-    
+            const source = document.getElementById(scriptId)?.innerHTML;
+            let template;
+            if(_templateAsString != undefined) {
+                template = Handlebars.compile(templateAsString);
+            } else {
+                template = Handlebars.compile(source);
+            }
             // Create context with items array
             let sortedResults = data.d.results
             const hasPositionProperty = data.d.results.some(item => item.hasOwnProperty('position'));
@@ -467,3 +472,6 @@ document.addEventListener("DOMContentLoaded", () => {
     //   `);
     });
 });
+
+
+

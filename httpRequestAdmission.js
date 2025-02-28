@@ -2,7 +2,40 @@
 import { ajax } from '/BG/SiteAssets/httpRequestBase.js';
 
 document.addEventListener("DOMContentLoaded", () => {
-    // siteUrl = langVersion + siteUrl
+    const pageTitle = _spPageContextInfo.webTitle;
+    const source = document.getElementById('slider-title')?.innerHTML;
+    if(source) {
+        const template = Handlebars.compile(source);
+        const context = pageTitle;
+        const html = template(context);
+        document.querySelector('.slider-title').innerHTML = html;
+    }
+// Load JSON data using $.ajax
+function loadJson(scriptIds) {
+    $.ajax({
+        url: '/BG/Admission/SiteAssets/' + 'custom-data.txt', // Path to your JSON file
+        method: 'GET',
+        dataType: 'json',
+        success: function (data) {
+            scriptIds.forEach(scriptId => {
+                const source = document.getElementById(scriptId)?.innerHTML;
+                if (source) {
+                    const template = Handlebars.compile(source);
+                    const context = data[scriptId];
+
+                    // Generate the HTML using the template and context
+                    const html = template(context);
+
+                    // Inject the rendered HTML into the DOM
+                    document.getElementById(scriptId + 'Output').innerHTML = html;
+                }
+            });
+        },
+        error: function (xhr, status, error) {
+            console.error('Error loading JSON file:', error);
+        }
+    });
+}
 
 var listName = "adm-navigation";
 var selectFields = "$select=ID,Title,link,position";
@@ -13,13 +46,13 @@ var itemsToShow;
 ajax(listName,'admNavigation',selectFields);
 
 listName = "adm-events";
-selectFields = "$select=ID,Title,link,picture,button,description,bigTile";
+selectFields = "$select=ID,Title,link,picture,button,description,bigTile,position";
 sort = "&$orderby=Created%20desc";
 
 ajax(listName,'admEvents',selectFields + sort);
 
 listName = "adm-choose-content";
-selectFields = "$select=ID,Title,link,picture";
+selectFields = "$select=ID,Title,link,picture,position";
 
 ajax(listName,'admChoice',selectFields);
 
@@ -55,5 +88,22 @@ itemsToShow = "&$top=10"
 // also the list name should point the responding namelist from the directory
 // if you want to load the list from admission just remove langVersion
 ajax(listName,'mainVideoGallery',selectFields + sort + itemsToShow);
+
+loadJson([
+    'admChooseHeader',
+    'admChooseContent',
+    'admChooseContentEn',
+    'admChooseContentDe',
+    'contactsInfo',
+    'contactsInfoEn',
+    'contactsInfoDe',
+    'admFaq',
+    'admWhatCanStudyEn',
+    'admWhatCanStudyDe',
+    'admHowToApplyEn',
+    'admHowToApplyDe'
+]);
+
+
 
 });

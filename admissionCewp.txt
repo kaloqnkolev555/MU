@@ -138,6 +138,7 @@ defer></script>
     }
 </script>
 
+
 <div class="overlay-subscribe"></div>
 <div class="popup-subscribe">
     <div class="popup-content">
@@ -223,7 +224,10 @@ defer></script>
 </div>
     <div class="admissions-wrapper lang-version bg-language" >
         <div class="slider" >
-            <div class="container slider-title">Прием 2025/2026</div>
+            <script id="slider-title" type="text/x-handlebars-template">
+                {{this}}
+            </script>
+            <div class="container slider-title"></div>
         </div>
         <div class="adm-navigation">
             <div class="container" id="admNavigationOutput">
@@ -278,34 +282,35 @@ defer></script>
             </div>
         </div>
         <div class="adm-choose">
-            <div class="adm-choose-header ">
-                <div class="container d-flex flex-column align-items-center">
-                    <!-- <img class="mb-3" src="https://dummyimage.com/165x50/" alt=""> -->
-                    <h3 class="mb-3 text-center">Когато цифрите и фактите говорят</h3>
-                    <p class="regular-text f16 color-primary-gray-3 text-center" style="max-width: 510px;">
-                        Първият и единствен университет в страната, въвел през 2008 г. 
-                        EFQM® модел за Business Excellence на Европейската фондация за
-                        управление на качеството.
-                    </p>
-                    <p class="regular-text f18 color-main-deep-blue text-center" >
-                        Тук се обучават студенти от 52 държави от целия свят.
-                    </p>
-                    <div class="tile-buttons-wrapper">
-                        <div class="tile-button">
-                            <a href="https://www.mu-varna.bg/BG/Admission/Pages/uni-cifri.aspx">
-                                <i class="fal fa-arrow-right"></i>
-                                <!-- <span>Полезни връзки</span> -->
-                            </a>
+            <div class="adm-choose-header" id="admChooseHeaderOutput">
+                <script id="admChooseHeader" type="text/x-handlebars-template">
+                    <div class="container d-flex flex-column align-items-center">
+                        <h3 class="mb-3 text-center">{{title}}</h3>
+                        <p class="regular-text f16 color-primary-gray-3 text-center" style="max-width: 510px;">
+                            {{description1}}
+                        </p>
+                        <p class="regular-text f18 color-main-deep-blue text-center">
+                            {{description2}}
+                        </p>
+                        <div class="tile-buttons-wrapper">
+                            <div class="tile-button">
+                                <a href="{{link}}">
+                                    <i class="fal fa-arrow-right"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </script>
             </div>
             <div class="adm-choose-content d-flex flex-column align-items-center">
-                <div class="container">
-                    <h1 class="mb-3 text-center">Защо да изберете МУ-Варна?</h1>
-                    <p class="regular-text f24 color-main-deep-blue text-center mb-5" >
-                        Академични традиции, технологични иновации и активен студентски живот, всичко в едно.
-                    </p>
+                <div class="container" id="admChooseContentOutput">
+                    <script id="admChooseContent" type="text/x-handlebars-template">
+                        <h1 class="mb-3 text-center">{{title}}</h1>
+                        <p class="regular-text f24 color-main-deep-blue text-center mb-5" >
+                            {{description}}
+                        </p>
+                    </script>
+
                 </div>
                 <div class="container">
                     <div class="d-flex flexcontainer flex-wrap"  id="admChoiceOutput">
@@ -410,16 +415,19 @@ defer></script>
             </div>
         </div>
         <div class="adm-faq mb-5">
-            <div class="container text-center">
-                <p class="title-text f24 color-main-deep-blue text-center mb-5" >
-                    Уважаеми кандидат-студенти, тук може да намерите отговори на най-често задаваните въпроси за кандидатстването в Медицински университет - Варна
-                </p>
-                <a href="/BG/chesto-zadavani-vyprosi-priem" class="faq-button">
-                    <span class="regular-text f24 color-white">Често задавани въпроси</span>
-                    <i class="fal fa-arrow-right"></i>
-                </a>
-                <p class="regular-text f18">Ако не намирате отговор на Вашия въпрос, можете да се свържете с нас.</p>
-            </div>
+            <script id="admFaq" type="text/x-handlebars-template">
+                <div class="container text-center">
+                    <p class="title-text f24 color-main-deep-blue text-center mb-5">
+                        {{title}}
+                    </p>
+                    <a href="{{buttonLink}}" class="faq-button">
+                        <span class="regular-text f24 color-white">{{buttonText}}</span>
+                        <i class="fal fa-arrow-right"></i>
+                    </a>
+                    <p class="regular-text f18">{{contactText}}</p>
+                </div>
+            </script>
+            <div id="admFaqOutput"></div>
         </div>
         <div class="contacts-section">
             <div class="container">
@@ -427,41 +435,24 @@ defer></script>
                     <h1>Контакти</h1>
                 </div>
                 <div class="map-info-wrapper">
-                    <div class="map-info f18 color-primary-gray-3 regular-text">
-                        <div class="d-flex mb-3">
-                            <i class="fal fa-clock mr-3 pt-2"></i>
-                            <div>
-                                Понеделник - Петък:<br>
-                                08:30 - 12:00 ч.<br>
-                                13:00 - 17:00 ч.
+                    <script id="contactsInfo" type="text/x-handlebars-template">
+                        <div class="map-info f18 color-primary-gray-3 regular-text">
+                            {{#each contactsInfo}}
+                            <div class="d-flex mb-3">
+                                <i class="fal {{icon}} mr-3 pt-2"></i>
+                                <div>
+                                    {{#if title}}{{title}}:<br>{{/if}}
+                                    {{#each details}}
+                                    {{this}}<br>
+                                    {{/each}}
+                                </div>
                             </div>
+                            {{/each}}
+                            <a href="{{linkUrl}}" class="mt-5 color-main-deep-blue">{{linkText}}</a>
                         </div>
-                        <div class="d-flex mb-3">
-                            <i class="fal fa-envelope mr-3 pt-2"></i>
-                            <div>
-                                E-mail:<br>
-                                ksk@mu-varna.bg
-                            </div>
-                        </div>
-                        <div class="d-flex mb-3">
-                            <i class="fal fa-phone mr-3 pt-2"></i>
-                            <div>
-                                Комисия по прием на кандидатстудентски документи:<br>
-                                052/677 059<br>
-                                052/677 060 
-                            </div>
-                        </div>
-                        <div class="d-flex mb-3">
-                            <i class="fal fa-location mr-3 pt-2"></i>
-                            <div>
-                                Адрес:<br>
-                                гр. Варна<br>
-                                ул. Марин Дринов 55
-                            </div>
-                        </div>
-                        <a href="/BG/kontakti-priem" class="mt-5 color-main-deep-blue">Вижте повече</a>
-                        
-                    </div>
+                    </script>
+                    <div id="contactsInfoOutput"></div>
+
                     <div class="map-holder">
                         <iframe src="https://www.google.com/maps?q=43.212159,27.918655(Medical+University+Varna)&hl=bg&z=17&output=embed" 
                             width="720" 

@@ -1,0 +1,303 @@
+{
+    "admissionSectionTitles": {
+        "title0": {
+            "name":"First Title"
+        },
+        "title1": {
+            "name":"Second Title"
+        }
+    },
+    "admChooseHeader": {
+            "title": "Когато цифрите и фактите говорят",
+            "description1": "Първият и единствен университет в страната, въвел през 2008 г. EFQM® модел за Business Excellence на Европейската фондация за управление на качеството.",
+            "description2": "Тук се обучават студенти от 52 държави от целия свят.",
+            "link": "https://www.mu-varna.bg/BG/Admission/Pages/uni-cifri.aspx"
+    },
+    "admChooseContent": {
+            "title": "Защо да изберете МУ-Варна?",
+            "description": "Академични традиции, технологични иновации и активен студентски живот, всичко в едно."
+    },
+    "admChooseContentEn": {
+            "title": "Why choose Medical University - Varna?",
+            "description": "Academic traditions, technological innovations and an active student life, all in one.",
+            "icons": [
+                {
+                    "icon": "/_layouts/15/MUVarna/img/icon1.svg",
+                    "title": "Accredited M.D. diploma that lets you work anywhere in the EU"
+                },
+                {
+                    "icon": "/_layouts/15/MUVarna/img/icon2.svg",
+                    "title": "New and modern medical equipment"
+                },
+                {
+                    "icon": "/_layouts/15/MUVarna/img/icon3.svg",
+                    "title": "Medical education at the Black Sea coast"
+                }
+            ]
+    },
+    "admChooseContentDe": {
+            "title": "Warum Medizinische Universität Varna wählen",
+            "description": "Akademische Traditionen, technologische Innovationen und ein aktives Studentenleben, alles in einem.",
+            "icons": [
+                {
+                    "icon": "/_layouts/15/MUVarna/img/icon1.svg",
+                    "title": "Anerkanntes Doktordiplom, mit dem Sie überall in der EU arbeiten können"
+                },
+                {
+                    "icon": "/_layouts/15/MUVarna/img/icon2.svg",
+                    "title": "Neue und moderne medizinische Ausstattung"
+                },
+                {
+                    "icon": "/_layouts/15/MUVarna/img/icon3.svg",
+                    "title": "Medizinisches Studium an der Schwarzmeerküste"
+                }
+            ]
+    },
+    "admFaq": {
+        "title": "Уважаеми кандидат-студенти, тук може да намерите отговори на най-често задаваните въпроси за кандидатстването в Медицински университет - Варна",
+        "buttonLink": "/BG/chesto-zadavani-vyprosi-priem",
+        "buttonText": "Често задавани въпроси",
+        "contactText": "Ако не намирате отговор на Вашия въпрос, можете да се свържете с нас."
+    },
+    "contactsInfo": {
+        "linkUrl": "/BG/kontakti-priem",
+        "linkText": "Вижте повече",
+        "contactsInfo": [
+            {
+                "icon": "fa-clock",
+                "title": "Понеделник - Петък",
+                "details": [
+                    "08:30 - 12:00 ч.",
+                    "13:00 - 17:00 ч."
+                ]
+            },
+            {
+                "icon": "fa-envelope",
+                "title": "E-mail",
+                "details": [
+                    "ksk@mu-varna.bg"
+                ]
+            },
+            {
+                "icon": "fa-phone",
+                "title": "Комисия по прием на кандидатстудентски документи",
+                "details": [
+                    "052/677 059",
+                    "052/677 060"
+                ]
+            },
+            {
+                "icon": "fa-location",
+                "title": "Адрес",
+                "details": [
+                    "гр. Варна",
+                    "ул. Марин Дринов 55"
+                ]
+            }
+        ]
+    },
+    "contactsInfoEn": {
+        "contactsInfoEn": [
+            {
+                "icon": "fa-clock",
+                "title": "Monday - Friday",
+                "details": [
+                    "08:30 a.m. - 12:00 a.m.",
+                    "13:00 p.m. - 17:00 p.m."
+                ]
+            },
+            {
+                "icon": "fa-envelope",
+                "title": "E-mail",
+                "details": [
+                    "admissions@mu-varna.bg"
+                ]
+            },
+            {
+                "icon": "fa-phone",
+                "title": "Mobile line",
+                "details": [
+                    "+359 885 992 088 (EN)",
+                    "+359 52 677 085 (EN)"
+                ]
+            },
+            {
+                "icon": "fa-location",
+                "title": "Address",
+                "details": [
+                    "Office of Admissions (room 210A)",
+                    "Medical University of Varna",
+                    "55 \"Marin Drinov Street\"",
+                    "9002 Varna, Bulgaria"
+                ]
+            }
+        ]
+    },
+    "contactsInfoDe": {
+        "contactsInfoDe": [
+            {
+                "icon": "fa-clock",
+                "title": "Monday - Friday",
+                "details": [
+                    "08:30 a.m. - 12:00 a.m.",
+                    "13:00 p.m. - 17:00 p.m."
+                ]
+            },
+            {
+                "icon": "fa-envelope",
+                "title": "E-mail",
+                "details": [
+                    "admissions@mu-varna.bg"
+                ]
+            },
+            {
+                "icon": "fa-phone",
+                "title": "Mobile line",
+                "details": [
+                    "+359 885 992 088 (DE)",
+                    "+359 52 677 085 (DE)"
+                ]
+            },
+            {
+                "icon": "fa-location",
+                "title": "Address",
+                "details": [
+                    "Office of Admissions (room 210A)",
+                    "Medical University of Varna",
+                    "55 \"Marin Drinov Street\"",
+                    "9002 Varna, Bulgaria"
+                ]
+            }
+        ]
+    },
+    "admWhatCanStudyEn": {
+        "title": "What can I study",
+        "sections": [
+            {
+                "backgroundColor": "bluebg",
+                "icon": "fa-graduation-cap",
+                "sectionTitle": "Undergraduate",
+                "linkUrl": "/EN/Admission/Pages/whatcanistudy.aspx",
+                "linkText": "Learn more",
+                "buttons": [
+                    {
+                        "link": "/EN/Admission/Pages/programs-engl.aspx",
+                        "text": "Programmes in English"
+                    },
+                    {
+                        "link": "/BG/specialnosti",
+                        "text": "Programmes in Bulgarian"
+                    }
+                ]
+            },
+            {
+                "backgroundColor": "redbg",
+                "icon": "fa-graduation-cap",
+                "sectionTitle": "Graduate",
+                "linkUrl": "/EN/Admission/Pages/whatcanistudy.aspx",
+                "linkText": "Learn more",
+                "buttons": [
+                    {
+                        "link": "https://www.mu-varna.bg/EN/Admission/Pages/Master-programmes-in-English-mu-varna.aspx",
+                        "text": "Programmes in English"
+                    },
+                    {
+                        "link": "https://www.mu-varna.bg/BG/specialnosti",
+                        "text": "Programmes in Bulgarian"
+                    }
+                ]
+            }
+        ]
+    },
+    "admWhatCanStudyDe": {
+        "title": "Was kann ich studieren",
+        "link": "/EN/AdmissionDE/Pages/whatcanistudy.aspx",
+        "sections": [
+            {
+                "backgroundColor": "bluebg",
+                "icon": "fa-graduation-cap",
+                "sectionTitle": "Undergraduate",
+                "linkUrl": "/EN/Admission/Pages/whatcanistudy.aspx",
+                "linkText": "Learn more",
+                "buttons": [
+                    {
+                        "link": "/EN/Admission/Pages/programs-engl.aspx",
+                        "text": "Programmes in English"
+                    },
+                    {
+                        "link": "/BG/specialnosti",
+                        "text": "Programmes in Bulgarian"
+                    }
+                ]
+            },
+            {
+                "backgroundColor": "redbg",
+                "icon": "fa-graduation-cap",
+                "sectionTitle": "Graduate",
+                "linkUrl": "/EN/Admission/Pages/whatcanistudy.aspx",
+                "linkText": "Learn more",
+                "buttons": [
+                    {
+                        "link": "https://www.mu-varna.bg/EN/Admission/Pages/Master-programmes-in-English-mu-varna.aspx",
+                        "text": "Programmes in English"
+                    },
+                    {
+                        "link": "https://www.mu-varna.bg/BG/specialnosti",
+                        "text": "Programmes in Bulgarian"
+                    }
+                ]
+            }
+        ]
+    },
+    "admHowToApplyEn": {
+        "title": "HOW TO APPLY",
+        "sections": [
+            {
+                "backgroundColor": "redbg",
+                "link": "/EN/Admission/Pages/eu-eea-citizen-how-to-apply.aspx",
+                "sectionTitle": "EU and EEA CITIZENS"
+            },
+            {
+                "backgroundColor": "orangebg",
+                "link": "/EN/Admission/Pages/non-eu-how-to-apply.aspx",
+                "sectionTitle": "INTERNATIONAL (NON-EU) STUDENTS",
+                "brochureText": "Have a look at our 2025 Brochure",
+                "buttons": [
+                    {
+                        "link": "https://press.mu-varna.bg/showpdf/books/adm2026en/",
+                        "icon": "far fa-book-open"
+                    },
+                    {
+                        "link": "/BG/Admission/Documents/2025/Broshura-2025.pdf",
+                        "icon": "far fa-file-download"
+                    }
+                ]
+            }
+        ],
+        "faqLink": "/EN/Admission/Pages/faqs.aspx",
+        "faqText": "FAQs"
+    },
+    "admHowToApplyDe": {
+        "title": "WIE BEWERBE ICH MICH",
+        "sections": [
+            {
+                "backgroundColor": "orangebg",
+                "link": "/EN/AdmissionDE/Pages/Aufnahmepr%C3%BCfungen.aspx",
+                "sectionTitle": "Aufnahmeprüfungen und Vorbereitungskurs",
+                "brochureText": "Zum INFOBLATT",
+                "buttons": [
+                    {
+                        "link": "https://press.mu-varna.bg/showpdf/books/adm2026en/",
+                        "icon": "far fa-book-open"
+                    },
+                    {
+                        "link": "https://www.mu-varna.bg/EN/AdmissionDE/Documents/2024/INFOBLATT_2024.pdf",
+                        "icon": "far fa-file-download"
+                    }
+                ]
+            }
+        ],
+        "faqLink": "/EN/AdmissionDE/Pages/faqs.aspx",
+        "faqText": "FAQs"
+    }
+}

@@ -1,0 +1,142 @@
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script type="module">
+
+import { ajax } from '/BG/SiteAssets/httpRequestBase.js';
+let _siteUrl;
+let siteUrl = _spPageContextInfo.siteAbsoluteUrl
+
+        document.addEventListener("DOMContentLoaded", function () {
+            Handlebars.registerHelper('isLinkProperty', function(propertyName, parRoot, options) {
+                // const currentItem = options.data.root[options.data.index];
+                return parRoot[propertyName] != null && propertyName.startsWith("Link")
+            });
+            let listName = 'ombudsman'
+            $.ajax({
+                url: "/BG/_api/web/lists/getbytitle('" + listName + "')/defaultview/viewfields",
+                method: "GET",
+                headers: {
+                    "Accept": "application/json; odata=verbose"
+                },
+                success: function (response) {
+                    // Step 2: Extract the field names
+                    var fields = response.d.Items.results;  // Extracting field names from the response
+                    fields[0] = "Title"; // Override "LinkTitle" which is the internal name that Sharepoint use
+                    var selectFields = "$select=" + fields.join(",");  // Creating the $select parameter
+
+                    // Step 3: Use these fields to fetch the data
+                    ajax(listName, 'menuOmbudsman', selectFields,'/BG/');
+                },
+                error: function (error) {
+                    console.error("Error fetching view fields:", error);
+                }
+            });
+
+            $(document).ready(function () {
+                // Event delegation to handle dynamic elements
+                $('#menuOmbudsmanOutput').on('click', '.dropdown-toggle', function (e) {
+                    const href = $(this).attr('href'); // Get the href attribute
+
+                    // Prevent default action only if href is missing or empty
+                    if (typeof href === "undefined" || href.trim() === "") {
+                        e.preventDefault();
+                        e.stopPropagation(); // Stop event from bubbling up
+                    }
+                    const $dropdownMenu = $(this).siblings('.dropdown-menu.OMBUDSMAN');
+
+                    // Close other open dropdowns
+                    $('.dropdown-menu.OMBUDSMAN').not($dropdownMenu).slideUp();
+
+                    if(e.currentTarget.nextElementSibling.childElementCount != 0) {
+                        // Toggle the clicked dropdown
+                        $dropdownMenu.stop(true, true).slideToggle();
+                    }
+                    
+                });
+
+                // Close dropdown when clicking outside
+                $(document).on('click', function (e) {
+                // Check if the clicked element is NOT inside the dropdown or its toggle button
+                if (!$(e.target).closest('.dropdown-menu.OMBUDSMAN, .dropdown-toggle').length) {
+                    $('.dropdown-menu.OMBUDSMAN').slideUp();
+                }
+                });
+
+            });
+        });
+
+        $(document).ready(function () {
+    $(".ms-rteTableOddCol-0").each(function () {
+        const showMenu = $('<div class="showMenu"></div>');
+
+        // Attach the event listener
+        showMenu.on('click', function () {
+            $('#menuOmbudsmanOutput').toggleClass('d-block');
+        });
+
+        // Append the div
+        $(this).append(showMenu);
+    });
+});
+</script>
+
+<style>
+    .dropdown-toggle.hideDropdownArrow::after {
+        border-color: transparent !important;
+        border: 0 !important;
+        margin: 0;
+    }
+    #menuOmbudsmanOutput li.dropdown {
+        background: #5b9bd5;
+        border: solid 1px #c6c6c6;
+        a {
+            color: white;
+            &:focus {
+                background-color: inherit;
+            }
+            &:hover {
+                background-color: rgb(62 115 164);
+            }
+        }
+        .dropdown-menu {
+            background-color: #4b86bc;
+            li > a:hover {
+                background-color: rgb(62 115 164);
+            }
+        }
+    }  
+    .ms-WPBorder {
+        border: none;
+    }
+</style>
+    <script id="menuOmbudsman" type="text/x-handlebars-template">
+        <p class="mb-4 text-center"> 
+               <span style="font-family:&quot;bookman old style&quot;;color:#203864;font-size:40px;">
+                <!-- replace it with >  _spPageContextInfo.webTitle -->
+                Академичен омбудсман
+               </span>
+        </p>
+        <ul class="nav nav-pills justify-content-center" role="menu">
+            {{#each menuOmbudsman}}
+                <li class="dropdown">
+                    <!-- href="{{#if url}}{{url.Url}}{{/if}}" -->
+                    <a href="{{#if url}}{{url.Url}}{{/if}}" 
+                        class="dropdown-toggle disabled {{#if url}}hideDropdownArrow{{/if}}" 
+                        data-toggle="dropdown">
+                        {{Title}}
+                    </a>
+                    <ul class="dropdown-menu OMBUDSMAN" style="display: none;">
+                        {{#each this}}
+                            {{#if (isLinkProperty @key ..)}}
+                                <li><a href="{{this.Url}}">{{this.Description}}</a></li>
+                            {{/if}}
+                        {{/each}}
+                    </ul>
+                </li>
+            {{/each}}
+        </ul>
+    
+    </script>
+
+    <div id="menuOmbudsmanOutput" class=""></div>

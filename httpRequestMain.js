@@ -2,22 +2,6 @@ window.document.head.innerHTML += '<meta name="viewport" content="width=device-w
 document.addEventListener("DOMContentLoaded", () => {
     siteUrl = langVersion + siteUrl
 
-    // https://intd.mu-varna.bg/BG/_api/web/lists/getbytitle(%27NavigationNodes%27)/items?$select=Title,Url,Parent/Id,Parent/Title&$expand=Parent
-    listName = 'NavigationNodes'
-    selectFields = '$select=Title,Url,Parent/Id,Parent/Title&$expand=Parent'
-    $.ajax({
-        url: siteUrl + "/_api/web/lists/getbytitle('" + listName + "')/items?" + selectFields,
-        method: "GET",
-        headers: {
-            "Accept": "application/json; odata=verbose"
-        },
-        success: function (data) {
-            const mainAdmission = data.d.results;
-
-
-        }
-    })
-
     function updateItemsPerPage(itemsPerPage) {
         if ($(window).width() < 768) {
             _itemsPerPage = 1;

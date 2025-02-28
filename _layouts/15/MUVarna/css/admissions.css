@@ -184,10 +184,15 @@
 .adm-choose .choose-icon-column {
     padding: 20px;
 }
-.adm-choose .choose-icon-column svg {
-    width: 70px;
-    margin: 20px auto;
-    display: block;
+.adm-choose .choose-icon-column {
+    img {
+        filter: invert(98%) sepia(60%) saturate(1043%) hue-rotate(200deg) brightness(80%) contrast(60%);
+    }
+    svg, img {
+        width: 70px;
+        margin: 20px auto;
+        display: block;
+    }
 }
 .adm-choose .feature-title {
     text-align: center;
